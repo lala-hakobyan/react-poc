@@ -1,0 +1,12 @@
+.main {
+  flex-grow: 1;
+  padding: 4rem 2rem;
+  max-width: 1020px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  section:last-child {
+    margin-bottom: 0;
+  }
+}

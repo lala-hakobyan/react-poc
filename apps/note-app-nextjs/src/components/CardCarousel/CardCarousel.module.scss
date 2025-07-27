@@ -1,0 +1,19 @@
+.cardCarousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1.5rem;
+  padding: 1rem;
+  list-style: none;
+  margin: 0;
+
+  &__item {
+    flex: 0 0 180px;
+    scroll-snap-align: center;
+  }
+
+  @media (min-width: 1020px) {
+    justify-content: center;
+  }
+}

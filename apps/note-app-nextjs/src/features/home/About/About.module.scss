@@ -1,0 +1,10 @@
+.about {
+  font-size: 1.6rem;
+
+  &__list {
+    padding-left: 4rem;
+    &Item {
+      list-style: circle;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@use './variables.scss';
+
+:root {
+  --primary-color: #1F2937;
+  --secondary-color: #6B7280;
+  --primary-bg-color: #F9FAFB;
+  --secondary-bg-color: #FFFFFF;
+  --muted-bg-color: #F3F4F6;
+  --primary-accent-color: #EC7724;
+  --hover-accent-color: #D26000;
+  --border-color: #E5E7EB;
+  --menu-color: #5F6368;
+}
+
+.dark-theme {
+  --primary-color: #E5E7EB;           // Light text on dark bg
+  --secondary-color: #9CA3AF;         // Muted/secondary text
+  --primary-bg-color: #1F2937;        // Main dark background
+  --secondary-bg-color: #111827;      // Slightly darker panels
+  --muted-bg-color: #374151;          // Section backgrounds, inputs
+  --primary-accent-color: #EC7724;    // Accent stays same for contrast
+  --hover-accent-color: #D26000;      // Slightly darker on hover
+  --border-color: #4B5563;            // Soft borders on dark bg
+  --menu-color: #D1D5DB;              // Text in nav/menu
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #E5E7EB;           // Light text on dark bg
+    --secondary-color: #9CA3AF;         // Muted/secondary text
+    --primary-bg-color: #1F2937;        // Main dark background
+    --secondary-bg-color: #111827;      // Slightly darker panels
+    --muted-bg-color: #374151;          // Section backgrounds, inputs
+    --primary-accent-color: #EC7724;    // Accent stays same for contrast
+    --hover-accent-color: #D26000;      // Slightly darker on hover
+    --border-color: #4B5563;            // Soft borders on dark bg
+    --menu-color: #D1D5DB;              // Text in nav/menu
+  }
+}

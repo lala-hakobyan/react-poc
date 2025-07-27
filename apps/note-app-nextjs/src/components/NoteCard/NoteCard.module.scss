@@ -1,0 +1,32 @@
+.noteCard {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  background-color: var(--secondary-bg-color);
+  overflow: hidden;
+  transition: background-color 0.2s ease, box-shadow 0.5s ease;
+  min-height: 150px;
+  height: 100%;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    background-color: rgba(236, 119, 36, 0.1);
+  }
+
+  &__imgWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    height: auto;
+    margin: auto;
+  }
+
+  &__img {
+    object-fit: contain;
+  }
+
+  &__content {
+    padding: 2rem;
+  }
+}
