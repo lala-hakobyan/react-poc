@@ -1,42 +1,55 @@
+"use client";
 import styles from "./NoteList.module.scss";
 import NoteCard from "@/components/NoteCard/NoteCard";
 import {Note} from "@/types/note.types";
 import Button from "@/components/Button/Button";
+import {useEffect, useState} from "react";
+import Loader from "@/components/Loader/Loader";
 
 export  default function NoteList() {
-    const note1: Note = {
-        imageUrl: '/assets/images/travel-paris.png',
-        title: 'Paris Travel Tips',
-        description: `- Visit Eiffel Tower <br/> - Visit Louvre <br/> - Visit Versailles`
-    }
-    const note2: Note = {
-        imageUrl: '/assets/images/travel-paris.jpg',
-        title: 'Paris Travel Tips',
-        description: `- Visit Eiffel Tower`
-    }
+    const [notes, setNotes] = useState<Note[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // This will read from next.js route for api/notes, located under: app/api/notes/route.ts
+                const response = await fetch("/api/notes");
+                if(!response.ok) {
+                    throw new Error(`HTTP response error: Status ${response.status}`);
+                }
+
+                const result = await response.json();
+                setNotes(result);
+                setIsLoading(false);
+            } catch(error) {
+                console.log('Error fetching notes', error);
+                setIsLoading(false);
+            }
+        }
+
+        fetchData();
+    }, []);
+
     return (
         <>
-            <div className={styles.noteList}>
-                <div className={styles.noteList__item}>
-                    <NoteCard note={note1}></NoteCard>
+            {!isLoading &&
+                <div className={styles.noteList}>
+                    {notes.map((note: Note) => (
+                        <div className={styles.noteList__item} key={note.id}>
+                            <NoteCard noteCard={{note: note, showImage: true}}></NoteCard>
+                        </div>
+                    ))}
                 </div>
-                <div className={styles.noteList__item}>
-                    <NoteCard note={note2}></NoteCard>
-                </div>
-                <div className={styles.noteList__item}>
-                    <NoteCard note={note1}></NoteCard>
-                </div>
-                <div className={styles.noteList__item}>
-                    <NoteCard note={note1}></NoteCard>
-                </div>
-                <div className={styles.noteList__item}>
-                    <NoteCard note={note1}></NoteCard>
-                </div>
-            </div>
+            }
 
-            <div className="text-center mt-md">
-                <Button button={{label: 'Load More', type: 'button', style: 'ghost'}}></Button>
-            </div>
+            {isLoading && <Loader></Loader>}
+
+            {!isLoading &&
+                <div className="text-center mt-md">
+                    <Button button={{label: 'Load More', type: 'button', style: 'ghost'}}></Button>
+                </div>
+            }
         </>
     )
 }

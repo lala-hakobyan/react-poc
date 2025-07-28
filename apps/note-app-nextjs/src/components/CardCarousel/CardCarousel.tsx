@@ -2,30 +2,14 @@ import styles from './CardCarousel.module.scss';
 import NoteCard from "@/components/NoteCard/NoteCard";
 import {Note} from "@/types/note.types";
 
-export default function CardCarousel() {
-    const note1: Note = {
-        imageUrl: '/assets/images/travel-paris.png',
-        title: 'Paris Travel Tips',
-        description: `- Visit Eyffel Tower <br/> - Visit Louvre <br/> - Visit Versailles`
-    }
-
+export default function CardCarousel({notes} : {notes: Note[]}) {
     return (
         <ul className={styles.cardCarousel}>
-            <li className={styles.cardCarousel__item}>
-                <NoteCard note={note1}></NoteCard>
-            </li>
-            <li className={styles.cardCarousel__item}>
-                <NoteCard note={note1}></NoteCard>
-            </li>
-            <li className={styles.cardCarousel__item}>
-                <NoteCard note={note1}></NoteCard>
-            </li>
-            <li className={styles.cardCarousel__item}>
-                <NoteCard note={note1}></NoteCard>
-            </li>
-            <li className={styles.cardCarousel__item}>
-                <NoteCard note={note1}></NoteCard>
-            </li>
+            {notes.map(note => (
+                <li className={styles.cardCarousel__item} key={note.id}>
+                    <NoteCard noteCard={{note: note}}></NoteCard>
+                </li>
+            ))}
         </ul>
     )
 }

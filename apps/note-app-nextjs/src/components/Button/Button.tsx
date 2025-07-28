@@ -8,7 +8,7 @@ export default function Button({button}: {button: ButtonProps | undefined}) {
         label: '',
     }
     const finalButton = {...defaultButton, ...button};
-    console.log('finalButton', finalButton)
+
     return (
         <button
             className={`${styles.button} ${styles['button--' + finalButton.style]}`}
