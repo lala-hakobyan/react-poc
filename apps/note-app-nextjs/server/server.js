@@ -4,7 +4,6 @@ let express = require('express');
 let notes = require('./database.json');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const cors = require('cors');
-const {setTimeout} = require("node:timers");
 
 const app = express();
 const port = 3010;

@@ -39,7 +39,7 @@ export const useNotesStore = create<NotesState>((set) => ({
     addNote: async (note: Note) => {
         try {
             set({isNotesUpdateLoading: true});
-            const response = await fetch("api/notespop", {
+            const response = await fetch("api/notes", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
