@@ -94,8 +94,9 @@ export default function useNoteForm(): NoteFormContract {
     }
 
     const isFormValid = (): boolean => {
-        const hasError = Object.keys(notesFormState.errors).some(key => !!notesFormState.errors[key as NoteFormField])
-        return !hasError;
+        const errorsKeys: string[] = Object.keys(notesFormState.errors);
+        const hasError = errorsKeys.some(key => !!notesFormState.errors[key as NoteFormField])
+        return errorsKeys.length !== 0 && !hasError;
     }
 
     return {
