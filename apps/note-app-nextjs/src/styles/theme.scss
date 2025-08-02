@@ -10,6 +10,7 @@
   --hover-accent-color: #D26000;
   --border-color: #E5E7EB;
   --menu-color: #5F6368;
+  --danger-color: #d93025;
 }
 
 .dark-theme {
@@ -22,6 +23,7 @@
   --hover-accent-color: #D26000;      // Slightly darker on hover
   --border-color: #4B5563;            // Soft borders on dark bg
   --menu-color: #D1D5DB;              // Text in nav/menu
+  --danger-color: #ff6b6b;            // Danger/error style text
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,5 +37,6 @@
     --hover-accent-color: #D26000;      // Slightly darker on hover
     --border-color: #4B5563;            // Soft borders on dark bg
     --menu-color: #D1D5DB;              // Text in nav/menu
+    --danger-color: #ff6b6b;            // Danger/error style text
   }
 }

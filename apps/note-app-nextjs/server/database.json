@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "imageUrl": "/assets/images/travel-paris.png",
+    "image": "/assets/images/travel-paris.png",
     "title": "Paris Travel Tips",
     "description": "- Visit Eiffel Tower \n - Visit Louvre \n - Visit Versailles",
     "color": "blue",
@@ -12,7 +12,7 @@
   },
   {
     "id": "2",
-    "imageUrl": "/assets/images/reading-list.jpg",
+    "image": "/assets/images/reading-list.jpg",
     "title": "Books to Read This Month",
     "description": "- Atomic Habits \n - Clean Code \n - Deep Work",
     "color": "yellow",
@@ -45,7 +45,7 @@
   },
   {
     "id": "5",
-    "imageUrl": "/assets/images/design-moodboard.jpg",
+    "image": "/assets/images/design-moodboard.jpg",
     "title": "Mood Board: Website Redesign",
     "description": "Modern, clean, with lots of whitespace and accent color inspiration.",
     "color": "blue",
@@ -66,7 +66,7 @@
   },
   {
     "id": "7",
-    "imageUrl": "/assets/images/beach-day.jpg",
+    "image": "/assets/images/beach-day.jpg",
     "title": "Plan a Beach Day",
     "description": "Checklist: sunscreen, snacks, water, hat, book.",
     "color": "green",
@@ -97,7 +97,7 @@
   },
   {
     "id": "10",
-    "imageUrl": "/assets/images/fitness-plan.jpg",
+    "image": "/assets/images/fitness-plan.jpg",
     "title": "July Fitness Goals",
     "description": "🏋️‍♀️ 3x workouts/week\n🥗 Clean eating\n🧘‍♀️ Stretch every morning",
     "color": "green",

@@ -1,4 +1,3 @@
-import '../../styles/general.scss';
 import Header from "@/layout/Header/Header";
 import Footer from "@/layout/Footer/Footer";
 import {ReactNode} from "react";

@@ -3,37 +3,20 @@ import styles from "./NoteList.module.scss";
 import NoteCard from "@/components/NoteCard/NoteCard";
 import {Note} from "@/types/note.types";
 import Button from "@/components/Button/Button";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Loader from "@/components/Loader/Loader";
+import {useNotesStore} from "@/store/notesStore";
 
 export  default function NoteList() {
-    const [notes, setNotes] = useState<Note[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const {notes, isNotesLoading, isNotesError, fetchNotes} = useNotesStore();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // This will read from next.js route for api/notes, located under: app/api/notes/route.ts
-                const response = await fetch("/api/notes");
-                if(!response.ok) {
-                    throw new Error(`HTTP response error: Status ${response.status}`);
-                }
-
-                const result = await response.json();
-                setNotes(result);
-                setIsLoading(false);
-            } catch(error) {
-                console.log('Error fetching notes', error);
-                setIsLoading(false);
-            }
-        }
-
-        fetchData();
-    }, []);
+        fetchNotes();
+    }, [fetchNotes]);
 
     return (
         <>
-            {!isLoading &&
+            {!isNotesLoading &&
                 <div className={styles.noteList}>
                     {notes.map((note: Note) => (
                         <div className={styles.noteList__item} key={note.id}>
@@ -43,13 +26,15 @@ export  default function NoteList() {
                 </div>
             }
 
-            {isLoading && <Loader></Loader>}
+            {isNotesLoading && <Loader></Loader>}
 
-            {!isLoading &&
+            {!isNotesLoading && !isNotesError &&
                 <div className="text-center mt-md">
                     <Button button={{label: 'Load More', type: 'button', style: 'ghost'}}></Button>
                 </div>
             }
+
+            {isNotesError && <div className="text-center">Sorry, something went wrong while loading your notes.<br/>Please try again later.</div>}
         </>
     )
 }

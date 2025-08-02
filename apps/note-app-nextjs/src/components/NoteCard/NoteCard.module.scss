@@ -14,18 +14,6 @@
     background-color: rgba(236, 119, 36, 0.1);
   }
 
-  &__imgWrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 2 / 1;
-    height: auto;
-    margin: auto;
-  }
-
-  &__img {
-    object-fit: cover;
-  }
-
   &__content {
     padding: 2rem;
   }

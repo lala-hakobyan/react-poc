@@ -1,6 +1,5 @@
 import MainLayout from "@/layout/MainLayout/MainLayout";
 import PageTitle from "@/components/PageTitle/PageTitle";
-import '../../styles/helpers.scss';
 
 export default function Page() {
     return (

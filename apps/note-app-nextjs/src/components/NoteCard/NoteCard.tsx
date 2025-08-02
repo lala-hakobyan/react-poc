@@ -21,11 +21,11 @@ function displayText(text:string) {
 export default function NoteCard({noteCard}: {noteCard: NoteCardProps}) {
     return (
         <div className={styles.noteCard}>
-            {noteCard.showImage && noteCard.note.imageUrl && (
-                <figure className={styles.noteCard__imgWrapper}>
+            {noteCard.showImage && noteCard.note.image && (
+                <figure className="imageWrapper">
                     <Image
-                        className={styles.noteCard__img}
-                        src={noteCard.note.imageUrl}
+                        className="imageWrapper__img"
+                        src={noteCard.note.image}
                         fill
                         alt="My Page"
                         sizes="100vw"/>

@@ -1,6 +1,7 @@
 export type Note = {
     id?: string;
-    imageUrl?: string;
+    link?: string;
+    image?: string;
     title: string;
     description: string;
     color?: Color;

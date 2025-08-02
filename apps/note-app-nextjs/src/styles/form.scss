@@ -1,0 +1,62 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-color);
+
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--primary-color);
+
+      &--required:after {
+        content: ' *';
+        color: var(--danger-color);
+        margin-left: 4px;
+        font-weight: bold;
+      }
+    }
+
+    &__errorMessage {
+      color: var(--danger-color);
+      font-size: 1.3rem;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    &__formControl {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: var(--muted-bg-color);
+      color: var(--primary-color);
+      font-size: 1.6rem;
+      height: 35px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &--error {
+        border-color: var(--danger-color);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-accent-color);
+        box-shadow: 0 0 0 2px rgba(236, 119, 36, 0.3); // from your accent color
+      }
+    }
+
+    textarea.formGroup__formControl {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+}
+
