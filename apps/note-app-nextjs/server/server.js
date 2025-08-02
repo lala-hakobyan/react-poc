@@ -4,6 +4,7 @@ let express = require('express');
 let notes = require('./database.json');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const cors = require('cors');
+const {setTimeout} = require("node:timers");
 
 const app = express();
 const port = 3010;
@@ -19,8 +20,9 @@ app.get('/api/notes', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-    notes.push(req);
-    res.json(req);
+    const note = req.body;
+    notes.push(note);
+    setTimeout(() => res.json(req.body),1000);
 });
 
 app.delete('/api/notes/:id', (req, res) => {

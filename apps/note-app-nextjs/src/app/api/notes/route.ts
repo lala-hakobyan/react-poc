@@ -19,3 +19,18 @@ export async function GET(req: Request) {
 
     return NextResponse.json(result, { status: result.status });
 }
+
+export async function POST(req: Request) {
+    const body = await req.json();
+    const response = await fetch('http://localhost:3010/api/notes', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+
+    const result = await response.json();
+
+    return NextResponse.json(result, {status: result.status});
+}
