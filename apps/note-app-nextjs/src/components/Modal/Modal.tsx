@@ -89,7 +89,7 @@ const ModalRoot = ({children, isOpen, title, onClosed} : ModalProps): React.JSX.
                            <h2 className={styles.modal__title}>{title}</h2>
                            <a href="#" className={styles.modal__closeLink} onClick={(ev: SyntheticEvent) => closeModalAction(ev)}>
                                <svg className={styles.modal__closeIcon} width={30} height={30}>
-                                    <use href="/assets/icons/svg-sprite.svg#icon-remove" />
+                                    <use href="/assets/icons/svg-sprite.svg#icon-close" />
                                </svg>
                            </a>
                        </>

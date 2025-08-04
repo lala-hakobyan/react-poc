@@ -1,7 +1,7 @@
 "use client";
 import styles from './Actions.module.scss';
 import Button from "@/components/Button/Button";
-import AddNote from "@/features/note/AddNote/AddNote";
+import AddEditNote from "@/features/note/AddEditNote/AddEditNote";
 import {useNotesStore} from "@/store/notesStore";
 
 export default function Actions() {
@@ -10,7 +10,7 @@ export default function Actions() {
     return (
         <div className={`${styles.actions} mb-sm`}>
             <Button button={{label: 'Add New'}} onClick={() => setIsAddNewNoteOpen(true)}></Button>
-            <AddNote></AddNote>
+            <AddEditNote></AddEditNote>
             <svg className={styles.actions__icon} width={30} height={30}>
                 <use href="/assets/icons/svg-sprite.svg#icon-sort-up" />
             </svg>
@@ -24,7 +24,7 @@ export default function Actions() {
                 <use href="/assets/icons/svg-sprite.svg#icon-view" />
             </svg>
             <svg className={styles.actions__icon} width={30} height={30}>
-                <use href="/assets/icons/svg-sprite.svg#icon-remove" />
+                <use href="/assets/icons/svg-sprite.svg#icon-close" />
             </svg>
             <svg className={styles.actions__icon} width={30} height={30}>
                 <use href="/assets/icons/svg-sprite.svg#icon-loading" />

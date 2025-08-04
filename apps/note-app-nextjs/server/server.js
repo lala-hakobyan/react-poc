@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.get('/api/notes', (req, res) => {
     const count = req.query.pageCount;
-    let finalNotes = count!==undefined ? notes.slice(count) : notes;
+    let finalNotes = count!==undefined ? notes.slice(0, count) : notes;
 
     setTimeout(() => res.json(finalNotes), 1000);
 });
@@ -41,7 +41,7 @@ app.put('/api/notes/:id', (req, res) => {
     }
 
     notes[noteIndex] = { ...notes[noteIndex], ...updatedNote };
-    res.json(notes[noteIndex]);
+    setTimeout(() => res.json(notes[noteIndex]), 1000);
 });
 
 app.listen(port, () => {

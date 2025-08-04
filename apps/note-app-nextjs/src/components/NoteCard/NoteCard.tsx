@@ -1,6 +1,6 @@
 import styles from './NoteCard.module.scss'
 import Image from "next/image";
-import {Fragment} from "react";
+import {Fragment, SyntheticEvent} from "react";
 import {NoteCardProps} from "@/types/noteCard.types";
 
 function displayText(text:string) {
@@ -18,7 +18,21 @@ function displayText(text:string) {
     )
 }
 
-export default function NoteCard({noteCard}: {noteCard: NoteCardProps}) {
+export default function NoteCard({noteCard, onEdit, onDelete}: NoteCardProps) {
+    const onEditAction = (ev: SyntheticEvent) => {
+        ev.preventDefault();
+        if(onEdit) {
+            onEdit();
+        }
+    }
+
+    const onDeleteAction = (ev: SyntheticEvent) => {
+        ev.preventDefault();
+        if(onDelete) {
+            onDelete();
+        }
+    }
+
     return (
         <div className={styles.noteCard}>
             {noteCard.showImage && noteCard.note.image && (
@@ -31,6 +45,20 @@ export default function NoteCard({noteCard}: {noteCard: NoteCardProps}) {
                         sizes="100vw"/>
                 </figure>
             )}
+            {noteCard.showActions &&
+                <div className={styles.noteCard__actions}>
+                <a href="#" onClick={onEditAction}>
+                    <svg className={styles.actions__icon} width={30} height={30}>
+                        <use href="/assets/icons/svg-sprite.svg#icon-edit" />
+                    </svg>
+                </a>
+                <a href="#" onClick={onDeleteAction}>
+                    <svg className={styles.actions__icon} width={30} height={30}>
+                        <use href="/assets/icons/svg-sprite.svg#icon-trash" />
+                    </svg>
+                </a>
+            </div>
+            }
             <div className={styles.noteCard__content}>
                 <h3>{noteCard.note.title}</h3>
                 <p>{displayText(noteCard.note.description)}</p>

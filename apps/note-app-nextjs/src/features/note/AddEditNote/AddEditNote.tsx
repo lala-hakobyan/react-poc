@@ -7,37 +7,56 @@ import "./../../../styles/imageWrapper.scss"
 import {useRef} from "react";
 import Image from "next/image";
 import {Note} from "@/types/note.types";
-import useNoteForm from "@/features/note/AddNote/useNoteForm";
-import {NoteFormContract} from "@/types/noteForm.types";
+import useNoteForm from "@/features/note/AddEditNote/useNoteForm";
+import {NoteForm, NoteFormContract} from "@/types/noteForm.types";
 import Loader from "@/components/Loader/Loader";
 
 
-export default function AddNote() {
-    const {isAddNewNoteOpen, setIsAddNewNoteOpen, addNote, isNotesUpdateLoading, isNotesUpdateError} = useNotesStore();
-    const noteFormContract: NoteFormContract = useNoteForm();
+export default function AddEditNote() {
+    const {
+        isAddNewNoteOpen,
+        addNote,
+        editNote,
+        isNoteUpdateLoading,
+        isNoteUpdateError,
+        currentEditNote,
+        setCurrentEditNote,
+    } = useNotesStore();
+    const noteFormContract: NoteFormContract = useNoteForm(currentEditNote as NoteForm);
     const imageInputRef = useRef<HTMLInputElement>(null);
+    const title = currentEditNote ? `Edit Note: ${currentEditNote.title}`: 'Add New Note';
+    const buttonName = currentEditNote ? `Edit Note`: 'Add Note';
 
     const submitForm = async () => {
-        await addNote({...noteFormContract.notesFormState.form, id: crypto.randomUUID()} as Note);
+        if(currentEditNote) {
+            await editNote(noteFormContract.notesFormState.form as Note);
+        } else {
+            await addNote({...noteFormContract.notesFormState.form, id: crypto.randomUUID()} as Note);
+        }
         closeModal();
     }
 
     const closeModal = () => {
-        setIsAddNewNoteOpen(false);
+        setCurrentEditNote(null, false);
         resetForm();
     }
 
-    const resetForm = () => {
+    const resetForm = (ev?: MouseEvent) => {
+        if(ev) {
+            ev.preventDefault();
+        }
+
         if(imageInputRef.current) {
             imageInputRef.current.value = ''
         }
+
         noteFormContract.resetForm();
     }
 
     return (
         <>
-            {isNotesUpdateLoading && <Loader></Loader>}
-            {!isNotesUpdateError && <Modal isOpen={isAddNewNoteOpen} title={'Add New Note'} onClosed={() => closeModal()} >
+            {isNoteUpdateLoading && <Loader></Loader>}
+            {!isNoteUpdateError && <Modal isOpen={isAddNewNoteOpen} title={title} onClosed={() => closeModal()} >
                 <Modal.Body>
                     <form className="form">
                         <div className="formGroup">
@@ -101,12 +120,12 @@ export default function AddNote() {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button button={{label: 'Add New', disabled: !noteFormContract.isFormValid()}} onClick={() => submitForm()} />
-                    <Button button={{label: 'Reset', className: 'ml-xs'}} onClick={() => resetForm()} />
+                    <Button button={{label: buttonName, disabled: !noteFormContract.isFormValid() || isNoteUpdateLoading}} onClick={() => submitForm()} />
+                    <Button button={{label: 'Reset', className: 'ml-xs'}} onClick={(ev?: MouseEvent) => resetForm(ev)} />
                 </Modal.Footer>
             </Modal>
             }
-            {isNotesUpdateError &&
+            {isNoteUpdateError &&
                 <Modal isOpen={true} title="Error happened">
                     <Modal.Body>
                         Sorry error happened while adding a note. Please try again later.
