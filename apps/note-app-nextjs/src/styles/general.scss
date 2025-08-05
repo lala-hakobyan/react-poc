@@ -24,6 +24,8 @@ ul, li {
 
 html {
   font-size: 10px;
+  // Added to fix cumulative layout shift that appears after content is loaded and scroll appears
+  overflow-y: scroll;
 }
 
 html,

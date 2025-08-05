@@ -29,3 +29,10 @@
 .position-relative {
   position: relative;
 }
+
+.svg-link {
+  transition: fill 0.2s;
+  &:hover, &:focus, &:active {
+    fill: var(--primary-accent-color);
+  }
+}

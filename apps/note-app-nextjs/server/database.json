@@ -3,6 +3,7 @@
     "id": "1",
     "image": "/assets/images/travel-paris.png",
     "title": "Paris Travel Tips",
+    "link": "https://www.lonelyplanet.com/articles/first-time-paris",
     "description": "- Visit Eiffel Tower \n - Visit Louvre \n - Visit Versailles",
     "color": "blue",
     "priority": "medium",

@@ -20,7 +20,7 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
     const note = req.body;
-    notes.push(note);
+    notes.unshift(note);
     setTimeout(() => res.json(req.body),1000);
 });
 
