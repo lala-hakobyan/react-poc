@@ -1,0 +1,30 @@
+.alert {
+  padding: 1rem;
+  border-radius: 4px;
+
+  a {
+    &, &:hover, &:focus, &:visited {
+      text-decoration: underline;
+    }
+  }
+
+  &--success {
+    background-color: var(--success-bg-color);
+    border: 1px solid var(--success-border-color);
+  }
+
+  &--warning {
+    background-color: var(--warning-bg-color);
+    border: 1px solid var(--warning-border-color);
+  }
+
+  &--danger {
+    background-color: var(--danger-bg-color);
+    border: 1px solid var(--danger-border-color);
+  }
+
+  &--info {
+    background-color: var(--info-bg-color);
+    border: 1px solid var(--info-border-color);
+  }
+}

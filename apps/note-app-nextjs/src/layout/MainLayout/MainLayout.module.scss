@@ -9,4 +9,8 @@
   section:last-child {
     margin-bottom: 0;
   }
+
+  &--sm {
+    max-width: 500px;
+  }
 }

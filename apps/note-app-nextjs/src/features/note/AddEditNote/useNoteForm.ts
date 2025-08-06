@@ -28,7 +28,7 @@ const validateField = (field: NoteFormField | null, value: string | null) => {
     const errors: NoteFormErrors = {};
 
     if(field === 'title' && !value) {
-        errors.title = 'Title is required';
+        errors.title = 'Title is required.';
     }
 
     if(field === 'link' && (value && !value?.startsWith('http'))) {
@@ -80,12 +80,12 @@ export default function useNoteForm(defaultNoteForm?: NoteForm): NoteFormContrac
     const isLinkError: boolean =  !!(notesFormState.touched.link && notesFormState.errors.link);
 
     // Use useEffect to update form state when defaultNoteForm changes
-    // Without this the value of the defaultNoteForm will not be applied correctly when it is changed
+    // Without this the value of the defaultNoteForm will not be applied correctly when prop is changed
     useEffect(() => {
         const initialValue: NoteForm = defaultNoteForm ? { ...emptyFormValue, ...defaultNoteForm } : emptyFormValue;
 
         dispatch({ type: 'set_form_value', value: initialValue});
-    }, [defaultNoteForm]); // Dependency array: run this effect whenever currentEditNote changes
+    }, [defaultNoteForm]); // Dependency array: run this effect whenever defaultNoteForm changes
 
     const resetForm = () => {
         dispatch({type: 'set_form_value', value: emptyFormValue as Note})

@@ -88,7 +88,7 @@ export default function AddEditNote() {
                         </div>
 
                         <div className="formGroup">
-                            <label htmlFor="descriptionField">Description</label>
+                            <label className="formGroup__label" htmlFor="descriptionField">Description</label>
                             <textarea className="formGroup__formControl"
                                       id="descriptionField"
                                       value={noteFormContract.notesFormState.form.description}
