@@ -3,6 +3,7 @@
 :root {
   --primary-color: #1F2937;
   --secondary-color: #6B7280;
+  --ghost-color: #FFFFFF;
   --primary-bg-color: #F9FAFB;
   --secondary-bg-color: #FFFFFF;
   --muted-bg-color: #F3F4F6;
@@ -24,6 +25,7 @@
 .dark-theme {
   --primary-color: #E5E7EB;           // Light text on dark bg
   --secondary-color: #9CA3AF;         // Muted/secondary text
+  --ghost-color: #111827;             // Ghost text
   --primary-bg-color: #1F2937;        // Main dark background
   --secondary-bg-color: #111827;      // Slightly darker panels
   --muted-bg-color: #374151;          // Section backgrounds, inputs
@@ -38,6 +40,7 @@
   :root {
     --primary-color: #E5E7EB;           // Light text on dark bg
     --secondary-color: #9CA3AF;         // Muted/secondary text
+    --ghost-color: #111827;             // Ghost text
     --primary-bg-color: #1F2937;        // Main dark background
     --secondary-bg-color: #111827;      // Slightly darker panels
     --muted-bg-color: #374151;          // Section backgrounds, inputs

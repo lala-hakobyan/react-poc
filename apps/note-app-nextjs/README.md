@@ -20,7 +20,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Documentation
 
 To learn more about Next.js, take a look at the following resources:
 
@@ -34,3 +34,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Troubleshooting
+
+### Error: port is already in use
+`Error: listen EADDRINUSE: address already in use :::3000`
+If this happens, you can run you can do the following:
+1. Run app in a different port: `set PORT=3001 && npm start` 
+
+2. Find the processes that are using the port and kill them:
+**Instructions for Windows**
+   - Find and kill the process using port 3000
+   In PowerShell or Command Prompt:    
+   ```netstat -ano | findstr :3000```
+   - You’ll see something like:    
+   ```TCP    0.0.0.0:3000     0.0.0.0:0     LISTENING     12345```
+   - That last number (12345) is the PID (process ID). Kill it:      
+    ```taskkill /PID 12345 /F```

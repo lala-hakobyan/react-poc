@@ -9,6 +9,7 @@ export type ButtonConfig ={
     style?: ButtonStyle;
     className?: string;
     disabled?: boolean;
+    icon?: string;
 }
 
 export type ButtonType = 'submit' | 'reset' | 'button';

@@ -12,8 +12,11 @@ app.use(cors()); // Allow all origins
 app.use(express.json());
 
 app.get('/api/notes', (req, res) => {
-    const count = req.query.pageCount;
-    let finalNotes = count!==undefined ? notes.slice(0, count) : notes;
+    const offset = req.query.offset ? parseInt(req.query.offset) : 0;
+    const limit = req.query.limit ? parseInt(req.query.limit) : 20;
+    notes.sort((a,b) => b.creationDate.localeCompare(a.creationDate)).slice(offset, limit);
+
+    let finalNotes = notes.slice(offset, offset + limit);
 
     setTimeout(() => res.json(finalNotes), 1000);
 });

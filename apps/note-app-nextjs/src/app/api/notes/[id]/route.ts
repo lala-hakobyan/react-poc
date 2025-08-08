@@ -1,8 +1,9 @@
 import {NextResponse} from "next/server";
 
-export async function PUT(req: Request, { params } : {params: {id: string}}) {
+export async function PUT(req: Request, context: { params: Promise<{ id: string }> }) {
+    const { id } = await context.params;
     const body = await req.json();
-    const response = await fetch(`http://localhost:3010/api/notes/${params.id}`, {
+    const response = await fetch(`http://localhost:3010/api/notes/${id}`, {
         method: 'PUT',
         headers: {
             'Content-type': 'application/json'
@@ -15,9 +16,10 @@ export async function PUT(req: Request, { params } : {params: {id: string}}) {
     return NextResponse.json(result, {status: result.status});
 }
 
-export async function DELETE(req: Request, {params} : {params: {id: string}}) {
-    // const body = await req.json();
-    const response = await fetch(`http://localhost:3010/api/notes/${params.id}`, {
+
+export async function DELETE(req: Request, context: { params: Promise<{ id: string }> }) {
+    const { id } = await context.params;
+    const response = await fetch(`http://localhost:3010/api/notes/${id}`, {
         method: 'DELETE'
     })
     const status = response.status;

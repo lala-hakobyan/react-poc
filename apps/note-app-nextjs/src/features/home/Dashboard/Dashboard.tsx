@@ -13,7 +13,7 @@ export default function Dashboard() {
     useEffect(() => {
         const getApiData = async () => {
             try {
-                const response: Response = await fetch('api/notes?pageCount=5');
+                const response: Response = await fetch('api/notes?limit=5');
                 if(!response.ok) {
                     throw new Error(`HTTP response error: Status ${response.status}`)
                 }

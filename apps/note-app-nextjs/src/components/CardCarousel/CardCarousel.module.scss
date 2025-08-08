@@ -10,6 +10,7 @@
 
   &__item {
     flex: 0 0 180px;
+    max-width: 180px;
     scroll-snap-align: center;
   }
 

@@ -5,17 +5,10 @@ export type Note = {
     title: string;
     description: string;
     color?: Color;
-    priority?: Priority;
     creationDate?: Date;
     lastUpdatedDate?: Date;
     dueDate?: Date;
     category?: Category;
-}
-
-export enum Priority {
-    high = 'high',
-    low = 'low',
-    medium = 'medium'
 }
 
 export enum Color {
@@ -31,3 +24,5 @@ export enum Category {
     personal = 3,
     relationship = 4
 }
+
+export type FetchNotesAction = 'set_init' | 'set_load_more';

@@ -19,6 +19,11 @@ export default function Button({button, onClick}: ButtonProps) {
             onClick={onClick}
             disabled={finalButton.disabled}
             type={finalButton.type}>
+            {finalButton.icon &&
+                <svg className={styles.button__svgIcon} width={20} height={20}>
+                    <use href={`/assets/icons/svg-sprite.svg#${finalButton.icon}`}/>
+                </svg>
+            }
             {finalButton.label}
         </button>
     );

@@ -6,29 +6,28 @@
     "link": "https://www.lonelyplanet.com/articles/first-time-paris",
     "description": "- Visit Eiffel Tower \n - Visit Louvre \n - Visit Versailles",
     "color": "blue",
-    "priority": "medium",
     "creationDate": "2025-07-20T09:00:00Z",
     "lastUpdatedDate": "2025-07-21T14:00:00Z",
+    "dueDate": "2025-08-21T14:00:00Z",
     "category": 1
   },
   {
     "id": "2",
-    "image": "/assets/images/reading-list.jpg",
-    "title": "Books to Read This Month",
-    "description": "- Atomic Habits \n - Clean Code \n - Deep Work",
-    "color": "yellow",
-    "priority": "high",
-    "creationDate": "2025-07-01T10:30:00Z",
-    "lastUpdatedDate": "2025-07-02T11:15:00Z",
-    "dueDate": "2025-07-31T23:59:59Z",
-    "category": 2
+    "image": "/assets/images/healthy-meal-prep.jpg",
+    "title": "Weekly Healthy Meal Prep Plan",
+    "description": "- Plan balanced meals ahead: proteins, veggies, whole grains\n- Prep overnight oats for quick breakfasts\n- Batch cook grilled chicken and roasted veggies\n- Portion snacks: nuts, hummus, sliced fruits\n- Keep hydration high with infused water",
+    "color": "green",
+    "creationDate": "2025-07-01T08:00:00Z",
+    "lastUpdatedDate": "2025-07-02T09:30:00Z",
+    "dueDate": "2025-07-07T20:00:00Z",
+    "category": 3,
+    "link": "https://www.eatingwell.com/article/290544/meal-prep-ideas-for-the-week/"
   },
   {
     "id": "3",
     "title": "Weekly Groceries",
     "description": "- Milk\n- Eggs\n- Cheese\n- Veggies",
     "color": "green",
-    "priority": "low",
     "creationDate": "2025-07-19T12:00:00Z",
     "lastUpdatedDate": "2025-07-19T12:00:00Z",
     "category": 3
@@ -38,7 +37,6 @@
     "title": "Call Mom",
     "description": "Don't forget to call mom on Sunday!",
     "color": "red",
-    "priority": "high",
     "creationDate": "2025-07-22T08:00:00Z",
     "lastUpdatedDate": "2025-07-22T08:00:00Z",
     "dueDate": "2025-07-27T18:00:00Z",
@@ -50,7 +48,6 @@
     "title": "Mood Board: Website Redesign",
     "description": "Modern, clean, with lots of whitespace and accent color inspiration.",
     "color": "blue",
-    "priority": "medium",
     "creationDate": "2025-07-15T09:45:00Z",
     "lastUpdatedDate": "2025-07-18T16:30:00Z",
     "category": 1
@@ -60,7 +57,6 @@
     "title": "Frontend Interview Checklist",
     "description": "Topics\n- React\n- TypeScript\n- CSS architecture\n- System Design basics",
     "color": "yellow",
-    "priority": "high",
     "creationDate": "2025-07-10T13:15:00Z",
     "lastUpdatedDate": "2025-07-23T11:20:00Z",
     "category": 2
@@ -71,7 +67,6 @@
     "title": "Plan a Beach Day",
     "description": "Checklist: sunscreen, snacks, water, hat, book.",
     "color": "green",
-    "priority": "low",
     "creationDate": "2025-07-03T09:00:00Z",
     "lastUpdatedDate": "2025-07-03T09:00:00Z",
     "category": 3
@@ -81,7 +76,6 @@
     "title": "Date Night Ideas 💕",
     "description": "- Try new restaurant\n- Stargazing\n- Mini golf\n- Movie night",
     "color": "red",
-    "priority": "medium",
     "creationDate": "2025-07-05T20:00:00Z",
     "lastUpdatedDate": "2025-07-05T21:00:00Z",
     "category": 4
@@ -91,7 +85,6 @@
     "title": "Quick Dev Tips",
     "description": "💡 Use `:has()` for advanced CSS\n💡 Prefer composition over inheritance\n💡 Keep components pure",
     "color": "blue",
-    "priority": "medium",
     "creationDate": "2025-07-21T11:00:00Z",
     "lastUpdatedDate": "2025-07-22T13:00:00Z",
     "category": 1
@@ -99,12 +92,503 @@
   {
     "id": "10",
     "image": "/assets/images/fitness-plan.jpg",
-    "title": "July Fitness Goals",
+    "title": "August Fitness Goals",
     "description": "🏋️‍♀️ 3x workouts/week\n🥗 Clean eating\n🧘‍♀️ Stretch every morning",
     "color": "green",
-    "priority": "high",
-    "creationDate": "2025-07-01T07:00:00Z",
-    "lastUpdatedDate": "2025-07-15T07:00:00Z",
+    "creationDate": "2025-07-20T07:00:00Z",
+    "lastUpdatedDate": "2025-08-01T07:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "11",
+    "title": "Master React Suspense",
+    "description": "- Understand data fetching with Suspense\n- Explore concurrent rendering\n- Build fallback UIs",
+    "link": "https://reactjs.org/docs/concurrent-mode-suspense.html",
+    "color": "yellow",
+    "creationDate": "2025-06-03T09:00:00Z",
+    "lastUpdatedDate": "2025-06-10T09:30:00Z",
+    "dueDate": "2025-07-01T12:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "12",
+    "image": "/assets/images/cat-relaxing.jpg",
+    "title": "Daily Cat Care Routine",
+    "description": "- Morning feeding\n- Evening play sessions\n- Weekly grooming\n- Monthly vet check",
+    "color": "green",
+    "creationDate": "2025-06-04T07:30:00Z",
+    "lastUpdatedDate": "2025-06-09T08:45:00Z",
+    "category": 3
+  },
+  {
+    "id": "13",
+    "title": "Paris Trip Must-Dos",
+    "description": "- Visit Eiffel Tower at sunrise\n- Explore Louvre’s hidden gems\n- Picnic by the Seine\n- Day trip to Versailles",
+    "link": "https://www.lonelyplanet.com/articles/first-time-paris",
+    "color": "blue",
+    "creationDate": "2025-06-05T10:15:00Z",
+    "lastUpdatedDate": "2025-06-12T14:20:00Z",
+    "dueDate": "2025-08-20T18:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "14",
+    "title": "Weekly Fitness Plan",
+    "description": "- Monday: Strength training (full body)\n- Wednesday: Yoga & stretching\n- Friday: HIIT cardio\n- Sunday: Long walk on beach",
+    "color": "green",
+    "creationDate": "2025-06-07T06:45:00Z",
+    "lastUpdatedDate": "2025-06-14T07:30:00Z",
+    "dueDate": "2025-07-31T20:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "15",
+    "image": "/assets/images/beach-waves.jpg",
+    "title": "Beach Day Essentials",
+    "description": "- High SPF sunscreen\n- Reusable water bottle\n- Wide-brimmed hat\n- Good book\n- Eco-friendly snacks",
+    "color": "green",
+    "creationDate": "2025-06-08T11:00:00Z",
+    "lastUpdatedDate": "2025-06-11T15:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "16",
+    "title": "Improve TypeScript Skills",
+    "description": "- Learn utility types (Partial, Pick, Omit)\n- Practice generics\n- Build typed React components\n- Read official handbook",
+    "link": "https://www.typescriptlang.org/docs/handbook/utility-types.html",
+    "color": "yellow",
+    "creationDate": "2025-06-09T08:15:00Z",
+    "lastUpdatedDate": "2025-06-18T10:30:00Z",
+    "dueDate": "2025-07-20T17:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "17",
+    "title": "Support Local Animal Shelter",
+    "description": "- Volunteer every Saturday morning\n- Donate cat toys and food\n- Organize fundraiser in August",
+    "color": "red",
+    "creationDate": "2025-06-11T09:00:00Z",
+    "lastUpdatedDate": "2025-06-17T13:00:00Z",
+    "dueDate": "2025-08-10T12:00:00Z",
+    "category": 4
+  },
+  {
+    "id": "18",
+    "image": "/assets/images/healthy-salad.jpg",
+    "title": "Summer Healthy Meals",
+    "description": "- Grilled salmon with quinoa\n- Fresh vegetable salads\n- Smoothie bowls with nuts and seeds",
+    "color": "green",
+    "creationDate": "2025-06-12T07:30:00Z",
+    "lastUpdatedDate": "2025-06-20T08:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "19",
+    "title": "Advanced CSS Techniques",
+    "description": "- Master CSS Grid\n- Explore CSS variables\n- Animate with keyframes\n- Responsive design best practices",
+    "link": "https://css-tricks.com/snippets/css/complete-guide-grid/",
+    "color": "blue",
+    "creationDate": "2025-06-14T09:45:00Z",
+    "lastUpdatedDate": "2025-06-21T15:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "20",
+    "title": "Organize Digital Workspace",
+    "description": "- Clean desktop weekly\n- Archive old projects\n- Use meaningful folder names\n- Backup important files",
+    "color": "green",
+    "creationDate": "2025-06-15T11:00:00Z",
+    "lastUpdatedDate": "2025-06-19T12:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "21",
+    "title": "Mindful Leadership Practices",
+    "description": "- Active listening during meetings\n- Give clear, kind feedback\n- Empower teammates with autonomy\n- Lead by example",
+    "color": "red",
+    "creationDate": "2025-06-16T08:00:00Z",
+    "lastUpdatedDate": "2025-06-25T09:30:00Z",
+    "category": 1
+  },
+  {
+    "id": "22",
+    "image": "/assets/images/morning-yoga.jpg",
+    "title": "Morning Yoga Flow",
+    "description": "- Sun salutations\n- Cat-Cow stretches\n- Downward dog\n- Meditation breathing",
+    "color": "green",
+    "creationDate": "2025-06-17T06:00:00Z",
+    "lastUpdatedDate": "2025-06-22T07:30:00Z",
+    "category": 3
+  },
+  {
+    "id": "23",
+    "title": "Explore Next.js Features",
+    "description": "- App router basics\n- Server-side rendering\n- Static site generation\n- API routes",
+    "link": "https://nextjs.org/docs/app",
+    "color": "yellow",
+    "creationDate": "2025-06-18T10:00:00Z",
+    "lastUpdatedDate": "2025-06-24T15:00:00Z",
+    "dueDate": "2025-07-15T18:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "24",
+    "title": "Plan Weekend Beach Trip",
+    "description": "- Pack sunscreen and snacks\n- Bring water and hat\n- Prepare beach games\n- Check weather forecast",
+    "color": "green",
+    "creationDate": "2025-06-19T09:30:00Z",
+    "lastUpdatedDate": "2025-06-23T11:00:00Z",
+    "dueDate": "2025-06-28T08:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "25",
+    "title": "Improve CSS Architecture",
+    "description": "- Use BEM naming\n- Modularize styles\n- Leverage CSS variables\n- Document component styles",
+    "color": "yellow",
+    "creationDate": "2025-06-20T14:00:00Z",
+    "lastUpdatedDate": "2025-06-26T10:30:00Z",
+    "category": 2
+  },
+  {
+    "id": "26",
+    "image": "/assets/images/cat-playtime.jpg",
+    "title": "Interactive Cat Toys",
+    "description": "- Laser pointers\n- Feather wands\n- Puzzle feeders\n- Cardboard boxes",
+    "color": "green",
+    "creationDate": "2025-06-21T07:00:00Z",
+    "lastUpdatedDate": "2025-06-29T09:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "27",
+    "title": "Remote Work Best Practices",
+    "description": "- Set dedicated workspace\n- Use noise-cancelling headphones\n- Regular breaks\n- Clear daily goals",
+    "color": "blue",
+    "creationDate": "2025-06-22T11:00:00Z",
+    "lastUpdatedDate": "2025-06-27T14:00:00Z",
+    "category": 1
+  },
+  {
+    "id": "28",
+    "title": "Clean Eating Grocery List",
+    "description": "- Leafy greens\n- Fresh fruits\n- Whole grains\n- Lean proteins\n- Healthy fats",
+    "color": "green",
+    "creationDate": "2025-06-23T08:00:00Z",
+    "lastUpdatedDate": "2025-06-25T08:30:00Z",
+    "category": 3
+  },
+  {
+    "id": "29",
+    "title": "Master Git Advanced Commands",
+    "description": "- git rebase\n- git cherry-pick\n- git stash\n- git reflog",
+    "link": "https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging",
+    "color": "yellow",
+    "creationDate": "2025-06-24T09:30:00Z",
+    "lastUpdatedDate": "2025-07-01T10:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "30",
+    "title": "Plan Monthly Team Meeting",
+    "description": "- Set agenda\n- Collect feedback\n- Share progress\n- Assign action items",
+    "color": "red",
+    "creationDate": "2025-06-25T13:00:00Z",
+    "lastUpdatedDate": "2025-06-30T15:00:00Z",
+    "dueDate": "2025-07-05T16:00:00Z",
+    "category": 1
+  },
+  {
+    "id": "31",
+    "image": "/assets/images/mountain-hiking.jpg",
+    "title": "Mountain Hiking Essentials",
+    "description": "- Comfortable shoes\n- Water bottle\n- Trail snacks\n- First aid kit\n- Weather-appropriate clothing",
+    "color": "green",
+    "creationDate": "2025-06-26T07:30:00Z",
+    "lastUpdatedDate": "2025-07-02T09:00:00Z",
+    "dueDate": "2025-07-15T07:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "32",
+    "title": "Learn D3.js Basics",
+    "description": "- Understand SVG\n- Bind data to DOM\n- Create bar charts\n- Animate transitions",
+    "link": "https://d3js.org/",
+    "color": "yellow",
+    "creationDate": "2025-06-27T10:00:00Z",
+    "lastUpdatedDate": "2025-07-05T11:30:00Z",
+    "category": 2
+  },
+  {
+    "id": "33",
+    "title": "Plan Family Picnic",
+    "description": "- Pack healthy snacks\n- Bring outdoor games\n- Check park opening hours\n- Invite friends",
+    "color": "red",
+    "creationDate": "2025-06-28T09:00:00Z",
+    "lastUpdatedDate": "2025-07-01T10:00:00Z",
+    "dueDate": "2025-07-10T12:00:00Z",
+    "category": 4
+  },
+  {
+    "id": "34",
+    "title": "CSS Variables Best Practices",
+    "description": "- Define theme colors\n- Use for spacing\n- Responsive typography\n- Dark mode support",
+    "color": "yellow",
+    "creationDate": "2025-06-29T08:00:00Z",
+    "lastUpdatedDate": "2025-07-07T09:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "35",
+    "image": "/assets/images/sunset-beach-walks.jpg",
+    "title": "Sunset Beach Walks",
+    "description": "- Bring light jacket\n- Capture photos\n- Reflect and meditate\n- Listen to waves",
+    "color": "green",
+    "creationDate": "2025-06-30T18:00:00Z",
+    "lastUpdatedDate": "2025-07-06T19:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "36",
+    "title": "Improve Frontend Accessibility",
+    "description": "- Use semantic HTML\n- Keyboard navigable UI\n- Proper ARIA roles\n- Contrast checks",
+    "link": "https://www.w3.org/WAI/fundamentals/accessibility-principles/",
+    "color": "yellow",
+    "creationDate": "2025-07-01T09:00:00Z",
+    "lastUpdatedDate": "2025-07-08T11:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "37",
+    "title": "Daily Meditation Schedule",
+    "description": "- 5 min morning breathing\n- 10 min midday mindfulness\n- 5 min evening reflection",
+    "color": "green",
+    "creationDate": "2025-07-02T07:00:00Z",
+    "lastUpdatedDate": "2025-07-09T08:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "38",
+    "title": "React Hooks Deep Dive",
+    "description": "- useState\n- useEffect\n- useMemo\n- useCallback\n- Custom hooks",
+    "link": "https://reactjs.org/docs/hooks-intro.html",
+    "color": "yellow",
+    "creationDate": "2025-07-03T10:00:00Z",
+    "lastUpdatedDate": "2025-07-10T11:30:00Z",
+    "category": 2
+  },
+  {
+    "id": "39",
+    "image": "/assets/images/healthy-breakfast.jpg",
+    "title": "Healthy Breakfast Ideas",
+    "description": "- Overnight oats with chia\n- Avocado toast with seeds\n- Smoothie with spinach and banana",
+    "color": "green",
+    "creationDate": "2025-07-04T07:30:00Z",
+    "lastUpdatedDate": "2025-07-12T09:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "40",
+    "title": "Organize Project Backlog",
+    "description": "- Prioritize user stories\n- Break tasks into subtasks\n- Estimate effort\n- Schedule sprints",
+    "color": "yellow",
+    "creationDate": "2025-07-05T10:00:00Z",
+    "lastUpdatedDate": "2025-07-12T11:00:00Z",
+    "category": 1
+  },
+  {
+    "id": "41",
+    "title": "Cat Enrichment Ideas",
+    "description": "- Rotate toys weekly\n- Create window perches\n- Introduce new scents\n- Interactive playtime daily",
+    "color": "green",
+    "creationDate": "2025-07-06T08:00:00Z",
+    "lastUpdatedDate": "2025-07-10T10:30:00Z",
+    "category": 3
+  },
+  {
+    "id": "42",
+    "title": "Frontend Interview Prep Topics",
+    "description": "- JavaScript fundamentals\n- React hooks & context\n- CSS methodologies\n- System design basics",
+    "color": "yellow",
+    "creationDate": "2025-07-07T09:00:00Z",
+    "lastUpdatedDate": "2025-07-15T12:00:00Z",
+    "dueDate": "2025-07-25T23:59:59Z",
+    "category": 2
+  },
+  {
+    "id": "43",
+    "title": "Plan Volunteer Meetup",
+    "description": "- Reserve community hall\n- Invite animal lovers\n- Prepare materials\n- Schedule guest speakers",
+    "color": "red",
+    "creationDate": "2025-07-08T10:00:00Z",
+    "lastUpdatedDate": "2025-07-14T14:00:00Z",
+    "dueDate": "2025-08-05T18:00:00Z",
+    "category": 4
+  },
+  {
+    "id": "44",
+    "title": "Improve JavaScript Performance",
+    "description": "- Debounce expensive calls\n- Use web workers\n- Avoid unnecessary re-renders\n- Profile with dev tools",
+    "link": "https://web.dev/learn-js/performance/",
+    "color": "yellow",
+    "creationDate": "2025-07-09T08:30:00Z",
+    "lastUpdatedDate": "2025-07-16T10:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "45",
+    "image": "/assets/images/beach-reading.jpg",
+    "title": "Beach Reading List",
+    "description": "- ‘Atomic Habits’ by James Clear\n- ‘Deep Work’ by Cal Newport\n- ‘Clean Code’ by Robert C. Martin",
+    "color": "green",
+    "creationDate": "2025-07-10T07:00:00Z",
+    "lastUpdatedDate": "2025-07-12T09:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "46",
+    "title": "Healthy Snack Prep",
+    "description": "- Cut veggies with hummus\n- Mixed nuts and seeds\n- Greek yogurt with berries",
+    "color": "green",
+    "creationDate": "2025-07-11T07:30:00Z",
+    "lastUpdatedDate": "2025-07-14T08:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "47",
+    "title": "Organize Leadership Workshop",
+    "description": "- Book venue\n- Prepare slides\n- Create handouts\n- Plan group activities",
+    "color": "red",
+    "creationDate": "2025-07-12T09:00:00Z",
+    "lastUpdatedDate": "2025-07-18T11:30:00Z",
+    "dueDate": "2025-07-30T17:00:00Z",
+    "category": 1
+  },
+  {
+    "id": "48",
+    "title": "React State Management Options",
+    "description": "- useState and Context\n- Redux basics\n- Zustand for lightweight stores\n- Recoil introduction",
+    "link": "https://reactjs.org/docs/state-and-lifecycle.html",
+    "color": "yellow",
+    "creationDate": "2025-07-13T10:00:00Z",
+    "lastUpdatedDate": "2025-07-20T12:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "49",
+    "image": "/assets/images/cat-nap.jpg",
+    "title": "Create Cozy Cat Napping Spot",
+    "description": "- Soft blankets\n- Warm sunlight spot\n- Safe from loud noises\n- Favorite toys nearby",
+    "color": "green",
+    "creationDate": "2025-07-14T07:00:00Z",
+    "lastUpdatedDate": "2025-07-16T08:30:00Z",
+    "category": 3
+  },
+  {
+    "id": "50",
+    "title": "Healthy Hydration Habits",
+    "description": "- Drink 8 glasses of water daily\n- Add lemon or cucumber for flavor\n- Avoid sugary drinks\n- Use reusable bottles",
+    "color": "green",
+    "creationDate": "2025-07-15T08:00:00Z",
+    "lastUpdatedDate": "2025-07-22T09:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "51",
+    "title": "Improve Web Accessibility",
+    "description": "- Use semantic tags\n- Add alt text for images\n- Ensure keyboard navigation\n- Test with screen readers",
+    "link": "https://www.w3.org/WAI/standards-guidelines/",
+    "color": "yellow",
+    "creationDate": "2025-07-16T09:30:00Z",
+    "lastUpdatedDate": "2025-07-23T11:30:00Z",
+    "category": 2
+  },
+  {
+    "id": "52",
+    "title": "Organize Summer Book Club",
+    "description": "- Select books\n- Schedule meetings\n- Arrange snacks\n- Prepare discussion questions",
+    "color": "red",
+    "creationDate": "2025-07-17T10:00:00Z",
+    "lastUpdatedDate": "2025-07-24T12:00:00Z",
+    "dueDate": "2025-08-15T18:00:00Z",
+    "category": 4
+  },
+  {
+    "id": "53",
+    "title": "Master Responsive Images",
+    "description": "- Use srcset and sizes\n- Optimize formats\n- Lazy load images\n- Test on devices",
+    "link": "https://web.dev/responsive-images/",
+    "color": "yellow",
+    "creationDate": "2025-07-18T11:00:00Z",
+    "lastUpdatedDate": "2025-07-25T13:00:00Z",
+    "category": 2
+  },
+  {
+    "id": "54",
+    "image": "/assets/images/cat-toys.jpg",
+    "title": "DIY Cat Toys",
+    "description": "- Yarn balls\n- Cardboard scratchers\n- Feather wands\n- Crumpled paper balls",
+    "color": "green",
+    "creationDate": "2025-07-19T07:00:00Z",
+    "lastUpdatedDate": "2025-07-26T08:30:00Z",
+    "category": 3
+  },
+  {
+    "id": "55",
+    "title": "Front-End Coding Challenges",
+    "description": "- Solve algorithm problems daily\n- Build UI components\n- Review code with peers\n- Refactor old projects",
+    "color": "yellow",
+    "creationDate": "2025-07-20T09:00:00Z",
+    "lastUpdatedDate": "2025-07-27T10:30:00Z",
+    "category": 2
+  },
+  {
+    "id": "56",
+    "title": "Plan Weekend Surfing",
+    "description": "- Check surf reports\n- Pack board and wetsuit\n- Bring sunscreen\n- Invite friends",
+    "color": "green",
+    "creationDate": "2025-07-21T08:00:00Z",
+    "lastUpdatedDate": "2025-07-28T09:30:00Z",
+    "dueDate": "2025-07-26T07:00:00Z",
+    "category": 3
+  },
+  {
+    "id": "57",
+    "title": "Effective Team Communication",
+    "description": "- Daily standups\n- Clear documentation\n- Open feedback culture\n- Use async tools",
+    "color": "red",
+    "creationDate": "2025-07-22T10:00:00Z",
+    "lastUpdatedDate": "2025-07-29T11:00:00Z",
+    "category": 1
+  },
+  {
+    "id": "58",
+    "image": "/assets/images/healthy-lunch.jpg",
+    "title": "Pack Healthy Lunches",
+    "description": "- Whole grain sandwiches\n- Fresh veggies\n- Fruits\n- Homemade energy bars",
+    "color": "green",
+    "creationDate": "2025-07-23T07:00:00Z",
+    "lastUpdatedDate": "2025-07-30T08:30:00Z",
+    "category": 3
+  },
+  {
+    "id": "59",
+    "title": "Learn Webpack Basics",
+    "description": "- Entry and output\n- Loaders and plugins\n- Dev server\n- Code splitting",
+    "link": "https://webpack.js.org/concepts/",
+    "color": "yellow",
+    "creationDate": "2025-07-24T09:00:00Z",
+    "lastUpdatedDate": "2025-07-31T10:30:00Z",
+    "category": 2
+  },
+  {
+    "id": "60",
+    "image": "/assets/images/beach-day.jpg",
+    "title": "Meditate at the Beach",
+    "description": "- Find quiet spot\n- Focus on waves and breath\n- 15 min daily\n- Evening sessions preferred",
+    "color": "green",
+    "creationDate": "2025-07-25T18:00:00Z",
+    "lastUpdatedDate": "2025-07-30T19:00:00Z",
     "category": 3
   }
 ]
