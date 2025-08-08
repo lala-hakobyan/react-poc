@@ -21,6 +21,7 @@ export default function AddEditNote() {
         isNoteUpdateError,
         currentEditNote,
         setCurrentEditNote,
+        setIsNoteUpdateError,
     } = useNotesStore();
     const noteFormContract: NoteFormContract = useNoteForm(currentEditNote as NoteForm);
     const imageInputRef = useRef<HTMLInputElement>(null);
@@ -41,6 +42,11 @@ export default function AddEditNote() {
         resetForm();
     }
 
+    const closeErrorModal= () => {
+        setIsNoteUpdateError(false);
+        resetForm();
+    }
+
     const resetForm = (ev?: MouseEvent) => {
         if(ev) {
             ev.preventDefault();
@@ -56,7 +62,7 @@ export default function AddEditNote() {
     return (
         <>
             {isNoteUpdateLoading && <Loader></Loader>}
-            {!isNoteUpdateError && <Modal isOpen={isAddNewNoteOpen} title={title} onClosed={() => closeModal()} >
+            <Modal isOpen={isAddNewNoteOpen} title={title} onClosed={() => closeModal()} >
                 <Modal.Body>
                     <form className="form">
                         <div className="formGroup">
@@ -124,9 +130,8 @@ export default function AddEditNote() {
                     <Button button={{label: 'Reset', className: 'ml-xs'}} onClick={(ev?: MouseEvent) => resetForm(ev)} />
                 </Modal.Footer>
             </Modal>
-            }
             {isNoteUpdateError &&
-                <Modal isOpen={true} title="Error happened">
+                <Modal isOpen={true} title="Error happened" onClosed={() => closeErrorModal()}>
                     <Modal.Body>
                         Sorry error happened while adding a note. Please try again later.
                     </Modal.Body>

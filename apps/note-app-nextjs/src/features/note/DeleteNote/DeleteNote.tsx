@@ -10,7 +10,8 @@ export default function DeleteNote() {
         isDeleteNoteOpen,
         setCurrentDeleteNote,
         isNoteDeleteError,
-        isNoteDeleteLoading
+        isNoteDeleteLoading,
+        setIsNoteDeleteError
     } = useNotesStore();
 
     const deleteAction = async() => {
@@ -18,6 +19,10 @@ export default function DeleteNote() {
             setCurrentDeleteNote(null, false);
             await deleteNote(currentDeleteNote.id);
         }
+    }
+
+    const closeModal = () => {
+        setIsNoteDeleteError(false);
     }
 
     return (
@@ -40,7 +45,7 @@ export default function DeleteNote() {
                 </Modal>
             }
             {isNoteDeleteError &&
-                <Modal isOpen={true} title="Error happened">
+                <Modal isOpen={true} title="Error happened" onClosed={closeModal}>
                     <Modal.Body>
                         Sorry error happened while deleting a note. Please try again later.
                     </Modal.Body>

@@ -16,6 +16,8 @@ type NotesState = {
     isNoteUpdateError: boolean,
     isNoteDeleteError: boolean,
     setIsAddNewNoteOpen: (val: boolean) => void,
+    setIsNoteUpdateError: (val: boolean) => void,
+    setIsNoteDeleteError: (val: boolean) => void,
     setCurrentEditNote: (val: Note | null, open: boolean) => void,
     setCurrentDeleteNote: (val: Note | null, open: boolean) => void,
     resetNotes: () => void,
@@ -39,8 +41,13 @@ export const useNotesStore = create<NotesState>((set) => ({
     isNotesError: false,
     isNoteDeleteError: false,
     setIsAddNewNoteOpen: (val: boolean) => {set({isAddNewNoteOpen: val})},
+    setIsNoteDeleteError: (val: boolean) => {set({isNoteDeleteError: val})},
+    setIsNoteUpdateError: (val: boolean) => {set({isNoteUpdateError: val})},
     setCurrentEditNote: (note: Note | null, open: boolean) => {
-        set({currentEditNote: note, isAddNewNoteOpen: open});
+        set({
+            currentEditNote: note,
+            isAddNewNoteOpen: open
+        });
     },
     setCurrentDeleteNote: (note:  Note | null, open: boolean) => {
        set({currentDeleteNote: note, isDeleteNoteOpen: open});
