@@ -4,7 +4,7 @@ import { Note } from '@/types/note.types';
  * Singleton class for abstracting API requests related to Notes
  */
 class NotesApiService {
-  private baseApiUrl = 'api/notes';
+  private baseApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/notes`;
   private static instance: NotesApiService;
 
   public async fetchNotes(offset = 0, limit = 9) {
