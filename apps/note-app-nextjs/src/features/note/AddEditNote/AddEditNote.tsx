@@ -28,6 +28,15 @@ export default function AddEditNote() {
     const title = currentEditNote ? `Edit Note: ${currentEditNote.title}`: 'Add New Note';
     const buttonName = currentEditNote ? `Edit Note`: 'Add Note';
 
+    function heavyComputation(durationMs: number) {
+        const start = performance.now();
+        while (performance.now() - start < durationMs) {
+            // Busy-wait loop to block main thread
+        }
+    }
+
+    heavyComputation(500);
+
     const submitForm = async () => {
         if(currentEditNote) {
             await editNote(noteFormContract.notesFormState.form as Note);
