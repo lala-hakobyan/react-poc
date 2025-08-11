@@ -1,8 +1,8 @@
-import MainLayout from "@/layout/MainLayout/MainLayout";
-import PageTitle from "@/components/PageTitle/PageTitle";
+import MainLayout from '@/layout/MainLayout/MainLayout';
+import PageTitle from '@/components/PageTitle/PageTitle';
 import '../styles/helpers.scss';
-import Dashboard from "@/features/home/Dashboard/Dashboard";
-import About from "@/features/home/About/About";
+import Dashboard from '@/features/home/Dashboard/Dashboard';
+import About from '@/features/home/About/About';
 
 export default function Page() {
   return (
