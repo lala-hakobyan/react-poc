@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { ContactFormStatus } from '@/types/contactForm.types';
 import Loader from '@/components/Loader/Loader';
 import Alert from '@/components/Alert/Alert';
+import contactApiService from '@/services/contactApiService';
 
 const defaultFormStatus: ContactFormStatus = { isLoading: false, isError: false, isSuccess: false };
 
@@ -20,21 +21,10 @@ export  default function Contact() {
   const submitForm = async () => {
     setContactFormStatus({ ...defaultFormStatus, ...{ isLoading: true } });
     try{
-      const response = await fetch('api/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(contactFormContract.contactFormState.form)
-      })
+      await contactApiService.sendMessage(contactFormContract.contactFormState.form);
 
       contactFormContract.resetForm();
-
-      if(response.ok) {
-        setContactFormStatus({ ...contactFormStatus, ...{ isSuccess: true, isLoading: false } })
-      } else {
-        setContactFormStatus({ ...contactFormStatus, ...{ isError: true, isLoading: false } })
-      }
+      setContactFormStatus({ ...contactFormStatus, ...{ isSuccess: true, isLoading: false } })
     } catch {
       setContactFormStatus({ ...contactFormStatus, ...{ isError: true, isLoading: false } })
     }
