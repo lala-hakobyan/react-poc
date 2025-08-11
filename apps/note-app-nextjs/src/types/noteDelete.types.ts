@@ -1,4 +1,4 @@
-import {Note} from '@/types/note.types';
+import { Note } from '@/types/note.types';
 
 export type NoteDeleteProps = {
     note: Note | null,

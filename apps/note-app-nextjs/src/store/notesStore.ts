@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import {Note, FetchNotesAction} from '@/types/note.types';
+import { Note, FetchNotesAction } from '@/types/note.types';
 
 type NotesState = {
     notes: Note[],
@@ -40,9 +40,9 @@ export const useNotesStore = create<NotesState>((set) => ({
   isLoadMoreNotesError: false,
   isNotesError: false,
   isNoteDeleteError: false,
-  setIsAddNewNoteOpen: (val: boolean) => {set({isAddNewNoteOpen: val})},
-  setIsNoteDeleteError: (val: boolean) => {set({isNoteDeleteError: val})},
-  setIsNoteUpdateError: (val: boolean) => {set({isNoteUpdateError: val})},
+  setIsAddNewNoteOpen: (val: boolean) => {set({ isAddNewNoteOpen: val })},
+  setIsNoteDeleteError: (val: boolean) => {set({ isNoteDeleteError: val })},
+  setIsNoteUpdateError: (val: boolean) => {set({ isNoteUpdateError: val })},
   setCurrentEditNote: (note: Note | null, open: boolean) => {
     set({
       currentEditNote: note,
@@ -50,35 +50,35 @@ export const useNotesStore = create<NotesState>((set) => ({
     });
   },
   setCurrentDeleteNote: (note:  Note | null, open: boolean) => {
-    set({currentDeleteNote: note, isDeleteNoteOpen: open});
+    set({ currentDeleteNote: note, isDeleteNoteOpen: open });
   },
   resetNotes: () => {
-    set({notes: []})
+    set({ notes: [] })
   },
   fetchNotes: async (offset = 0, limit = 9, type: FetchNotesAction = 'set_init') => {
     const isLoadingKey = type === 'set_load_more' ? 'isLoadMoreNotesLoading' : 'isNotesLoading';
     const isErrorKey = type === 'set_load_more'? 'isLoadMoreNotesError' : 'isNotesError';
 
-    set({[isLoadingKey]: true})
+    set({ [isLoadingKey]: true })
     try {
       const response = await fetch(`api/notes?offset=${offset}&limit=${limit}`);
 
       if(response.ok) {
         const result = await response.json();
         set((state: NotesState) => (
-          {notes: [...state.notes, ...result], [isLoadingKey]: false, [isErrorKey]: false}
+          { notes: [...state.notes, ...result], [isLoadingKey]: false, [isErrorKey]: false }
         ));
       } else {
-        set({[isLoadingKey]: false, [isErrorKey]: true});
+        set({ [isLoadingKey]: false, [isErrorKey]: true });
       }
     } catch {
-      set({[isLoadingKey]: false, [isErrorKey]: true});
+      set({ [isLoadingKey]: false, [isErrorKey]: true });
     }
   },
   addNote: async (note: Note) => {
-    const insertNote = {...note, creationDate: new Date(), lastUpdatedDate: new Date()}
+    const insertNote = { ...note, creationDate: new Date(), lastUpdatedDate: new Date() }
     try {
-      set({isNoteUpdateLoading: true});
+      set({ isNoteUpdateLoading: true });
       const response = await fetch('api/notes', {
         method: 'POST',
         headers: {
@@ -90,19 +90,19 @@ export const useNotesStore = create<NotesState>((set) => ({
       if(response.ok) {
         const result: Note = await response.json();
         set((state: NotesState) => (
-          { notes: [result, ...state.notes], isNoteUpdateLoading: false}
+          { notes: [result, ...state.notes], isNoteUpdateLoading: false }
         ));
       } else {
-        set({isNoteUpdateLoading: false, isNoteUpdateError: true});
+        set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
       }
     } catch {
-      set({isNoteUpdateLoading: false, isNoteUpdateError: true});
+      set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
     }
   },
   editNote: async (note: Note) => {
     try {
-      set({isNoteUpdateLoading: true});
-      const updateNote = {...note, lastUpdatedDate: new Date()};
+      set({ isNoteUpdateLoading: true });
+      const updateNote = { ...note, lastUpdatedDate: new Date() };
       const response = await fetch('api/notes/'+ note.id, {
         method: 'PUT',
         headers: {
@@ -116,22 +116,22 @@ export const useNotesStore = create<NotesState>((set) => ({
 
         set((state: NotesState) => {
           return {
-            notes: state.notes.map(noteItem => noteItem.id === note.id ? {...noteItem,...note} : noteItem),
+            notes: state.notes.map(noteItem => noteItem.id === note.id ? { ...noteItem,...note } : noteItem),
             isNoteUpdateLoading: false,
             isNoteUpdateError: false
           };
         })
       } else {
-        set({isNoteUpdateLoading: false, isNoteUpdateError: true});
+        set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
       }
 
     } catch {
-      set({isNoteUpdateLoading: false, isNoteUpdateError: true});
+      set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
     }
   },
   deleteNote: async (noteId: string) => {
     try {
-      set({isNoteDeleteLoading: true});
+      set({ isNoteDeleteLoading: true });
       const response = await fetch(`api/notes/${noteId}`, {
         method: 'DELETE',
         headers: {
@@ -147,10 +147,10 @@ export const useNotesStore = create<NotesState>((set) => ({
           }
         })
       } else {
-        set({isNoteDeleteLoading: false, isNoteDeleteError: true})
+        set({ isNoteDeleteLoading: false, isNoteDeleteError: true })
       }
     } catch {
-      set({isNoteDeleteLoading: false, isNoteDeleteError: true})
+      set({ isNoteDeleteLoading: false, isNoteDeleteError: true })
     }
   }
 }))

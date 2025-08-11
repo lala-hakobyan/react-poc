@@ -1,4 +1,4 @@
-import {NextResponse} from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function PUT(req: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
@@ -13,7 +13,7 @@ export async function PUT(req: Request, context: { params: Promise<{ id: string 
 
   const result = await response.json();
 
-  return NextResponse.json(result, {status: result.status});
+  return NextResponse.json(result, { status: result.status });
 }
 
 

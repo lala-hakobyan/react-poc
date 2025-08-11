@@ -1,6 +1,6 @@
 import Modal from '@/components/Modal/Modal';
 import Button from '@/components/Button/Button';
-import {useNotesStore} from '@/store/notesStore';
+import { useNotesStore } from '@/store/notesStore';
 import Loader from '@/components/Loader/Loader';
 
 export default function DeleteNote() {
@@ -35,10 +35,10 @@ export default function DeleteNote() {
                   </Modal.Body>
                   <Modal.Footer>
                     <Button
-                      button={{label: 'Yes'}}
+                      button={{ label: 'Yes' }}
                       onClick={() => deleteAction()}/>
                     <Button
-                      button={{label: 'No', className: 'ml-xs'}}
+                      button={{ label: 'No', className: 'ml-xs' }}
                       onClick={() => setCurrentDeleteNote(null, false)}
                     />
                   </Modal.Footer>

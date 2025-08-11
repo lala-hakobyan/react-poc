@@ -2,12 +2,12 @@
 import './../../styles/form.scss';
 import Button from '@/components/Button/Button';
 import useContractForm from '@/features/contact/useContactForm';
-import {useState} from 'react';
-import {ContactFormStatus} from '@/types/contactForm.types';
+import { useState } from 'react';
+import { ContactFormStatus } from '@/types/contactForm.types';
 import Loader from '@/components/Loader/Loader';
 import Alert from '@/components/Alert/Alert';
 
-const defaultFormStatus: ContactFormStatus = {isLoading: false, isError: false, isSuccess: false};
+const defaultFormStatus: ContactFormStatus = { isLoading: false, isError: false, isSuccess: false };
 
 export  default function Contact() {
   const contactFormContract = useContractForm();
@@ -18,7 +18,7 @@ export  default function Contact() {
   }
 
   const submitForm = async () => {
-    setContactFormStatus({...defaultFormStatus, ...{isLoading: true}});
+    setContactFormStatus({ ...defaultFormStatus, ...{ isLoading: true } });
     try{
       const response = await fetch('api/messages', {
         method: 'POST',
@@ -31,12 +31,12 @@ export  default function Contact() {
       contactFormContract.resetForm();
 
       if(response.ok) {
-        setContactFormStatus({...contactFormStatus, ...{isSuccess: true, isLoading: false}})
+        setContactFormStatus({ ...contactFormStatus, ...{ isSuccess: true, isLoading: false } })
       } else {
-        setContactFormStatus({...contactFormStatus, ...{isError: true, isLoading: false}})
+        setContactFormStatus({ ...contactFormStatus, ...{ isError: true, isLoading: false } })
       }
     } catch {
-      setContactFormStatus({...contactFormStatus, ...{isError: true, isLoading: false}})
+      setContactFormStatus({ ...contactFormStatus, ...{ isError: true, isLoading: false } })
     }
   }
 
@@ -55,9 +55,10 @@ export  default function Contact() {
             onBlur={contactFormContract.handleFieldBlur('name')}
             name="name" />
           {contactFormContract.isNameError &&
-                        <span className="formGroup__errorMessage">{contactFormContract.contactFormState.errors.name}</span>
+            <span className="formGroup__errorMessage">{contactFormContract.contactFormState.errors.name}</span>
           }
         </div>
+
         <div className="formGroup">
           <label className="formGroup__label formGroup__label--required" htmlFor="emailField">Email</label>
           <input type="text"
@@ -68,9 +69,10 @@ export  default function Contact() {
             onBlur={contactFormContract.handleFieldBlur('email')}
             name="email" />
           {contactFormContract.isEmailError &&
-                        <span className="formGroup__errorMessage">{contactFormContract.contactFormState.errors.email}</span>
+            <span className="formGroup__errorMessage">{contactFormContract.contactFormState.errors.email}</span>
           }
         </div>
+
         <div className="formGroup">
           <label className="formGroup__label" htmlFor="subjectField">Subject</label>
           <input type="text"
@@ -81,6 +83,7 @@ export  default function Contact() {
             id="subjectField"
             name="subject" />
         </div>
+
         <div className="formGroup">
           <label className="formGroup__label formGroup__label--required" htmlFor="messageField">Message</label>
           <textarea className={contactFormContract.isMessageError ? 'formGroup__formControl formGroup__formControl--error' : 'formGroup__formControl'}
@@ -91,19 +94,20 @@ export  default function Contact() {
             name="message">
           </textarea>
           {contactFormContract.isMessageError &&
-                        <span className="formGroup__errorMessage">{contactFormContract.contactFormState.errors.message}</span>
+            <span className="formGroup__errorMessage">{contactFormContract.contactFormState.errors.message}</span>
           }
         </div>
-        <div className="text-center">
-          {contactFormStatus.isSuccess && <Alert alert={{type: 'success'}}><p>{messages.success}</p></Alert>}
 
-          {contactFormStatus.isError && <Alert alert={{type: 'danger'}}><p dangerouslySetInnerHTML={{ __html: messages.error as TrustedHTML}}></p></Alert>}
+        <div className="text-center">
+          {contactFormStatus.isSuccess && <Alert alert={{ type: 'success' }}><p>{messages.success}</p></Alert>}
+
+          {contactFormStatus.isError && <Alert alert={{ type: 'danger' }}><p dangerouslySetInnerHTML={{ __html: messages.error as TrustedHTML }}></p></Alert>}
 
           {!contactFormStatus.isSuccess && !contactFormStatus.isError &&
-                     <>
-                       <Button button={{label: 'Send Message', style: 'primary', disabled: !contactFormContract.contactFormState.isValid || contactFormStatus.isLoading}} onClick={submitForm} />
-                       <Button button={{label: 'Reset', style: 'ghost', className: 'ml-xs'}} onClick={contactFormContract.resetForm} />
-                     </>
+          <>
+            <Button button={{ label: 'Send Message', style: 'primary', disabled: !contactFormContract.contactFormState.isValid || contactFormStatus.isLoading }} onClick={submitForm} />
+            <Button button={{ label: 'Reset', style: 'ghost', className: 'ml-xs' }} onClick={contactFormContract.resetForm} />
+          </>
           }
         </div>
       </form>

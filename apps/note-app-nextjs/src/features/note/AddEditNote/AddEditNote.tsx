@@ -1,14 +1,14 @@
 'use client';
 import Modal from '@/components/Modal/Modal';
-import {useNotesStore} from '@/store/notesStore';
+import { useNotesStore } from '@/store/notesStore';
 import Button from '@/components/Button/Button';
 import './../../../styles/form.scss'
 import './../../../styles/imageWrapper.scss'
-import {useRef} from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
-import {Note} from '@/types/note.types';
+import { Note } from '@/types/note.types';
 import useNoteForm from '@/features/note/AddEditNote/useNoteForm';
-import {NoteForm, NoteFormContract} from '@/types/noteForm.types';
+import { NoteForm, NoteFormContract } from '@/types/noteForm.types';
 import Loader from '@/components/Loader/Loader';
 
 
@@ -32,7 +32,7 @@ export default function AddEditNote() {
     if(currentEditNote) {
       await editNote(noteFormContract.notesFormState.form as Note);
     } else {
-      await addNote({...noteFormContract.notesFormState.form, id: crypto.randomUUID()} as Note);
+      await addNote({ ...noteFormContract.notesFormState.form, id: crypto.randomUUID() } as Note);
     }
     closeModal();
   }
@@ -126,8 +126,8 @@ export default function AddEditNote() {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button button={{label: buttonName, disabled: !noteFormContract.isFormValid() || isNoteUpdateLoading}} onClick={() => submitForm()} />
-          <Button button={{label: 'Reset', className: 'ml-xs'}} onClick={(ev?: MouseEvent) => resetForm(ev)} />
+          <Button button={{ label: buttonName, disabled: !noteFormContract.isFormValid() || isNoteUpdateLoading }} onClick={() => submitForm()} />
+          <Button button={{ label: 'Reset', className: 'ml-xs' }} onClick={(ev?: MouseEvent) => resetForm(ev)} />
         </Modal.Footer>
       </Modal>
       {isNoteUpdateError &&

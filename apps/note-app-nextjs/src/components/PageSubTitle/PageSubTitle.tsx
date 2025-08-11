@@ -1,7 +1,7 @@
 import styles from './PageSubTitle.module.scss';
 
-export default function PageSubTitle({title}: {title: string}) {
+export default function PageSubTitle({ title }: {title: string}) {
   return (
-    <h2 className={styles.pageSubTitle}>{title}</h2>
+    <h2 className={styles.pageSubTitle}>{ title }</h2>
   )
 }

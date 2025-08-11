@@ -3,8 +3,8 @@ import PageSubTitle from '@/components/PageSubTitle/PageSubTitle';
 import CardCarousel from '@/components/CardCarousel/CardCarousel';
 import Loader from '@/components/Loader/Loader';
 import styles from './Dashboard.module.scss';
-import {useEffect, useState} from 'react';
-import {Note} from '@/types/note.types';
+import { useEffect, useState } from 'react';
+import { Note } from '@/types/note.types';
 
 export default function Dashboard() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -36,7 +36,7 @@ export default function Dashboard() {
 
       {!isLoading && <CardCarousel notes={notes}></CardCarousel>}
 
-      {isLoading && <Loader loader={{type: 'section'}}></Loader>}
+      {isLoading && <Loader loader={{ type: 'section' }}></Loader>}
     </section>
   );
 }

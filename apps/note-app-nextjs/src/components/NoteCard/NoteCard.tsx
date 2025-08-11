@@ -1,7 +1,7 @@
 import styles from './NoteCard.module.scss'
 import Image from 'next/image';
-import {Fragment, SyntheticEvent} from 'react';
-import {NoteCardProps} from '@/types/noteCard.types';
+import { Fragment, SyntheticEvent } from 'react';
+import { NoteCardProps } from '@/types/noteCard.types';
 
 function displayText(text:string) {
   const lines = text.split('\n');
@@ -18,7 +18,7 @@ function displayText(text:string) {
   )
 }
 
-export default function NoteCard({noteCard, onEdit, onDelete}: NoteCardProps) {
+export default function NoteCard({ noteCard, onEdit, onDelete }: NoteCardProps) {
   const onEditAction = (ev: SyntheticEvent) => {
     ev.preventDefault();
     if(onEdit) {
@@ -46,25 +46,25 @@ export default function NoteCard({noteCard, onEdit, onDelete}: NoteCardProps) {
         </figure>
       )}
       {noteCard.showActions &&
-             <div className={styles.noteCard__actions}>
-               {noteCard.note.link &&
-                    <a href={noteCard.note.link} className="ml-xs svg-link" target="_blank">
-                      <svg className={styles.actions__icon} width={30} height={30}>
-                        <use href="/assets/icons/svg-sprite.svg#icon-link" />
-                      </svg>
-                    </a>
-               }
-               <a href="#" onClick={onEditAction} className="ml-xs svg-link">
-                 <svg className={styles.actions__icon} width={30} height={30}>
-                   <use href="/assets/icons/svg-sprite.svg#icon-edit" />
-                 </svg>
-               </a>
-               <a href="#" onClick={onDeleteAction} className="ml-xs svg-link">
-                 <svg className={styles.actions__icon} width={30} height={30}>
-                   <use href="/assets/icons/svg-sprite.svg#icon-trash" />
-                 </svg>
-               </a>
-             </div>
+         <div className={styles.noteCard__actions}>
+           {noteCard.note.link &&
+                <a href={noteCard.note.link} className="ml-xs svg-link" target="_blank">
+                  <svg className={styles.actions__icon} width={30} height={30}>
+                    <use href="/assets/icons/svg-sprite.svg#icon-link" />
+                  </svg>
+                </a>
+           }
+           <a href="#" onClick={onEditAction} className="ml-xs svg-link">
+             <svg className={styles.actions__icon} width={30} height={30}>
+               <use href="/assets/icons/svg-sprite.svg#icon-edit" />
+             </svg>
+           </a>
+           <a href="#" onClick={onDeleteAction} className="ml-xs svg-link">
+             <svg className={styles.actions__icon} width={30} height={30}>
+               <use href="/assets/icons/svg-sprite.svg#icon-trash" />
+             </svg>
+           </a>
+         </div>
       }
       <div className={styles.noteCard__content}>
         <h3>{noteCard.note.title}</h3>

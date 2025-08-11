@@ -1,7 +1,7 @@
 import styles from './Alert.module.scss';
-import {AlertProps} from '@/types/alert.types';
+import { AlertProps } from '@/types/alert.types';
 
-export default function Alert({children, alert}: AlertProps) {
+export default function Alert({ children, alert }: AlertProps) {
   const className = alert.type ? `${styles.alert} ${styles['alert--' + alert.type]}` : styles.alert;
 
   return (

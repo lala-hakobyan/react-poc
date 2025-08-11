@@ -1,7 +1,7 @@
-import {NextResponse} from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
-  const {searchParams} = new URL(req.url);
+  const { searchParams } = new URL(req.url);
   let queryString = searchParams.size > 0 ? '?' : '';
   let index = 0;
 
@@ -32,5 +32,5 @@ export async function POST(req: Request) {
 
   const result = await response.json();
 
-  return NextResponse.json(result, {status: result.status});
+  return NextResponse.json(result, { status: result.status });
 }

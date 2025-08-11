@@ -1,11 +1,11 @@
 'use client';
 import styles from './NoteList.module.scss';
 import NoteCard from '@/components/NoteCard/NoteCard';
-import {Note} from '@/types/note.types';
+import { Note } from '@/types/note.types';
 import Button from '@/components/Button/Button';
-import {useEffect, useRef} from 'react';
+import { useEffect, useRef } from 'react';
 import Loader from '@/components/Loader/Loader';
-import {useNotesStore} from '@/store/notesStore';
+import { useNotesStore } from '@/store/notesStore';
 import DeleteNote from '@/features/note/DeleteNote/DeleteNote';
 import Alert from '@/components/Alert/Alert';
 
@@ -46,7 +46,7 @@ export  default function NoteList() {
                         <NoteCard
                           onEdit={() => setCurrentEditNote(note, true)}
                           onDelete={() => setCurrentDeleteNote(note, true) }
-                          noteCard={{note: note, showImage: true, showActions: true}}
+                          noteCard={{ note: note, showImage: true, showActions: true }}
                         ></NoteCard>
                       </div>
                     ))}
@@ -60,7 +60,7 @@ export  default function NoteList() {
       {!isNotesLoading && !isNotesError &&
                 <div className="text-center mt-md">
                   {isLoadMoreNotesError &&
-                        <Alert alert={{type: 'danger', className: 'mb-sm'}}>An error occurred while loading more notes. Please try again later.</Alert>
+                        <Alert alert={{ type: 'danger', className: 'mb-sm' }}>An error occurred while loading more notes. Please try again later.</Alert>
                   }
                   <Button
                     button={{
@@ -76,7 +76,7 @@ export  default function NoteList() {
                 </div>
       }
 
-      {isNotesError && <Alert alert={{type: 'danger'}}>Sorry, something went wrong while loading your notes.Please try again later.</Alert>}
+      {isNotesError && <Alert alert={{ type: 'danger' }}>Sorry, something went wrong while loading your notes.Please try again later.</Alert>}
     </>
   )
 }

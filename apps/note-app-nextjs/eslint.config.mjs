@@ -22,6 +22,10 @@ const eslintConfig = [
 
       // Double quotes in JSX attributes
       'jsx-quotes': ['error', 'prefer-double'],
+
+      // Enforce spaces inside curly braces for better readability:
+      // import { NextResponse } from 'next/server'; instead of import {NextResponse} from 'next/server';
+      'object-curly-spacing': ['error', 'always']
     },
   },
 ];

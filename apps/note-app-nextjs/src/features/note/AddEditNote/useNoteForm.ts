@@ -6,8 +6,8 @@ import {
   NoteFormField,
   NoteFormState
 } from '@/types/noteForm.types';
-import {ChangeEvent, useEffect, useMemo, useReducer} from 'react';
-import {Note} from '@/types/note.types';
+import { ChangeEvent, useEffect, useMemo, useReducer } from 'react';
+import { Note } from '@/types/note.types';
 
 const emptyFormValue: NoteForm = {
   title: '',
@@ -18,7 +18,7 @@ const emptyFormValue: NoteForm = {
 
 const getDefaultStateValue = (defaultNoteForm: NoteForm | null): NoteFormState =>  {
   return {
-    form: defaultNoteForm ? {...emptyFormValue,...defaultNoteForm} : emptyFormValue,
+    form: defaultNoteForm ? { ...emptyFormValue,...defaultNoteForm } : emptyFormValue,
     errors: {},
     touched: {}
   }
@@ -43,13 +43,13 @@ const notesFormReducer = (state: NoteFormState, action: NoteFormAction): NoteFor
     case 'set_field':
       return {
         ...state,
-        form: {...state.form, [action.field]: action.value},
-        errors: {...state.errors, [action.field]: null}
+        form: { ...state.form, [action.field]: action.value },
+        errors: { ...state.errors, [action.field]: null }
       }
     case 'set_touched':
       return {
         ...state,
-        touched: {...state.touched, [action.field]: true},
+        touched: { ...state.touched, [action.field]: true },
         errors: {
           ...state.errors,
           ...validateField(action?.field, action?.value)
@@ -84,27 +84,27 @@ export default function useNoteForm(defaultNoteForm?: NoteForm): NoteFormContrac
   useEffect(() => {
     const initialValue: NoteForm = defaultNoteForm ? { ...emptyFormValue, ...defaultNoteForm } : emptyFormValue;
 
-    dispatch({ type: 'set_form_value', value: initialValue});
+    dispatch({ type: 'set_form_value', value: initialValue });
   }, [defaultNoteForm]); // Dependency array: run this effect whenever defaultNoteForm changes
 
   const resetForm = () => {
-    dispatch({type: 'set_form_value', value: emptyFormValue as Note})
+    dispatch({ type: 'set_form_value', value: emptyFormValue as Note })
   }
 
   const handleFieldChange = (field: NoteFormField) => (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch({type: 'set_field', field, value: ev.target.value})
+    dispatch({ type: 'set_field', field, value: ev.target.value })
   }
 
   const handleImageChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const file = ev.target.files? ev.target.files[0] : null;
     if(file) {
       const url = URL.createObjectURL(file);
-      dispatch({type: 'set_field', field: 'image', value: url})
+      dispatch({ type: 'set_field', field: 'image', value: url })
     }
   }
 
   const handleFieldBlur = (field: NoteFormField) => (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch({type: 'set_touched', field, value: ev.target.value});
+    dispatch({ type: 'set_touched', field, value: ev.target.value });
   }
 
   const isFormValid = (): boolean => {

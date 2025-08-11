@@ -5,7 +5,7 @@ import {
   ContactFormField,
   ContactFormState
 } from '@/types/contactForm.types';
-import {ChangeEvent, useReducer} from 'react';
+import { ChangeEvent, useReducer } from 'react';
 
 const defaultContactForm: ContactForm = {
   name: '',
@@ -55,21 +55,21 @@ const contactFormReducer = (state: ContactFormState, action: ContactFormAction):
       const newErrors = validateField(action.field, action.value);
       newState = {
         ...state,
-        form: {...state.form, [action.field]: action.value},
-        errors: {...state.errors, [action.field]: Object.keys(newErrors).length > 0 ? newErrors[action.field] : null}
+        form: { ...state.form, [action.field]: action.value },
+        errors: { ...state.errors, [action.field]: Object.keys(newErrors).length > 0 ? newErrors[action.field] : null }
       }
       break;
     case 'set_touched':
       newState = {
         ...state,
-        touched: {...state.touched, [action.field]: true},
-        errors: {...state.errors, ...validateField(action.field, action.value)}
+        touched: { ...state.touched, [action.field]: true },
+        errors: { ...state.errors, ...validateField(action.field, action.value) }
       }
       break;
     case 'set_form_value':
       newState = {
         ...state,
-        form: {...state.form, ...action.value},
+        form: { ...state.form, ...action.value },
         errors: {},
         touched: {}
       }
@@ -93,15 +93,15 @@ export default function useContractForm(): ContactFormContract {
   const isMessageError = !!(contactFormState.touched.message && contactFormState.errors.message);
 
   const resetForm = () => {
-    dispatch({type: 'set_form_value', value: defaultContactForm});
+    dispatch({ type: 'set_form_value', value: defaultContactForm });
   }
 
   const handleFieldChange = (field: ContactFormField) => (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch({type: 'set_field', field, value: ev.target.value})
+    dispatch({ type: 'set_field', field, value: ev.target.value })
   }
 
   const handleFieldBlur = (field: ContactFormField) => (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch({type: 'set_touched', field, value: ev.target.value});
+    dispatch({ type: 'set_touched', field, value: ev.target.value });
   }
 
   return {

@@ -1,5 +1,5 @@
-import {ChangeEvent} from 'react';
-import {Note} from '@/types/note.types';
+import { ChangeEvent } from 'react';
+import { Note } from '@/types/note.types';
 
 export type NoteForm = {
     title: string;

@@ -1,8 +1,8 @@
 'use client';
 import styles from './Modal.module.scss';
-import {ModalCompoundComponent, ModalContent, ModalProps} from '@/types/modal.types';
+import { ModalCompoundComponent, ModalContent, ModalProps } from '@/types/modal.types';
 import Button from '@/components/Button/Button';
-import React, {Children, ReactElement, ReactNode, SyntheticEvent, useEffect, useState} from 'react';
+import React, { Children, ReactElement, ReactNode, SyntheticEvent, useEffect, useState } from 'react';
 
 // Moving at top to avoid recreating classes for each rerender
 const modalInactiveClass = `${styles.modal}`;
@@ -58,8 +58,8 @@ const exportModalContent = (ModalRoot: (props: ModalProps) => React.JSX.Element)
   }) as ModalCompoundComponent;
 }
 
-const ModalRoot = ({children, isOpen, title, onClosed} : ModalProps): React.JSX.Element => {
-  const {modalHeader, modalBody, modalFooter} = extractModalContent(children);
+const ModalRoot = ({ children, isOpen, title, onClosed } : ModalProps): React.JSX.Element => {
+  const { modalHeader, modalBody, modalFooter } = extractModalContent(children);
 
   const closeModalAction = (ev?: SyntheticEvent) => {
     setModalClass(modalInactiveClass)
@@ -101,7 +101,7 @@ const ModalRoot = ({children, isOpen, title, onClosed} : ModalProps): React.JSX.
         </div>
 
         <div className={styles.modal__footer}>
-          { modalFooter ? modalFooter : <Button button={{label: 'Cancel'}} onClick={closeModalAction} ></Button>}
+          { modalFooter ? modalFooter : <Button button={{ label: 'Cancel' }} onClick={closeModalAction} ></Button>}
         </div>
       </div>
     </div>
