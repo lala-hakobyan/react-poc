@@ -5,10 +5,11 @@ import { LogMessagesConstants } from '@/constants/logMessages.constants';
  * Singleton class for abstracting API requests related to Notes
  */
 class NotesApiService {
+  private defaultLimitConfig: number = Number(process.env.NEXT_PUBLIC_NOTES_PAGE_SIZE);
   private baseApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/notes`;
   private static instance: NotesApiService;
 
-  public async fetchNotes(offset = 0, limit = 9) {
+  public async fetchNotes(offset = 0, limit = this.defaultLimitConfig) {
     const response = await fetch(`${this.baseApiUrl}?offset=${offset}&limit=${limit}`);
 
     if(!response.ok) {

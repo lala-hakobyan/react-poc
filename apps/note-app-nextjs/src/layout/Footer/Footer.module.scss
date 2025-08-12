@@ -1,7 +1,7 @@
 @use '../../styles/variables';
 
 .footer {
-  border-top: 1px solid variables.$border-color;
+  border-top: 1px solid var(--border-color);
   padding: 2rem;
   text-align: center;
 

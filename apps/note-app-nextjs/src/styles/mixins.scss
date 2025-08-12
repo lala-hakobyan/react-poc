@@ -1,0 +1,51 @@
+@use './variables.scss' as vars;
+
+@function next-breakpoint($name) {
+  $keys: map-keys(vars.$grid-breakpoints);
+  $index: index($keys, $name);
+
+  @if $index == null or $index == length($keys) {
+    @return null; // No next breakpoint
+  }
+
+  @return nth($keys, $index + 1);
+}
+
+@function breakpoint-min($name) {
+  $min: map-get(vars.$grid-breakpoints, $name);
+  @return if($min == 0, null, $min);
+}
+
+@function breakpoint-max($name) {
+  $next: map-get(vars.$grid-breakpoints, next-breakpoint($name));
+
+  @if $next {
+    @return $next - 0.02;
+  }
+
+  @return null; // No max for largest breakpoint
+}
+
+@mixin media-breakpoint-down($name) {
+  $max: breakpoint-max($name);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-up($name) {
+  $min: breakpoint-min($name);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

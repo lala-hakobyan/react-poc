@@ -1,22 +1,8 @@
-$primary-color: #1F2937;
-$secondary-color: #6B7280;
-$primary-bg-color: #F9FAFB;
-$secondary-bg-color: #FFFFFF;
-$muted-bg-color: #F3F4F6;
-$primary-accent-color: #EC7724;
-$hover-accent-color: #D26000;
-$border-color: #E5E7EB;
-$menu-color: #5F6368;
-$danger-color: #d93025;
-
-
-$primary-color-dark: #E5E7EB;           // Light text on dark bg
-$secondary-color-dark: #9CA3AF;         // Muted/secondary text
-$primary-bg-color-dark: #1F2937;        // Main dark background
-$secondary-bg-color-dark: #111827;      // Slightly darker panels
-$muted-bg-color-dark: #374151;          // Section backgrounds, inputs
-$primary-accent-color-dark: #EC7724;    // Accent stays same for contrast
-$hover-accent-color-dark: #D26000;      // Slightly darker on hover
-$border-color-dark: #4B5563;            // Soft borders on dark bg
-$menu-color-dark: #D1D5DB;              // Text in nav/menu
-$danger-color-dark: #ff6b6b;            // Danger/error style text
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;

@@ -9,14 +9,17 @@ import notesApiService from '@/services/notesApiService';
 import { LogMessagesConstants } from '@/constants/logMessages.constants';
 import { DashboardConstants } from '@/constants/dashboard.constants';
 
+const recentNotesSizeConfig = Number(process.env.NEXT_PUBLIC_DASHBOARD_ITEM_COUNT);
+
 export default function Dashboard() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+
   useEffect(() => {
     const getApiData = async () => {
       try {
-        const data = await notesApiService.fetchNotes(0, 5);
+        const data = await notesApiService.fetchNotes(0, recentNotesSizeConfig);
         setNotes(data);
         setIsLoading(false);
       } catch(error) {
