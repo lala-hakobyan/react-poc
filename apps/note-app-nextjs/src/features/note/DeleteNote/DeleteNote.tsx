@@ -2,6 +2,7 @@ import Modal from '@/components/Modal/Modal';
 import Button from '@/components/Button/Button';
 import { useNotesStore } from '@/store/notesStore';
 import Loader from '@/components/Loader/Loader';
+import { DeleteNoteConstants } from '@/constants/deleteNote.constants';
 
 export default function DeleteNote() {
   const {
@@ -29,27 +30,27 @@ export default function DeleteNote() {
     <>
       {isNoteDeleteLoading && <Loader />}
       {!isNoteDeleteError && currentDeleteNote &&
-                <Modal isOpen={isDeleteNoteOpen} title={`Delete Note: ${currentDeleteNote?.title}`} onClosed={() => setCurrentDeleteNote(null, false)}>
-                  <Modal.Body>
-                        Are you sure you want to delete this note?
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button
-                      button={{ label: 'Yes' }}
-                      onClick={() => deleteAction()}/>
-                    <Button
-                      button={{ label: 'No', className: 'ml-xs' }}
-                      onClick={() => setCurrentDeleteNote(null, false)}
-                    />
-                  </Modal.Footer>
-                </Modal>
+        <Modal isOpen={isDeleteNoteOpen} title={`Delete Note: ${currentDeleteNote?.title}`} onClosed={() => setCurrentDeleteNote(null, false)}>
+          <Modal.Body>
+            {DeleteNoteConstants.confirmDeleteMessage}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              button={{ label: 'Yes' }}
+              onClick={() => deleteAction()}/>
+            <Button
+              button={{ label: 'No', className: 'ml-xs' }}
+              onClick={() => setCurrentDeleteNote(null, false)}
+            />
+          </Modal.Footer>
+        </Modal>
       }
       {isNoteDeleteError &&
-                <Modal isOpen={true} title="Error happened" onClosed={closeModal}>
-                  <Modal.Body>
-                        Sorry error happened while deleting a note. Please try again later.
-                  </Modal.Body>
-                </Modal>
+        <Modal isOpen={true} title="Error happened" onClosed={closeModal}>
+          <Modal.Body>
+            {DeleteNoteConstants.deleteErrorMessage}
+          </Modal.Body>
+        </Modal>
       }
     </>
   )

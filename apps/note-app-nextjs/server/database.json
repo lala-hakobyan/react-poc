@@ -4,10 +4,10 @@
     "image": "/assets/images/travel-paris.png",
     "title": "Paris Travel Tips",
     "link": "https://www.lonelyplanet.com/articles/first-time-paris",
-    "description": "- Visit Eiffel Tower \n - Visit Louvre \n - Visit Versailles",
+    "description": "- Catch the Eiffel Tower glowing at sunset \uD83D\uDDFC \n - Get lost in art at the Louvre \uD83C\uDFA8  \n - Feel like royalty in Versailles \uD83D\uDC51",
     "color": "blue",
-    "creationDate": "2025-07-20T09:00:00Z",
-    "lastUpdatedDate": "2025-07-21T14:00:00Z",
+    "creationDate": "2025-07-25T09:00:00Z",
+    "lastUpdatedDate": "2025-07-27T14:00:00Z",
     "dueDate": "2025-08-21T14:00:00Z",
     "category": 1
   },
@@ -37,7 +37,7 @@
     "title": "Call Mom",
     "description": "Don't forget to call mom on Sunday!",
     "color": "red",
-    "creationDate": "2025-07-22T08:00:00Z",
+    "creationDate": "2025-07-18T08:00:00Z",
     "lastUpdatedDate": "2025-07-22T08:00:00Z",
     "dueDate": "2025-07-27T18:00:00Z",
     "category": 4
@@ -499,8 +499,8 @@
     "description": "- Use semantic tags\n- Add alt text for images\n- Ensure keyboard navigation\n- Test with screen readers",
     "link": "https://www.w3.org/WAI/standards-guidelines/",
     "color": "yellow",
-    "creationDate": "2025-07-16T09:30:00Z",
-    "lastUpdatedDate": "2025-07-23T11:30:00Z",
+    "creationDate": "2025-07-23T09:30:00Z",
+    "lastUpdatedDate": "2025-07-25T11:30:00Z",
     "category": 2
   },
   {
@@ -529,8 +529,8 @@
     "title": "DIY Cat Toys",
     "description": "- Yarn balls\n- Cardboard scratchers\n- Feather wands\n- Crumpled paper balls",
     "color": "green",
-    "creationDate": "2025-07-19T07:00:00Z",
-    "lastUpdatedDate": "2025-07-26T08:30:00Z",
+    "creationDate": "2025-07-22T07:00:00Z",
+    "lastUpdatedDate": "2025-07-28T08:30:00Z",
     "category": 3
   },
   {
@@ -547,7 +547,7 @@
     "title": "Plan Weekend Surfing",
     "description": "- Check surf reports\n- Pack board and wetsuit\n- Bring sunscreen\n- Invite friends",
     "color": "green",
-    "creationDate": "2025-07-21T08:00:00Z",
+    "creationDate": "2025-07-19T08:00:00Z",
     "lastUpdatedDate": "2025-07-28T09:30:00Z",
     "dueDate": "2025-07-26T07:00:00Z",
     "category": 3
@@ -555,9 +555,9 @@
   {
     "id": "57",
     "title": "Effective Team Communication",
-    "description": "- Daily standups\n- Clear documentation\n- Open feedback culture\n- Use async tools",
+    "description": "- Daily standups\n- Clear documentation\n- Open feedback culture\n- Use flexible collaboration tools",
     "color": "red",
-    "creationDate": "2025-07-22T10:00:00Z",
+    "creationDate": "2025-07-25T10:00:00Z",
     "lastUpdatedDate": "2025-07-29T11:00:00Z",
     "category": 1
   },
@@ -567,7 +567,7 @@
     "title": "Pack Healthy Lunches",
     "description": "- Whole grain sandwiches\n- Fresh veggies\n- Fruits\n- Homemade energy bars",
     "color": "green",
-    "creationDate": "2025-07-23T07:00:00Z",
+    "creationDate": "2025-07-24T07:00:00Z",
     "lastUpdatedDate": "2025-07-30T08:30:00Z",
     "category": 3
   },
@@ -577,8 +577,8 @@
     "description": "- Entry and output\n- Loaders and plugins\n- Dev server\n- Code splitting",
     "link": "https://webpack.js.org/concepts/",
     "color": "yellow",
-    "creationDate": "2025-07-24T09:00:00Z",
-    "lastUpdatedDate": "2025-07-31T10:30:00Z",
+    "creationDate": "2025-07-10T09:00:00Z",
+    "lastUpdatedDate": "2025-07-15T10:30:00Z",
     "category": 2
   },
   {

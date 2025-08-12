@@ -8,6 +8,7 @@ import {
 } from '@/types/noteForm.types';
 import { ChangeEvent, useEffect, useMemo, useReducer } from 'react';
 import { Note } from '@/types/note.types';
+import { AddEditNoteConstants } from '@/constants/addEditNote.constants';
 
 const emptyFormValue: NoteForm = {
   title: '',
@@ -28,11 +29,11 @@ const validateField = (field: NoteFormField | null, value: string | null) => {
   const errors: NoteFormErrors = {};
 
   if(field === 'title' && !value) {
-    errors.title = 'Title is required.';
+    errors.title = AddEditNoteConstants.form.titleRequiredError;
   }
 
   if(field === 'link' && (value && !value?.startsWith('http'))) {
-    errors.link = 'Please provide a valid URL.'
+    errors.link = AddEditNoteConstants.form.emailInvalidError;
   }
 
   return errors;

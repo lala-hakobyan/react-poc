@@ -7,16 +7,14 @@ import { ContactFormStatus } from '@/types/contactForm.types';
 import Loader from '@/components/Loader/Loader';
 import Alert from '@/components/Alert/Alert';
 import contactApiService from '@/services/contactApiService';
+import { ContactConstants } from '@/constants/contact.constants';
+import loggerService from '@/services/loggerService';
 
 const defaultFormStatus: ContactFormStatus = { isLoading: false, isError: false, isSuccess: false };
 
 export  default function Contact() {
   const contactFormContract = useContractForm();
   const [contactFormStatus, setContactFormStatus] = useState<ContactFormStatus>(defaultFormStatus);
-  const messages = {
-    success: 'Thank you! Your message was successfully sent. I will do my best to get back to you as soon as possible!',
-    error: 'Sorry, error happened when sending your message. Please try again later or contact me via <a target="_blank" href="https://www.linkedin.com/in/lala-hakobyan-71aa64b8/">Linkedin.</a>'
-  }
 
   const submitForm = async () => {
     setContactFormStatus({ ...defaultFormStatus, ...{ isLoading: true } });
@@ -25,7 +23,8 @@ export  default function Contact() {
 
       contactFormContract.resetForm();
       setContactFormStatus({ ...contactFormStatus, ...{ isSuccess: true, isLoading: false } })
-    } catch {
+    } catch(error) {
+      loggerService.logMessage('sendMessage', 'error', error);
       setContactFormStatus({ ...contactFormStatus, ...{ isError: true, isLoading: false } })
     }
   }
@@ -89,9 +88,16 @@ export  default function Contact() {
         </div>
 
         <div className="text-center">
-          {contactFormStatus.isSuccess && <Alert alert={{ type: 'success' }}><p>{messages.success}</p></Alert>}
+          {contactFormStatus.isSuccess &&
+            <Alert alert={{ type: 'success' }}>
+              <p>{ContactConstants.successMsg}</p>
+            </Alert>}
 
-          {contactFormStatus.isError && <Alert alert={{ type: 'danger' }}><p dangerouslySetInnerHTML={{ __html: messages.error as TrustedHTML }}></p></Alert>}
+          {contactFormStatus.isError &&
+            <Alert alert={{ type: 'danger' }}>
+              <p dangerouslySetInnerHTML={{ __html: ContactConstants.errorMsg as TrustedHTML }}></p>
+            </Alert>
+          }
 
           {!contactFormStatus.isSuccess && !contactFormStatus.isError &&
           <>

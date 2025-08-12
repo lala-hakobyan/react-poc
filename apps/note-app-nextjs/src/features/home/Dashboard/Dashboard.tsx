@@ -5,6 +5,9 @@ import Loader from '@/components/Loader/Loader';
 import styles from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
 import { Note } from '@/types/note.types';
+import notesApiService from '@/services/notesApiService';
+import { LogMessagesConstants } from '@/constants/logMessages.constants';
+import { DashboardConstants } from '@/constants/dashboard.constants';
 
 export default function Dashboard() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -13,16 +16,11 @@ export default function Dashboard() {
   useEffect(() => {
     const getApiData = async () => {
       try {
-        const response: Response = await fetch('api/notes?limit=5');
-        if(!response.ok) {
-          throw new Error(`HTTP response error: Status ${response.status}`)
-        }
-        const data = await response.json();
-
+        const data = await notesApiService.fetchNotes(0, 5);
         setNotes(data);
         setIsLoading(false);
       } catch(error) {
-        console.error('Error fetching notes', error);
+        console.error(LogMessagesConstants.notes.fetchError, error);
         setIsLoading(false);
       }
     }
@@ -32,7 +30,7 @@ export default function Dashboard() {
 
   return (
     <section className={`mb-md ${styles.dashboard}`}>
-      <PageSubTitle title={'Latest Notes'} ></PageSubTitle>
+      <PageSubTitle title={DashboardConstants.subTitle}></PageSubTitle>
 
       {!isLoading && <CardCarousel notes={notes}></CardCarousel>}
 

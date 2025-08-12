@@ -7,4 +7,9 @@
       list-style: circle;
     }
   }
+
+  &__link {
+    text-decoration: underline;
+    color: var(--primary-accent-color);
+  }
 }

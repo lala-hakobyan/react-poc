@@ -22,7 +22,6 @@ const defaultContactFormState: ContactFormState = {
 }
 
 const isFormValid = (form: ContactForm) => {
-  // This helper function checks all required fields
   const requiredFields: ContactFormField[] = ['name', 'email', 'message'];
   return requiredFields.every(field => {
     const value = form[field];

@@ -1,4 +1,5 @@
 import { ContactForm } from '@/types/contactForm.types';
+import { LogMessagesConstants } from '@/constants/logMessages.constants';
 
 class ContactApiService {
   private readonly baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/messages`;
@@ -14,7 +15,7 @@ class ContactApiService {
     })
 
     if(!response.ok) {
-      throw new Error('Failed to send message.');
+      throw new Error(LogMessagesConstants.contact.sendError);
     }
 
     return response.json();

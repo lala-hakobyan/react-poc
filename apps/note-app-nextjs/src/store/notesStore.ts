@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { Note, FetchNotesAction } from '@/types/note.types';
 import notesApiService from '@/services/notesApiService';
+import loggerService from '@/services/loggerService';
 
 type NotesState = {
   notes: Note[],
@@ -64,12 +65,12 @@ export const useNotesStore = create<NotesState>((set) => ({
 
     try {
       const result = await notesApiService.fetchNotes(offset, limit);
-
       set((state: NotesState) => (
         { notes: [...state.notes, ...result], [isLoadingKey]: false, [isErrorKey]: false }
       ));
-    } catch {
+    } catch(error: unknown) {
       set({ [isLoadingKey]: false, [isErrorKey]: true });
+      loggerService.logMessage('fetchNotes','error', error);
     }
   },
   addNote: async (note: Note) => {
@@ -82,8 +83,9 @@ export const useNotesStore = create<NotesState>((set) => ({
       set((state: NotesState) => (
         { notes: [result, ...state.notes], isNoteUpdateLoading: false }
       ));
-    } catch {
+    } catch(error: unknown) {
       set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
+      loggerService.logMessage('addNote', 'error', error);
     }
   },
   editNote: async (note: Note) => {
@@ -100,8 +102,9 @@ export const useNotesStore = create<NotesState>((set) => ({
           isNoteUpdateError: false
         };
       })
-    } catch {
+    } catch(error: unknown) {
       set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
+      loggerService.logMessage('editNote', 'error', error);
     }
   },
   deleteNote: async (noteId: string) => {
@@ -118,8 +121,9 @@ export const useNotesStore = create<NotesState>((set) => ({
         };
       });
     }
-    catch {
-      set({ isNoteDeleteLoading: false, isNoteDeleteError: true })
+    catch(error: unknown) {
+      set({ isNoteDeleteLoading: false, isNoteDeleteError: true });
+      loggerService.logMessage('deleteNote', 'error', error);
     }
   }
 }))

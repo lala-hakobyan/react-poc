@@ -10,6 +10,7 @@ import { Note } from '@/types/note.types';
 import useNoteForm from '@/features/note/AddEditNote/useNoteForm';
 import { NoteForm, NoteFormContract } from '@/types/noteForm.types';
 import Loader from '@/components/Loader/Loader';
+import { AddEditNoteConstants } from '@/constants/addEditNote.constants';
 
 
 export default function AddEditNote() {
@@ -75,7 +76,7 @@ export default function AddEditNote() {
                 onBlur={noteFormContract.handleFieldBlur('title')}
                 name="title" />
               {noteFormContract.isTitleError &&
-                                <span className="formGroup__errorMessage">{noteFormContract.notesFormState.errors.title}</span>
+                <span className="formGroup__errorMessage">{noteFormContract.notesFormState.errors.title}</span>
               }
             </div>
 
@@ -89,7 +90,7 @@ export default function AddEditNote() {
                 onBlur={noteFormContract.handleFieldBlur('link')}
                 name="link" />
               {noteFormContract.isLinkError &&
-                                <span className="formGroup__errorMessage">{noteFormContract.notesFormState.errors.link}</span>
+                <span className="formGroup__errorMessage">{noteFormContract.notesFormState.errors.link}</span>
               }
             </div>
 
@@ -114,13 +115,13 @@ export default function AddEditNote() {
                 accept=".png, .jpg, image/gif"
                 onChange={noteFormContract.handleImageChange} />
               {noteFormContract.notesFormState.form.image &&
-                                <figure className="imageWrapper">
-                                  <Image src={noteFormContract.notesFormState.form.image}
-                                    className="imageWrapper__img"
-                                    fill
-                                    sizes="100vw"
-                                    alt={noteFormContract.notesFormState.form.title ?? ''} />
-                                </figure>
+                <figure className="imageWrapper">
+                  <Image src={noteFormContract.notesFormState.form.image}
+                    className="imageWrapper__img"
+                    fill
+                    sizes="100vw"
+                    alt={noteFormContract.notesFormState.form.title ?? ''} />
+                </figure>
               }
             </div>
           </form>
@@ -131,11 +132,11 @@ export default function AddEditNote() {
         </Modal.Footer>
       </Modal>
       {isNoteUpdateError &&
-                <Modal isOpen={true} title="Error happened" onClosed={() => closeErrorModal()}>
-                  <Modal.Body>
-                        Sorry error happened while adding a note. Please try again later.
-                  </Modal.Body>
-                </Modal>
+        <Modal isOpen={true} title="Error happened" onClosed={() => closeErrorModal()}>
+          <Modal.Body>
+            {AddEditNoteConstants.ui.addEditError}
+          </Modal.Body>
+        </Modal>
       }
     </>
   );

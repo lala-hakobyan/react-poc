@@ -1,4 +1,5 @@
 import { Note } from '@/types/note.types';
+import { LogMessagesConstants } from '@/constants/logMessages.constants';
 
 /**
  * Singleton class for abstracting API requests related to Notes
@@ -11,7 +12,7 @@ class NotesApiService {
     const response = await fetch(`${this.baseApiUrl}?offset=${offset}&limit=${limit}`);
 
     if(!response.ok) {
-      throw new Error('Error occurred while fetching notes.');
+      throw new Error(LogMessagesConstants.notes.fetchError);
     }
 
     return response.json();
@@ -27,7 +28,7 @@ class NotesApiService {
     });
 
     if(!response.ok) {
-      throw new Error('Error occurred while adding note.');
+      throw new Error(LogMessagesConstants.notes.addError);
     }
 
     return response.json();
@@ -40,10 +41,10 @@ class NotesApiService {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(note)
-    });
+    })
 
     if (!response.ok) {
-      throw new Error('Error happened when editing note.');
+      throw new Error(LogMessagesConstants.notes.editError);
     }
 
     return response.json();
@@ -57,7 +58,7 @@ class NotesApiService {
       }
     })
     if(!response.ok) {
-      throw new Error('Error occurred while deleting note.');
+      throw new Error(LogMessagesConstants.notes.deleteError);
     }
   }
 

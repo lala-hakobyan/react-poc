@@ -20,18 +20,6 @@ export default function Actions() {
       <svg className={styles.actions__icon} width={30} height={30}>
         <use href="/assets/icons/svg-sprite.svg#icon-search" />
       </svg>
-      <svg className={styles.actions__icon} width={30} height={30}>
-        <use href="/assets/icons/svg-sprite.svg#icon-view" />
-      </svg>
-      <svg className={styles.actions__icon} width={30} height={30}>
-        <use href="/assets/icons/svg-sprite.svg#icon-close" />
-      </svg>
-      <svg className={styles.actions__icon} width={30} height={30}>
-        <use href="/assets/icons/svg-sprite.svg#icon-loading" />
-      </svg>
-      <svg className={styles.actions__icon} width={30} height={30}>
-        <use href="/assets/icons/svg-sprite.svg#icon-edit" />
-      </svg>
     </div>
   )
 }
