@@ -1,36 +1,45 @@
 import Modal from '@/components/Modal/Modal';
 import Button from '@/components/Button/Button';
-import { useNotesStore } from '@/store/notesStore';
+import { selectDeleteNoteSlice, useNotesStore } from '@/store/notes/notesStore';
 import Loader from '@/components/Loader/Loader';
 import { DeleteNoteConstants } from '@/constants/deleteNote.constants';
+import { useShallow } from 'zustand/react/shallow';
+import { ActionStatus } from '@/store/notes/notesStore.types';
 
 export default function DeleteNote() {
-  const {
-    deleteNote,
-    currentDeleteNote,
-    isDeleteNoteOpen,
-    setCurrentDeleteNote,
-    isNoteDeleteError,
-    isNoteDeleteLoading,
-    setIsNoteDeleteError
-  } = useNotesStore();
+  const deleteNoteState = useNotesStore(useShallow(selectDeleteNoteSlice));
 
   const deleteAction = async() => {
-    if(currentDeleteNote) {
-      setCurrentDeleteNote(null, false);
-      await deleteNote(currentDeleteNote.id);
+    let actionStatus: ActionStatus | null = null;
+
+    if(deleteNoteState.currentDeleteNote) {
+      actionStatus = await deleteNoteState.deleteNote(deleteNoteState.currentDeleteNote.id);
+    }
+
+    if(actionStatus?.success) {
+      closeDeleteModal();
     }
   }
 
-  const closeModal = () => {
-    setIsNoteDeleteError(false);
+  const closeDeleteModal = () => {
+    deleteNoteState.setCurrentDeleteNote(null, false);
+  }
+
+  const closeErrorModal = () => {
+    deleteNoteState.setIsNoteDeleteError(false);
+    closeDeleteModal();
   }
 
   return (
     <>
-      {isNoteDeleteLoading && <Loader />}
-      {!isNoteDeleteError && currentDeleteNote &&
-        <Modal isOpen={isDeleteNoteOpen} title={`Delete Note: ${currentDeleteNote?.title}`} onClosed={() => setCurrentDeleteNote(null, false)}>
+      {deleteNoteState.isNoteDeleteLoading && <Loader />}
+
+      {!deleteNoteState.isNoteDeleteError && deleteNoteState.currentDeleteNote &&
+        <Modal
+          isOpen={true}
+          title={`Delete Note: ${deleteNoteState.currentDeleteNote?.title}`}
+          onClosed={() => deleteNoteState.setCurrentDeleteNote(null, false)}
+        >
           <Modal.Body>
             {DeleteNoteConstants.confirmDeleteMessage}
           </Modal.Body>
@@ -40,13 +49,14 @@ export default function DeleteNote() {
               onClick={() => deleteAction()}/>
             <Button
               button={{ label: 'No', className: 'ml-xs' }}
-              onClick={() => setCurrentDeleteNote(null, false)}
+              onClick={() => deleteNoteState.setCurrentDeleteNote(null, false)}
             />
           </Modal.Footer>
         </Modal>
       }
-      {isNoteDeleteError &&
-        <Modal isOpen={true} title="Error happened" onClosed={closeModal}>
+
+      {deleteNoteState.isNoteDeleteError &&
+        <Modal isOpen={true} title="Error happened" onClosed={closeErrorModal}>
           <Modal.Body>
             {DeleteNoteConstants.deleteErrorMessage}
           </Modal.Body>

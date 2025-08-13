@@ -1,6 +1,6 @@
 'use client';
 import Modal from '@/components/Modal/Modal';
-import { useNotesStore } from '@/store/notesStore';
+import { selectAddEditNoteSlice, useNotesStore } from '@/store/notes/notesStore';
 import Button from '@/components/Button/Button';
 import './../../../styles/form.scss'
 import './../../../styles/imageWrapper.scss'
@@ -11,41 +11,39 @@ import useNoteForm from '@/features/note/AddEditNote/useNoteForm';
 import { NoteForm, NoteFormContract } from '@/types/noteForm.types';
 import Loader from '@/components/Loader/Loader';
 import { AddEditNoteConstants } from '@/constants/addEditNote.constants';
+import { ActionStatus, AddEditNoteSlice } from '@/store/notes/notesStore.types';
+import { useShallow } from 'zustand/react/shallow';
 
 
 export default function AddEditNote() {
-  const {
-    isAddNewNoteOpen,
-    addNote,
-    editNote,
-    isNoteUpdateLoading,
-    isNoteUpdateError,
-    currentEditNote,
-    setCurrentEditNote,
-    setIsNoteUpdateError,
-  } = useNotesStore();
-  const noteFormContract: NoteFormContract = useNoteForm(currentEditNote as NoteForm);
+  const addEditNoteState: AddEditNoteSlice = useNotesStore(useShallow(selectAddEditNoteSlice));
+  const noteFormContract: NoteFormContract = useNoteForm(addEditNoteState.currentEditNote as NoteForm);
   const imageInputRef = useRef<HTMLInputElement>(null);
-  const title = currentEditNote ? `Edit Note: ${currentEditNote.title}`: 'Add New Note';
-  const buttonName = currentEditNote ? `Edit Note`: 'Add Note';
+  const title = addEditNoteState.currentEditNote ? `Edit Note: ${addEditNoteState.currentEditNote.title}`: 'Add New Note';
+  const buttonName = addEditNoteState.currentEditNote ? `Edit Note`: 'Add Note';
 
   const submitForm = async () => {
-    if(currentEditNote) {
-      await editNote(noteFormContract.notesFormState.form as Note);
+    let actionStatus: ActionStatus;
+
+    if(addEditNoteState.currentEditNote) {
+      actionStatus = await addEditNoteState.editNote(noteFormContract.notesFormState.form as Note);
     } else {
-      await addNote({ ...noteFormContract.notesFormState.form, id: crypto.randomUUID() } as Note);
+      actionStatus = await addEditNoteState.addNote({ ...noteFormContract.notesFormState.form, id: crypto.randomUUID() } as Note);
     }
-    closeModal();
+
+    if(actionStatus?.success) {
+      closeAddEditModal();
+    }
   }
 
-  const closeModal = () => {
-    setCurrentEditNote(null, false);
+  const closeAddEditModal = () => {
+    addEditNoteState.setCurrentEditNote(null, false);
     resetForm();
   }
 
   const closeErrorModal= () => {
-    setIsNoteUpdateError(false);
-    resetForm();
+    addEditNoteState.setIsNoteUpdateError(false);
+    closeAddEditModal();
   }
 
   const resetForm = (ev?: MouseEvent) => {
@@ -62,8 +60,10 @@ export default function AddEditNote() {
 
   return (
     <>
-      {isNoteUpdateLoading && <Loader></Loader>}
-      <Modal isOpen={isAddNewNoteOpen} title={title} onClosed={() => closeModal()} >
+      {addEditNoteState.isNoteUpdateLoading && <Loader></Loader>}
+
+      {!addEditNoteState.isNoteUpdateError &&
+      <Modal isOpen={true} title={title} onClosed={() => closeAddEditModal()} >
         <Modal.Body>
           <form className="form">
             <div className="formGroup">
@@ -127,17 +127,17 @@ export default function AddEditNote() {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button button={{ label: buttonName, disabled: !noteFormContract.isFormValid() || isNoteUpdateLoading }} onClick={() => submitForm()} />
+          <Button button={{ label: buttonName, disabled: !noteFormContract.isFormValid() || addEditNoteState.isNoteUpdateLoading }} onClick={() => submitForm()} />
           <Button button={{ label: 'Reset', className: 'ml-xs' }} onClick={(ev?: MouseEvent) => resetForm(ev)} />
         </Modal.Footer>
       </Modal>
-      {isNoteUpdateError &&
-        <Modal isOpen={true} title="Error happened" onClosed={() => closeErrorModal()}>
-          <Modal.Body>
-            {AddEditNoteConstants.ui.addEditError}
-          </Modal.Body>
-        </Modal>
       }
+
+      <Modal isOpen={addEditNoteState.isNoteUpdateError} title="Error happened" onClosed={() => closeErrorModal()}>
+        <Modal.Body>
+          {AddEditNoteConstants.ui.addEditError}
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
