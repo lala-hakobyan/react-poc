@@ -2,15 +2,15 @@
 import styles from './NoteList.module.scss';
 import { Note } from '@/types/note.types';
 import Button from '@/components/Button/Button';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import Loader from '@/components/Loader/Loader';
 import { selectNotesListSlice, useNotesStore } from '@/store/notes/notesStore';
 import DeleteNote from '@/features/note/DeleteNote/DeleteNote';
 import Alert from '@/components/Alert/Alert';
 import { NoteListConstants } from '@/constants/noteList.constants';
 import { useShallow } from 'zustand/react/shallow';
+import { NoteItem } from '@/features/note/NoteList/NoteItem';
 import { NotesStore } from '@/store/notes/notesStore.types';
-import { NoteCard } from '@/components/NoteCard/NoteCard';
 
 export  default function NoteList() {
   const notesListState = useNotesStore(useShallow(selectNotesListSlice));
@@ -19,6 +19,17 @@ export  default function NoteList() {
     setCurrentDeleteNote: state.setCurrentDeleteNote,
     isDeleteModalOpen: state.isDeleteModalOpen,
   })));
+
+  const handleEdit = useCallback(
+    (note: Note) => setCurrentEditNote(note, true),
+    [setCurrentEditNote]
+  );
+
+  const handleDelete = useCallback(
+    (note: Note) => setCurrentDeleteNote(note, true),
+    [setCurrentDeleteNote]
+  );
+
   const initializedRef = useRef(false);
 
   const loadMoreAction = () => {
@@ -40,13 +51,12 @@ export  default function NoteList() {
         <>
           <div className={styles.noteList}>
             {notesListState.notes.map((note: Note) => (
-              <div className={styles.noteList__item} key={note.id}>
-                <NoteCard
-                  onEdit={() => setCurrentEditNote(note, true)}
-                  onDelete={() => setCurrentDeleteNote(note, true) }
-                  noteCard={{ note: note, showImage: true, showActions: true }}
-                />
-              </div>
+              <NoteItem
+                key={note.id}
+                note={note}
+                onEdit={() => handleEdit(note)}
+                onDelete={() => handleDelete(note)}
+              />
             ))}
           </div>
           {isDeleteModalOpen && <DeleteNote />}

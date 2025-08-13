@@ -1,6 +1,6 @@
 import styles from './NoteCard.module.scss'
 import Image from 'next/image';
-import React, { Fragment, SyntheticEvent } from 'react';
+import React, { Fragment, SyntheticEvent, useCallback } from 'react';
 import { NoteCardProps } from '@/types/noteCard.types';
 
 function displayText(text:string) {
@@ -18,7 +18,7 @@ function displayText(text:string) {
   )
 }
 
-const  NoteCardComponent = ({ noteCard, onEdit, onDelete }: NoteCardProps) => {
+export default  function NoteCard ({ noteCard, onEdit, onDelete }: NoteCardProps) {
   const onEditAction = (ev: SyntheticEvent) => {
     ev.preventDefault();
     if(onEdit) {
@@ -26,12 +26,12 @@ const  NoteCardComponent = ({ noteCard, onEdit, onDelete }: NoteCardProps) => {
     }
   }
 
-  const onDeleteAction = (ev: SyntheticEvent) => {
+  const onDeleteAction = useCallback((ev: SyntheticEvent) => {
     ev.preventDefault();
     if(onDelete) {
       onDelete();
     }
-  }
+  }, [onDelete]);
 
   return (
     <div className={styles.noteCard}>
@@ -72,6 +72,4 @@ const  NoteCardComponent = ({ noteCard, onEdit, onDelete }: NoteCardProps) => {
       </div>
     </div>
   )
-};
-
-export const NoteCard = React.memo(NoteCardComponent);
+}
