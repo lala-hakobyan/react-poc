@@ -8,9 +8,11 @@ import { NoteListConstants } from '@/constants/noteList.constants';
 export default function Page() {
   return (
     <MainLayout>
-      <PageTitle title={NoteListConstants.pageTitle}></PageTitle>
-      <Actions></Actions>
-      <NoteList></NoteList>
+      <section>
+        <PageTitle title={NoteListConstants.pageTitle}></PageTitle>
+        <Actions></Actions>
+        <NoteList></NoteList>
+      </section>
     </MainLayout>
   )
 }

@@ -7,9 +7,11 @@ import { ContactConstants } from '@/constants/contact.constants';
 export default function Page() {
   return (
     <MainLayout size="sm">
-      <PageTitle title={ContactConstants.pageTitle}></PageTitle>
-      <PageSubTitle title={ContactConstants.pageSubtitle} ></PageSubTitle>
-      <Contact></Contact>
+      <section>
+        <PageTitle title={ContactConstants.pageTitle}></PageTitle>
+        <PageSubTitle title={ContactConstants.pageSubtitle} ></PageSubTitle>
+        <Contact></Contact>
+      </section>
     </MainLayout>
   )
 }

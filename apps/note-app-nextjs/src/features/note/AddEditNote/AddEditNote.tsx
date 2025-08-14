@@ -13,6 +13,7 @@ import Loader from '@/components/Loader/Loader';
 import { AddEditNoteConstants } from '@/constants/addEditNote.constants';
 import { ActionStatus, AddEditNoteSlice } from '@/store/notes/notesStore.types';
 import { useShallow } from 'zustand/react/shallow';
+import BrowseLabel from '@/components/BrowseLabel/BrowseLabel';
 
 
 export default function AddEditNote() {
@@ -56,6 +57,18 @@ export default function AddEditNote() {
     }
 
     noteFormContract.resetForm();
+  }
+
+  const getImageFileName = () => {
+    let fileName = '';
+    const path = imageInputRef.current?.value ? imageInputRef.current.value : noteFormContract.notesFormState.form.image;
+
+    if(path) {
+      const imgPartsListArr = path.split('/');
+      fileName = imgPartsListArr[imgPartsListArr.length - 1];
+    }
+
+    return fileName;
   }
 
   return (
@@ -106,8 +119,12 @@ export default function AddEditNote() {
             </div>
 
             <div className="formGroup">
-              <label htmlFor="imageField">Image: </label>
-              <input className="formGroup__formControl"
+              <BrowseLabel browseLabel={{
+                buttonName: 'Browse Image',
+                text: getImageFileName(),
+                attributeName: 'imageField'
+              }} />
+              <input className="formGroup__formControl visually-hidden"
                 ref={imageInputRef}
                 type="file"
                 name="image"
@@ -126,6 +143,7 @@ export default function AddEditNote() {
             </div>
           </form>
         </Modal.Body>
+
         <Modal.Footer>
           <Button button={{ label: buttonName, disabled: !noteFormContract.isFormValid() || addEditNoteState.isNoteUpdateLoading }} onClick={() => submitForm()} />
           <Button button={{ label: 'Reset', className: 'ml-xs' }} onClick={(ev?: MouseEvent) => resetForm(ev)} />

@@ -35,7 +35,12 @@ export default function Dashboard() {
     <section className={`mb-md ${styles.dashboard}`}>
       <PageSubTitle title={DashboardConstants.subTitle}></PageSubTitle>
 
-      {!isLoading && <CardCarousel notes={notes}></CardCarousel>}
+      {!isLoading &&
+        <>
+          <CardCarousel notes={notes}></CardCarousel>
+          <p className="text-right mt-sm"><a href={'/notes'} className="primary-link">View All Notes</a></p>
+        </>
+      }
 
       {isLoading && <Loader loader={{ type: 'section' }}></Loader>}
     </section>

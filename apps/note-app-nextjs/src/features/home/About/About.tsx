@@ -1,6 +1,7 @@
 import PageSubTitle from '@/components/PageSubTitle/PageSubTitle';
 import styles from './About.module.scss';
 import { AboutConstants } from '@/constants/about.constants';
+import { GlobalConstants } from '@/constants/global.constants';
 
 export default function About() {
   return (
@@ -15,7 +16,7 @@ export default function About() {
           <p>You can play around with the app: add, edit and remove notes. However, please <strong>do not enter any sensitive information because there is no any authentication on backend side.</strong> Also, your notes will be stored per session and you would lose them when server is restarted.</p>
         </li>
         <li className={styles.about__listItem}>
-          <p>If you have any questions or find a bug, feel free to reach out via <a className={styles.about__link} href="/contact">Contact page</a> or via <a className={styles.about__link} target="_blank" href="https://www.linkedin.com/in/lala-hakobyan-71aa64b8/">Linkedin</a>.</p>
+          <p>If you have any questions or find a bug, feel free to reach out via <a className="primary-link" href="/contact">Contact page</a> or via <a className="primary-link" target="_blank" href={GlobalConstants.linkedinUrl}>Linkedin</a>.</p>
         </li>
       </ul>
     </section>

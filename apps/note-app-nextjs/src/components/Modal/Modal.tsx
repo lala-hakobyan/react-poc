@@ -1,8 +1,13 @@
 'use client';
 import styles from './Modal.module.scss';
-import { ModalCompoundComponent, ModalContent, ModalProps } from '@/types/modal.types';
+import {
+  ModalCompoundComponent,
+  ModalContent,
+  ModalProps,
+  ModalSlotType
+} from '@/types/modal.types';
 import Button from '@/components/Button/Button';
-import React, { Children, ReactElement, ReactNode, SyntheticEvent, useEffect, useState } from 'react';
+import React, { ReactElement, ReactNode, SyntheticEvent, useEffect, useState } from 'react';
 
 // Moving at top to avoid recreating classes for each rerender
 const modalInactiveClass = `${styles.modal}`;
@@ -17,28 +22,39 @@ const extractModalContent = (children: ReactNode): ModalContent => {
   let modalFooter: ReactNode = null;
   let modalHeader: ReactNode = null;
 
-  Children.forEach((children), (child) => {
-    if(React.isValidElement(child)) {
-      const element = child as ReactElement;
+  const findSlots = (nodes: ReactNode) => {
+    React.Children.forEach(nodes, (child) => {
+      if (!React.isValidElement(child)) return;
 
-      if(element.type === Modal.Header) {
-        modalHeader = element;
+      const el = child as ReactElement<{ children?: ReactNode }>;
+
+      // Type guard to ensure el.type is a function (a component)
+      if (typeof el.type === 'function') {
+        const componentType = el.type as ModalSlotType;
+
+        if (componentType.displayName === 'Modal.Header') {
+          modalHeader = el;
+        } else if (componentType.displayName === 'Modal.Body') {
+          modalBody = el;
+        } else if (componentType.displayName === 'Modal.Footer') {
+          modalFooter = el;
+        }
       }
-      if(element.type === Modal.Body) {
-        modalBody = element;
+
+      if (el.props.children) {
+        findSlots(el.props.children);
       }
-      if(element.type === Modal.Footer) {
-        modalFooter = element;
-      }
-    }
-  })
+    });
+  };
+
+  findSlots(children);
 
   return {
     modalHeader,
     modalBody,
-    modalFooter
-  }
-}
+    modalFooter,
+  };
+};
 
 /**
  * Use Compound Components pattern to create compound Modal object
@@ -47,8 +63,11 @@ const extractModalContent = (children: ReactNode): ModalContent => {
 const exportModalContent = (ModalRoot: (props: ModalProps) => React.JSX.Element): ModalCompoundComponent => {
   // Modal Content Slots
   const Header = ({ children }: { children: ReactNode }) => <>{children}</>;
+  Header.displayName = 'Modal.Header';
   const Body = ({ children }: { children: ReactNode }) => <>{children}</>;
+  Body.displayName = 'Modal.Body';
   const Footer = ({ children }: { children: ReactNode }) => <>{children}</>;
+  Footer.displayName = 'Modal.Footer';
 
   // Compound Return
   return Object.assign(ModalRoot, {
@@ -62,7 +81,8 @@ const ModalRoot = ({ children, isOpen, title, onClosed } : ModalProps): React.JS
   const { modalHeader, modalBody, modalFooter } = extractModalContent(children);
 
   const closeModalAction = (ev?: SyntheticEvent) => {
-    setModalClass(modalInactiveClass)
+    setModalClass(modalInactiveClass);
+    document.documentElement.classList.remove(`${styles['modal--open']}`);
     if(ev) {
       ev.preventDefault();
     }
@@ -73,36 +93,45 @@ const ModalRoot = ({ children, isOpen, title, onClosed } : ModalProps): React.JS
 
   const [modalClass, setModalClass] = useState(modalInactiveClass);
 
+
   useEffect(() => {
     const modalInitialClass = isOpen ? modalActiveClass : modalInactiveClass;
+
+    if(isOpen) {
+      document.documentElement.classList.add(`${styles['modal--open']}`);
+    }
+
     setModalClass(modalInitialClass);
   }, [isOpen]);
 
   return (
     <div className={modalClass} id="modal">
-      <div className={styles.modal__overlay} id="modalOverlay"></div>
+      <div className={styles.modal__overlay} id="modalOverlay">
+        <div className={styles.modal__wrapper}>
+          <div className={styles.modal__content}>
+            <div className={styles.modal__header}>
+              {modalHeader ? modalHeader :
+                <>
+                  <h2 className={styles.modal__title}>{title}</h2>
+                  <a href="#" className={styles.modal__closeLink} onClick={(ev: SyntheticEvent) => closeModalAction(ev)}>
+                    <svg className={styles.modal__closeIcon} width={30} height={30}>
+                      <use href="/assets/icons/svg-sprite.svg#icon-close" />
+                    </svg>
+                  </a>
+                </>
+              }
+            </div>
 
-      <div className={styles.modal__content}>
-        <div className={styles.modal__header}>
-          {modalHeader ? modalHeader :
-            <>
-              <h2 className={styles.modal__title}>{title}</h2>
-              <a href="#" className={styles.modal__closeLink} onClick={(ev: SyntheticEvent) => closeModalAction(ev)}>
-                <svg className={styles.modal__closeIcon} width={30} height={30}>
-                  <use href="/assets/icons/svg-sprite.svg#icon-close" />
-                </svg>
-              </a>
-            </>
-          }
+            <div className={styles.modal__body}>
+              {modalBody}
+            </div>
+
+            <div className={styles.modal__footer}>
+              { modalFooter ? modalFooter : <Button button={{ label: 'Cancel' }} onClick={closeModalAction} ></Button>}
+            </div>
+          </div>
         </div>
 
-        <div className={styles.modal__body}>
-          {modalBody}
-        </div>
-
-        <div className={styles.modal__footer}>
-          { modalFooter ? modalFooter : <Button button={{ label: 'Cancel' }} onClick={closeModalAction} ></Button>}
-        </div>
       </div>
     </div>
   )

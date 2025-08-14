@@ -1,3 +1,3 @@
-export const DashboardConstants = {
+export const DashboardConstants = Object.freeze({
   subTitle: 'Latest Notes'
-}
+});

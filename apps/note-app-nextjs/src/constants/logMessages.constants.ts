@@ -1,4 +1,4 @@
-export const LogMessagesConstants = {
+export const LogMessagesConstants = Object.freeze({
   notes: {
     fetchError: 'Error occurred while fetching notes.',
     addError: 'Error occurred while adding the note.',
@@ -8,4 +8,4 @@ export const LogMessagesConstants = {
   contact: {
     sendError: 'Error occurred while sending the message.'
   }
-}
+});

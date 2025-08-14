@@ -1,7 +1,8 @@
 import styles from './NoteCard.module.scss'
 import Image from 'next/image';
-import React, { Fragment, SyntheticEvent } from 'react';
+import React, { Fragment, memo, SyntheticEvent } from 'react';
 import { NoteCardProps } from '@/types/noteCard.types';
+import Icon from '@/components/Icon/Icon';
 
 function displayText(text:string) {
   const lines = text.split('\n');
@@ -18,23 +19,24 @@ function displayText(text:string) {
   )
 }
 
-const  NoteCardComponent = ({ noteCard, onEdit, onDelete }: NoteCardProps) => {
+const NoteCardComponent : React.FC<NoteCardProps> = ({ noteCard, onEdit, onDelete }: NoteCardProps) =>
+{
   const onEditAction = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    if(onEdit) {
+    if (onEdit) {
       onEdit();
     }
   }
 
   const onDeleteAction = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    if(onDelete) {
+    if (onDelete) {
       onDelete();
     }
   }
 
   return (
-    <div className={styles.noteCard}>
+    <article className={styles.noteCard}>
       {noteCard.showImage && noteCard.note.image && (
         <figure className="imageWrapper">
           <Image
@@ -46,32 +48,26 @@ const  NoteCardComponent = ({ noteCard, onEdit, onDelete }: NoteCardProps) => {
         </figure>
       )}
       {noteCard.showActions &&
-         <div className={styles.noteCard__actions}>
-           {noteCard.note.link &&
-                <a href={noteCard.note.link} className="ml-xs svg-link" target="_blank">
-                  <svg className={styles.actions__icon} width={30} height={30}>
-                    <use href="/assets/icons/svg-sprite.svg#icon-link" />
-                  </svg>
-                </a>
-           }
-           <a href="#" onClick={onEditAction} className="ml-xs svg-link">
-             <svg className={styles.actions__icon} width={30} height={30}>
-               <use href="/assets/icons/svg-sprite.svg#icon-edit" />
-             </svg>
-           </a>
-           <a href="#" onClick={onDeleteAction} className="ml-xs svg-link">
-             <svg className={styles.actions__icon} width={30} height={30}>
-               <use href="/assets/icons/svg-sprite.svg#icon-trash" />
-             </svg>
-           </a>
-         </div>
+        <div className={styles.noteCard__actions}>
+          {noteCard.note.link &&
+            <a href={noteCard.note.link} className="ml-xs svg-link" target="_blank">
+              <Icon icon={{ iconName: 'icon-link' }} />
+            </a>
+          }
+          <a href="#" onClick={onEditAction} className="ml-xs svg-link">
+            <Icon icon={{ iconName: 'icon-edit' }} />
+          </a>
+          <a href="#" onClick={onDeleteAction} className="ml-xs svg-link">
+            <Icon icon={{ iconName: 'icon-trash' }} />
+          </a>
+        </div>
       }
       <div className={styles.noteCard__content}>
         <h3>{noteCard.note.title}</h3>
         <p>{displayText(noteCard.note.description)}</p>
       </div>
-    </div>
+    </article>
   )
 };
 
-export const NoteCard = React.memo(NoteCardComponent);
+export const NoteCard = memo(NoteCardComponent);

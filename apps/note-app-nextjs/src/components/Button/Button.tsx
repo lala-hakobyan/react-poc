@@ -14,17 +14,32 @@ export default function Button({ button, onClick }: ButtonProps) {
   className = button.disabled ? `${className} ${styles['button--disabled']}`: `${className}`;
 
   return (
-    <button
-      className={className}
-      onClick={onClick}
-      disabled={finalButton.disabled}
-      type={finalButton.type}>
-      {finalButton.icon &&
-        <svg className={styles.button__svgIcon} width={20} height={20}>
-          <use href={`/assets/icons/svg-sprite.svg#${finalButton.icon}`}/>
-        </svg>
+    <>
+      {finalButton.type !=='text' ?
+        <button
+          className={className}
+          onClick={onClick}
+          disabled={finalButton.disabled}
+          type={finalButton.type}>
+          {finalButton.icon &&
+            <svg className={styles.button__svgIcon} width={20} height={20}>
+              <use href={`/assets/icons/svg-sprite.svg#${finalButton.icon}`}/>
+            </svg>
+          }
+          {finalButton.label}
+        </button> :
+        <span
+          className={className}
+          onClick={onClick}
+        >
+          {finalButton.icon &&
+            <svg className={styles.button__svgIcon} width={20} height={20}>
+              <use href={`/assets/icons/svg-sprite.svg#${finalButton.icon}`}/>
+            </svg>
+          }
+          {finalButton.label}
+        </span>
       }
-      {finalButton.label}
-    </button>
+    </>
   );
 }

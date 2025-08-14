@@ -4,8 +4,8 @@
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 2rem;
 
-  &__icon {
+  &__iconLink {
+    line-height: 0;
     margin-left: 1rem;
-    fill: var(--menu-color);
   }
 }
