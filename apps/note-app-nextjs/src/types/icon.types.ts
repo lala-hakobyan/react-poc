@@ -1,5 +1,6 @@
 export type IconConfig = {
   iconName: string;
+  className?: string;
   size?: IconSize;
   color?: IconColor;
 }

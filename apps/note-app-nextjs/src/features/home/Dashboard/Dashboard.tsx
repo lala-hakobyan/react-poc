@@ -6,15 +6,14 @@ import styles from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
 import { Note } from '@/types/note.types';
 import notesApiService from '@/services/notesApiService';
-import { LogMessagesConstants } from '@/constants/logMessages.constants';
 import { DashboardConstants } from '@/constants/dashboard.constants';
+import loggerService from '@/services/loggerService';
 
 const recentNotesSizeConfig = Number(process.env.NEXT_PUBLIC_DASHBOARD_ITEM_COUNT);
 
 export default function Dashboard() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
 
   useEffect(() => {
     const getApiData = async () => {
@@ -23,7 +22,7 @@ export default function Dashboard() {
         setNotes(data);
         setIsLoading(false);
       } catch(error) {
-        console.error(LogMessagesConstants.notes.fetchError, error);
+        loggerService.logMessage('fetchNotes', 'error', error);
         setIsLoading(false);
       }
     }

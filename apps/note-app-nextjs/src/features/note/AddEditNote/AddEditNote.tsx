@@ -27,7 +27,7 @@ export default function AddEditNote() {
     let actionStatus: ActionStatus;
 
     if(addEditNoteState.currentEditNote) {
-      actionStatus = await addEditNoteState.editNote(noteFormContract.notesFormState.form as Note);
+      actionStatus = await addEditNoteState.editNote({ ...noteFormContract.notesFormState.form, id: addEditNoteState.currentEditNote.id } as Note);
     } else {
       actionStatus = await addEditNoteState.addNote({ ...noteFormContract.notesFormState.form, id: crypto.randomUUID() } as Note);
     }

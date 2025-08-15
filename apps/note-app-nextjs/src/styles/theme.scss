@@ -11,13 +11,17 @@
   --hover-accent-color: #D26000;
   --border-color: #E5E7EB;
   --menu-color: #5F6368;
-  --danger-color: #d93025;
+  --error-color: #d93025;
+  --danger-color: #842029;
   --danger-bg-color: #F8D7DA;
   --danger-border-color: #F5C6CB;
+  --success-color: #0f5132;
   --success-bg-color: #D4EDDA;
   --success-border-color: #C3E6CB;
+  --info-color: #084298;
   --info-bg-color: #CCE5FF;
   --info-border-color: #CCE5FF;
+  --warning-color: #664d03;
   --warning-bg-color: #FFF3CD;
   --warning-border-color: #FFEEBA;
 }
@@ -33,7 +37,7 @@
   --hover-accent-color: #D26000;      // Slightly darker on hover
   --border-color: #4B5563;            // Soft borders on dark bg
   --menu-color: #D1D5DB;              // Text in nav/menu
-  --danger-color: #ff6b6b;            // Danger/error style text
+  --error-color: #ff6b6b;            // Danger/error style text
 }
 
 @media (prefers-color-scheme: dark) {
@@ -48,6 +52,6 @@
     --hover-accent-color: #D26000;      // Slightly darker on hover
     --border-color: #4B5563;            // Soft borders on dark bg
     --menu-color: #D1D5DB;              // Text in nav/menu
-    --danger-color: #ff6b6b;            // Danger/error style text
+    --error-color: #ff6b6b;            // Danger/error style text
   }
 }

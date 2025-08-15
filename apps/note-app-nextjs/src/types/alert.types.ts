@@ -4,6 +4,7 @@ export type AlertConfig = {
     type?: AlertType;
     text?: string;
     className?: string;
+    hideIcon?: boolean;
 }
 
 export type AlertProps = {

@@ -20,14 +20,14 @@
 
       &--required:after {
         content: ' *';
-        color: var(--danger-color);
+        color: var(--error-color);
         margin-left: 4px;
         font-weight: bold;
       }
     }
 
     &__errorMessage {
-      color: var(--danger-color);
+      color: var(--error-color);
       font-size: 1.3rem;
       margin-top: 4px;
       font-weight: 500;
@@ -44,7 +44,7 @@
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
       &--error {
-        border-color: var(--danger-color);
+        border-color: var(--error-color);
       }
 
       &:focus {

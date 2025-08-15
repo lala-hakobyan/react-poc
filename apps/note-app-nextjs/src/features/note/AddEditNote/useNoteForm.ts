@@ -89,7 +89,10 @@ export default function useNoteForm(defaultNoteForm?: NoteForm): NoteFormContrac
   }, [defaultNoteForm]); // Dependency array: run this effect whenever defaultNoteForm changes
 
   const resetForm = () => {
-    dispatch({ type: 'set_form_value', value: emptyFormValue as Note })
+    dispatch({
+      type: 'set_form_value',
+      value: emptyFormValue as Note
+    })
   }
 
   const handleFieldChange = (field: NoteFormField) => (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

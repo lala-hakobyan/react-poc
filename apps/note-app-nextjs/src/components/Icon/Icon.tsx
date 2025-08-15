@@ -11,9 +11,12 @@ export default function Icon({ icon } : {icon: IconConfig}) {
   const styleClass = icon.color ?? 'primary';
   const styleSize = icon.size ?? 'md';
 
+  let className = `styles.actions__icon ${styles['icon--' + styleClass]}`;
+  className = icon.className ?? `${className} ${icon.iconName}`;
+
   return (
     <svg
-      className={`styles.actions__icon ${styles['icon--' + styleClass]}`}
+      className={className}
       width={iconSizeMapping[styleSize]}
       height={iconSizeMapping[styleSize]}
     >
