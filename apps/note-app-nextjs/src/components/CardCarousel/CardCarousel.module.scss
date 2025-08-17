@@ -8,9 +8,14 @@
   list-style: none;
   margin: 0;
 
+  &__wrapper {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
   &__item {
-    flex: 0 0 180px;
-    max-width: 180px;
+    flex: 0 0 184px;
+    max-width: 184px;
     scroll-snap-align: center;
   }
 

@@ -1,42 +1,47 @@
-"use client";
-import PageSubTitle from "@/components/PageSubTitle/PageSubTitle";
-import CardCarousel from "@/components/CardCarousel/CardCarousel";
-import Loader from "@/components/Loader/Loader";
-import styles from "./Dashboard.module.scss";
-import {useEffect, useState} from "react";
-import {Note} from "@/types/note.types";
+'use client';
+import PageSubTitle from '@/components/PageSubTitle/PageSubTitle';
+import CardCarousel from '@/components/CardCarousel/CardCarousel';
+import Loader from '@/components/Loader/Loader';
+import styles from './Dashboard.module.scss';
+import { useEffect, useState } from 'react';
+import { Note } from '@/types/note.types';
+import notesApiService from '@/services/notesApiService';
+import { DashboardConstants } from '@/constants/dashboard.constants';
+import loggerService from '@/services/loggerService';
+
+const recentNotesSizeConfig = Number(process.env.NEXT_PUBLIC_DASHBOARD_ITEM_COUNT);
 
 export default function Dashboard() {
-    const [notes, setNotes] = useState<Note[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        const getApiData = async () => {
-            try {
-                const response: Response = await fetch('api/notes?limit=5');
-                if(!response.ok) {
-                    throw new Error(`HTTP response error: Status ${response.status}`)
-                }
-                const data = await response.json();
+  useEffect(() => {
+    const getApiData = async () => {
+      try {
+        const data = await notesApiService.fetchNotes(0, recentNotesSizeConfig);
+        setNotes(data);
+        setIsLoading(false);
+      } catch(error) {
+        loggerService.logMessage('fetchNotes', 'error', error);
+        setIsLoading(false);
+      }
+    }
 
-                setNotes(data);
-                setIsLoading(false);
-            } catch(error) {
-                console.error('Error fetching notes', error);
-                setIsLoading(false);
-            }
-        }
+    getApiData();
+  }, []);
 
-        getApiData();
-    }, []);
+  return (
+    <section className={`mb-md ${styles.dashboard}`}>
+      <PageSubTitle title={DashboardConstants.subTitle}></PageSubTitle>
 
-    return (
-        <section className={`mb-md ${styles.dashboard}`}>
-            <PageSubTitle title={'Latest Notes'} ></PageSubTitle>
+      {!isLoading &&
+        <>
+          <CardCarousel notes={notes}></CardCarousel>
+          <p className="text-right mt-sm"><a href={'/notes'} className="primary-link">View All Notes</a></p>
+        </>
+      }
 
-            {!isLoading && <CardCarousel notes={notes}></CardCarousel>}
-
-            {isLoading && <Loader loader={{type: 'section'}}></Loader>}
-        </section>
-    );
+      {isLoading && <Loader loader={{ type: 'section' }}></Loader>}
+    </section>
+  );
 }

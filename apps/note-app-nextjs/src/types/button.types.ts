@@ -12,6 +12,6 @@ export type ButtonConfig ={
     icon?: string;
 }
 
-export type ButtonType = 'submit' | 'reset' | 'button';
+export type ButtonType = 'submit' | 'reset' | 'button' | 'text';
 
 export type ButtonStyle = 'primary' | 'secondary' | 'ghost';

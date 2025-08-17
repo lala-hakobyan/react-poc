@@ -1,9 +1,10 @@
-import {ReactNode} from "react";
+import { ReactNode } from 'react';
 
 export type AlertConfig = {
     type?: AlertType;
     text?: string;
     className?: string;
+    hideIcon?: boolean;
 }
 
 export type AlertProps = {

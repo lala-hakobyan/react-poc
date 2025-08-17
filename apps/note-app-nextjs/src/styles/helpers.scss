@@ -26,13 +26,43 @@
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .position-relative {
   position: relative;
 }
 
 .svg-link {
-  transition: fill 0.2s;
-  &:hover, &:focus, &:active {
-    fill: var(--primary-accent-color);
+  svg {
+    transition: fill 0.5s ease;
   }
+  &:hover, &:focus, &:active {
+    svg {
+      fill: var(--primary-accent-color);
+    }
+  }
+}
+
+.primary-link {
+  text-decoration: underline;
+  transition: 0.5s color ease;
+  color: var(--primary-accent-color);
+
+  &:hover, &:focus, &:active {
+    color: var(--hover-accent-color)
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

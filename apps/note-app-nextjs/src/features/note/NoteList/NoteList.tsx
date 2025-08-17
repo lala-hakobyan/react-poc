@@ -1,82 +1,83 @@
-"use client";
-import styles from "./NoteList.module.scss";
-import NoteCard from "@/components/NoteCard/NoteCard";
-import {Note} from "@/types/note.types";
-import Button from "@/components/Button/Button";
-import {useEffect, useRef} from "react";
-import Loader from "@/components/Loader/Loader";
-import {useNotesStore} from "@/store/notesStore";
-import DeleteNote from "@/features/note/DeleteNote/DeleteNote";
-import Alert from "@/components/Alert/Alert";
+'use client';
+import styles from './NoteList.module.scss';
+import { Note } from '@/types/note.types';
+import Button from '@/components/Button/Button';
+import { useCallback, useEffect, useRef } from 'react';
+import Loader from '@/components/Loader/Loader';
+import { selectNotesListSlice, useNotesStore } from '@/store/notes/notesStore';
+import Alert from '@/components/Alert/Alert';
+import { NoteListConstants } from '@/constants/noteList.constants';
+import { useShallow } from 'zustand/react/shallow';
+import { NotesStore } from '@/store/notes/notesStore.types';
+import { NoteCard } from '@/components/NoteCard/NoteCard';
 
 export  default function NoteList() {
-    const {
-        notes,
-        isNotesLoading,
-        isNotesError,
-        isLoadMoreNotesLoading,
-        isLoadMoreNotesError,
-        fetchNotes,
-        setCurrentEditNote,
-        setCurrentDeleteNote,
-        resetNotes,
-    } = useNotesStore();
-    const initializedRef = useRef(false);
+  const notesListState = useNotesStore(useShallow(selectNotesListSlice));
+  const { setCurrentEditNote, setCurrentDeleteNote } = useNotesStore(useShallow((state: NotesStore) => ({
+    setCurrentEditNote: state.setCurrentEditNote,
+    setCurrentDeleteNote: state.setCurrentDeleteNote
+  })));
 
-    const loadMoreAction = () => {
-        fetchNotes(notes.length, 9, 'set_load_more');
+  const handleEditNote = useCallback((note: Note) => setCurrentEditNote(note, true), [setCurrentEditNote]);
+  const handleDeleteNote = useCallback((note: Note) => setCurrentDeleteNote(note, true), [setCurrentDeleteNote]);
+  const initializedRef = useRef(false);
+
+  const loadMoreAction = () => {
+    notesListState.fetchNotes(notesListState.notes.length, 9, 'set_load_more');
+  }
+
+  useEffect(() => {
+    if(!initializedRef.current) {
+      notesListState.resetNotes();
+      initializedRef.current = true;
+      notesListState.fetchNotes();
     }
 
-    useEffect(() => {
-        if(!initializedRef.current) {
-            resetNotes();
-            initializedRef.current = true;
-            fetchNotes();
-        }
+  }, [notesListState.fetchNotes, notesListState.resetNotes]);
 
-    }, [fetchNotes, resetNotes]);
-
-    return (
+  return (
+    <>
+      {!notesListState.isNotesLoading &&
         <>
-            {!isNotesLoading &&
-                <>
-                    <div className={styles.noteList}>
-                        {notes.map((note: Note) => (
-                            <div className={styles.noteList__item} key={note.id}>
-                                <NoteCard
-                                    onEdit={() => setCurrentEditNote(note, true)}
-                                    onDelete={() => setCurrentDeleteNote(note, true) }
-                                    noteCard={{note: note, showImage: true, showActions: true}}
-                                ></NoteCard>
-                            </div>
-                        ))}
-                    </div>
-                    <DeleteNote />
-                </>
-            }
+          <ul className={styles.noteList}>
+            {notesListState.notes.map((note: Note) => (
+              <li className={styles.noteList__item} key={note.id}>
+                <NoteCard
+                  onEdit={() => handleEditNote(note)}
+                  onDelete={() => handleDeleteNote(note)}
+                  noteCard={{ note: note, showImage: true, showActions: true }}
+                />
+              </li>
+            ))}
+          </ul>
 
-            {isNotesLoading && <Loader></Loader>}
-
-            {!isNotesLoading && !isNotesError &&
-                <div className="text-center mt-md">
-                    {isLoadMoreNotesError &&
-                        <Alert alert={{type: 'danger', className: 'mb-sm'}}>An error occurred while loading more notes. Please try again later.</Alert>
-                    }
-                    <Button
-                        button={{
-                            label: isLoadMoreNotesLoading ? 'Loading' : 'Load More',
-                            type: 'button',
-                            icon: isLoadMoreNotesLoading ? 'icon-loading' : '',
-                            style: 'ghost',
-                            className: `${styles['noteList__button']}`,
-                            disabled: isLoadMoreNotesLoading
-                        }}
-                        onClick={loadMoreAction}
-                    ></Button>
-                </div>
-            }
-
-            {isNotesError && <Alert alert={{type: 'danger'}}>Sorry, something went wrong while loading your notes.Please try again later.</Alert>}
         </>
-    )
+      }
+
+      {notesListState.isNotesLoading && <Loader />}
+
+      {!notesListState.isNotesLoading && !notesListState.isNotesError &&
+        <div className="text-center mt-md">
+          {notesListState.isLoadMoreNotesError &&
+            <Alert alert={{ type: 'danger', className: 'mb-sm' }}>{NoteListConstants.loadMoreErrorMessage}</Alert>
+          }
+          <Button
+            button={{
+              label: notesListState.isLoadMoreNotesLoading ? 'Loading' : 'Load More',
+              type: 'button',
+              icon: notesListState.isLoadMoreNotesLoading ? 'icon-loading' : '',
+              style: 'ghost',
+              className: `${styles['noteList__button']}`,
+              disabled: notesListState.isLoadMoreNotesLoading
+            }}
+            onClick={loadMoreAction}
+          />
+        </div>
+      }
+
+      {notesListState.isNotesError &&
+        <Alert alert={{ type: 'danger' }}>{ NoteListConstants.fetchErrorMessage }</Alert>
+      }
+    </>
+  )
 }

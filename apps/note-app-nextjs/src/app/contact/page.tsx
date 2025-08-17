@@ -1,14 +1,17 @@
-import MainLayout from "@/layout/MainLayout/MainLayout";
-import PageTitle from "@/components/PageTitle/PageTitle";
-import Contact from "@/features/contact/Contact";
-import PageSubTitle from "@/components/PageSubTitle/PageSubTitle";
+import MainLayout from '@/layout/MainLayout/MainLayout';
+import PageTitle from '@/components/PageTitle/PageTitle';
+import Contact from '@/features/contact/Contact';
+import PageSubTitle from '@/components/PageSubTitle/PageSubTitle';
+import { ContactConstants } from '@/constants/contact.constants';
 
 export default function Page() {
-    return (
-        <MainLayout size="sm">
-            <PageTitle title={'Contact us / Report and Issue'}></PageTitle>
-            <PageSubTitle title={'If you encounter any issues, have feedback, or have questions, feel free to drop a message.'} ></PageSubTitle>
-            <Contact></Contact>
-        </MainLayout>
-    )
+  return (
+    <MainLayout size="sm">
+      <section>
+        <PageTitle title={ContactConstants.pageTitle}></PageTitle>
+        <PageSubTitle title={ContactConstants.pageSubtitle} ></PageSubTitle>
+        <Contact></Contact>
+      </section>
+    </MainLayout>
+  )
 }

@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React, { ReactNode } from 'react';
 
 export type ModalProps = {
     isOpen: boolean;
@@ -22,3 +22,9 @@ export type ModalCompoundComponent = {
     Body: SlotComponent;
     Footer: SlotComponent;
 };
+
+export type ModalSlotDisplayName = 'Modal.Header' | 'Modal.Body' | 'Modal.Footer';
+
+export type ModalSlotType = {
+  displayName?: ModalSlotDisplayName
+}
