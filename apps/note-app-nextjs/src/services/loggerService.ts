@@ -19,6 +19,8 @@ class LoggerService {
     let messageDetails = '';
     const message = this.logMessageTypeMapping[logMessageType];
 
+    console.log('details', details);
+
     if(details) {
       messageDetails = details instanceof Error ? details.message : String(details);
     }

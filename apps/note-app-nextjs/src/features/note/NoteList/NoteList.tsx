@@ -26,6 +26,33 @@ export  default function NoteList() {
     notesListState.fetchNotes(notesListState.notes.length, 9, 'set_load_more');
   }
 
+  const getNoteById = async (noteId: string) => {
+    const start = performance.now();
+    try {
+      const response: Response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notes/${noteId}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `Bearer ${process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN}`,
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Could not find note.');
+      }
+
+      // return parsed note object
+      const result = await response.json();
+      setCurrentEditNote(result, true);
+    } catch(error) {
+      console.error(error);
+      throw error; // rethrow so caller can handle it
+    }
+
+    const end = performance.now();
+    console.info('Total Time in ms', Math.ceil((end - start) * 1000) / 1000);
+  }
+
   useEffect(() => {
     if(!initializedRef.current) {
       notesListState.resetNotes();
@@ -43,7 +70,7 @@ export  default function NoteList() {
             {notesListState.notes.map((note: Note) => (
               <li className={styles.noteList__item} key={note.id}>
                 <NoteCard
-                  onEdit={() => handleEditNote(note)}
+                  onEdit={() => getNoteById(note.id)}
                   onDelete={() => handleDeleteNote(note)}
                   noteCard={{ note: note, showImage: true, showActions: true }}
                 />
