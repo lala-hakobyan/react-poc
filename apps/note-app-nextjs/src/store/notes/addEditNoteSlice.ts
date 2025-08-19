@@ -48,6 +48,9 @@ export const createAddEditNoteSlice = (set: StoreApi<NotesStore>['setState']): A
   },
 
   editNote: async (note: Note): Promise<ActionStatus> => {
+    if(note.id === '54') {
+      debugger;
+    }
     set({ isNoteUpdateLoading: true });
 
     try {

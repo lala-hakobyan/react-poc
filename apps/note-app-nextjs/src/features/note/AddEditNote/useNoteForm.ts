@@ -28,8 +28,15 @@ const getDefaultStateValue = (defaultNoteForm: NoteForm | null): NoteFormState =
 const validateField = (field: NoteFormField | null, value: string | null) => {
   const errors: NoteFormErrors = {};
 
-  if(field === 'title' && !value) {
-    errors.title = AddEditNoteConstants.form.titleRequiredError;
+  if(field === 'title') {
+    if(!value) {
+      errors.title = AddEditNoteConstants.form.titleRequiredError;
+    } else {
+      const regex = /[!@#$%^&*(),.?":{}|<>]/;
+      if(regex.test(value)) {
+        errors.title = AddEditNoteConstants.form.specialCharactersError;
+      }
+    }
   }
 
   if(field === 'link' && (value && !value?.startsWith('http'))) {

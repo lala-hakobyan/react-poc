@@ -4,6 +4,7 @@ export const AddEditNoteConstants = Object.freeze({
   },
   form: {
     titleRequiredError: 'Title is required.',
+    specialCharactersError: 'Special characters are not allowed: !@#$%^&*(),.?":{}|<>',
     emailInvalidError: 'Please provide a valid URL.',
   }
 });

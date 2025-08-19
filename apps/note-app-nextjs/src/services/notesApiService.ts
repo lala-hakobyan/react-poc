@@ -13,6 +13,7 @@ class NotesApiService {
   public async fetchNotes(offset = 0, limit = this.defaultLimitConfig) {
     const response: Response = await fetch(`${this.baseApiUrl}?offset=${offset}&limit=${limit}`, {
       method: 'GET',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.testAccessToken}`,
@@ -29,9 +30,10 @@ class NotesApiService {
   public async addNote(note: Note) {
     const response = await fetch(this.baseApiUrl, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.testAccessToken}`,
+        'Authorization': `Bearer ${this.testAccessToken}`
       },
       body: JSON.stringify(note)
     });
@@ -65,7 +67,7 @@ class NotesApiService {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.testAccessToken}`
+        'Authorization': `${this.testAccessToken}`
       }
     })
 
