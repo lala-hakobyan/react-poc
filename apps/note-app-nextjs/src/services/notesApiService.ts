@@ -7,10 +7,19 @@ import { LogMessagesConstants } from '@/constants/logMessages.constants';
 class NotesApiService {
   private defaultLimitConfig: number = Number(process.env.NEXT_PUBLIC_NOTES_PAGE_SIZE);
   private baseApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/notes`;
+  private testAccessToken = process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN;
   private static instance: NotesApiService;
 
   public async fetchNotes(offset = 0, limit = this.defaultLimitConfig) {
-    const response = await fetch(`${this.baseApiUrl}?offset=${offset}&limit=${limit}`);
+    const response: Response = await fetch(`${this.baseApiUrl}?offset=${offset}&limit=${limit}`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.testAccessToken}`,
+      }
+    });
+
 
     if(!response.ok) {
       throw new Error(LogMessagesConstants.notes.fetchError);
@@ -21,9 +30,10 @@ class NotesApiService {
 
   public async addNote(note: Note) {
     const response = await fetch(this.baseApiUrl, {
-      method: 'POST',
+      credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.testAccessToken}`
       },
       body: JSON.stringify(note)
     });
@@ -38,8 +48,10 @@ class NotesApiService {
   public async editNote(note: Note) {
     const response = await fetch(`${this.baseApiUrl}/${note.id}`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.testAccessToken}`
       },
       body: JSON.stringify(note)
     })
@@ -54,8 +66,10 @@ class NotesApiService {
   public async deleteNote(noteId: string) {
     const response = await fetch(`${this.baseApiUrl}/${noteId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${this.testAccessToken}`
       }
     })
     if(!response.ok) {

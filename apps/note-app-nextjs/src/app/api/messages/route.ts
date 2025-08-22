@@ -4,6 +4,7 @@ export async function POST(req: Request) {
   const body = await req.json();
   const response = await fetch('http://localhost:3010/api/messages', {
     method: 'POST',
+    credentials: 'include',
     headers: {
       contentType: 'application/json',
     },

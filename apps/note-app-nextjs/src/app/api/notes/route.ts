@@ -24,6 +24,7 @@ export async function POST(req: Request) {
   const body = await req.json();
   const response = await fetch('http://localhost:3010/api/notes', {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-type': 'application/json'
     },

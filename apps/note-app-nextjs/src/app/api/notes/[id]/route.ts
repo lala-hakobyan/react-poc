@@ -20,6 +20,7 @@ export async function PUT(req: Request, context: { params: Promise<{ id: string 
 export async function DELETE(req: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
   const response = await fetch(`http://localhost:3010/api/notes/${id}`, {
+    credentials: 'include',
     method: 'DELETE'
   })
   const status = response.status;
