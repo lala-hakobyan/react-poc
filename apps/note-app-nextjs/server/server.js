@@ -13,7 +13,10 @@ const app = express();
 const port = 3010;
 
 app.use(cors({
-  origin: 'http://local.react-note-app.com:3000', // allow only this domain
+  origin: [
+    'http://local.react-note-app.com:3000',
+    'http://localhost:3000'
+  ], // allow only this domain
   credentials: true, // optional: allow cookies/auth headers
 }));
 

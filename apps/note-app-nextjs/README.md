@@ -40,14 +40,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ### Error: port is already in use
 `Error: listen EADDRINUSE: address already in use :::3000`
 If this happens, you can run you can do the following:
-1. Run app in a different port: `set PORT=3001 && npm start` 
+1. Run app in a different port: `set PORT=3001 && npm start`
 
 2. Find the processes that are using the port and kill them:
 **Instructions for Windows**
    - Find and kill the process using port 3000
-   In PowerShell or Command Prompt:    
+   In PowerShell or Command Prompt:
    ```netstat -ano | findstr :3000```
-   - You’ll see something like:    
+   - You’ll see something like:
    ```TCP    0.0.0.0:3000     0.0.0.0:0     LISTENING     12345```
-   - That last number (12345) is the PID (process ID). Kill it:      
+   - That last number (12345) is the PID (process ID). Kill it:
     ```taskkill /PID 12345 /F```
+
+### Remove Project Cache
+`npx rimraf .next node_modules .package.json`
+

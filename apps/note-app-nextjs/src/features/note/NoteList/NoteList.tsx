@@ -10,6 +10,7 @@ import { NoteListConstants } from '@/constants/noteList.constants';
 import { useShallow } from 'zustand/react/shallow';
 import { NotesStore } from '@/store/notes/notesStore.types';
 import { NoteCard } from '@/components/NoteCard/NoteCard';
+import DeleteNote from '@/features/note/DeleteNote/DeleteNote';
 
 export  default function NoteList() {
   const notesListState = useNotesStore(useShallow(selectNotesListSlice));
@@ -127,6 +128,7 @@ export  default function NoteList() {
             ))}
           </ul>
 
+          <DeleteNote />
         </>
       }
 

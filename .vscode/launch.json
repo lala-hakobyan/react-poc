@@ -1,29 +1,43 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Next.js: Server-side",
-        "type": "node-terminal",
-        "request": "launch",
-        "command": "npm run dev",
-        "cwd": "${workspaceFolder}/apps/note-app-nextjs"
-      },
-      {
-        "name": "Next.js: Client-side",
-        "type": "chrome",
-        "request": "launch",
-        "url": "http://localhost:3000",
-        "webRoot": "${workspaceFolder}/apps/note-app-nextjs"
-      },
-      {
-        "name": "API: Express Server",
-        "type": "node-terminal",
-        "request": "launch",
-        "command": "npm run server",
-        "cwd": "${workspaceFolder}/apps/note-app-nextjs"
-      }
-    ],
-    "compounds": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: Server-side",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "cwd": "${workspaceFolder}/apps/note-app-nextjs",
+      "skipFiles": [
+        "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
+        "${workspaceFolder}/apps/note-app-nextjs/.next/**",
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "Next.js: Client-side",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://local.react-note-app.com:3000",
+      "webRoot": "${workspaceFolder}/apps/note-app-nextjs",
+      "skipFiles": [
+        "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
+        "${workspaceFolder}/apps/note-app-nextjs/.next/**",
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "API: Express Server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run server",
+      "cwd": "${workspaceFolder}/apps/note-app-nextjs",
+      "skipFiles": [
+        "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
+        "<node_internals>/**"
+      ]
+    }
+  ],
+  "compounds": [
     {
       "name": "Debug: Full Stack",
       "configurations": [
@@ -33,4 +47,4 @@
       ]
     }
   ]
-  }
+}
