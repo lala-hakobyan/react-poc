@@ -69,7 +69,7 @@ class NotesApiService {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `${this.testAccessToken}`
+        'Authorization': `Bearer ${this.testAccessToken}`
       }
     })
     if(!response.ok) {
