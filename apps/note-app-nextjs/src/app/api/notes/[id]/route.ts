@@ -1,30 +1,18 @@
-import { NextResponse } from 'next/server';
+import proxyRequestService from '@/services/proxyRequestService';
+
+const baseApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/notes`;
 
 export async function PUT(req: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
-  const body = await req.json();
-  const response = await fetch(`http://localhost:3010/api/notes/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  })
+  const url = `${baseApiUrl}/${id}`;
 
-  const result = await response.json();
-
-  return NextResponse.json(result, { status: result.status });
+  return proxyRequestService.proxyRequest(req, url);
 }
 
 
 export async function DELETE(req: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
-  const response = await fetch(`http://localhost:3010/api/notes/${id}`, {
-    credentials: 'include',
-    method: 'DELETE'
-  })
-  const status = response.status;
-  const result = await response.json().catch(() => ({})); // in case there's no body
+  const url = `${baseApiUrl}/${id}`;
 
-  return NextResponse.json(result, { status });
+  return proxyRequestService.proxyRequest(req, url);
 }

@@ -7,5 +7,8 @@ export const LogMessagesConstants = Object.freeze({
   },
   contact: {
     sendError: 'Error occurred while sending the message.'
+  },
+  global: {
+    internalServerError: 'Internal server error'
   }
 });

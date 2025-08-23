@@ -23,12 +23,10 @@ export const createAddEditNoteSlice = (set: StoreApi<NotesStore>['setState']): A
   setIsAddEditModalOpen: (val: boolean) => {set({ isAddEditModalOpen: val })},
 
   addNote: async (note: Note) => {
-    const insertNote = { ...note, creationDate: new Date(), lastUpdatedDate: new Date() }
-
     set({ isNoteUpdateLoading: true });
 
     try {
-      const result: Note = await notesApiService.addNote(insertNote);
+      const result: Note = await notesApiService.addNote(note);
       set((state: NotesStore) => (
         {
           notes: [result, ...state.notes],
@@ -51,8 +49,7 @@ export const createAddEditNoteSlice = (set: StoreApi<NotesStore>['setState']): A
     set({ isNoteUpdateLoading: true });
 
     try {
-      const updateNote = { ...note, lastUpdatedDate: new Date() };
-      const result: Note = await notesApiService.editNote(updateNote);
+      const result: Note = await notesApiService.editNote(note);
 
       set((state: NotesStore) => (
         {

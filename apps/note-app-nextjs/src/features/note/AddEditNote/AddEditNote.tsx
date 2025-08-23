@@ -14,6 +14,7 @@ import { AddEditNoteConstants } from '@/constants/addEditNote.constants';
 import { ActionStatus, AddEditNoteSlice } from '@/store/notes/notesStore.types';
 import { useShallow } from 'zustand/react/shallow';
 import BrowseLabel from '@/components/BrowseLabel/BrowseLabel';
+import { generateUuid } from '@/utils/random';
 
 
 export default function AddEditNote() {
@@ -27,9 +28,20 @@ export default function AddEditNote() {
     let actionStatus: ActionStatus;
 
     if(addEditNoteState.currentEditNote) {
-      actionStatus = await addEditNoteState.editNote({ ...noteFormContract.notesFormState.form, id: addEditNoteState.currentEditNote.id } as Note);
+      actionStatus = await addEditNoteState.editNote(
+        { ...noteFormContract.notesFormState.form,
+          id: addEditNoteState.currentEditNote.id,
+          lastUpdatedDate: new Date()
+        } as Note
+      );
     } else {
-      actionStatus = await addEditNoteState.addNote({ ...noteFormContract.notesFormState.form, id: crypto.randomUUID() } as Note);
+      actionStatus = await addEditNoteState.addNote({
+        ...noteFormContract.notesFormState.form,
+        creationDate: new Date(),
+        lastUpdatedDate: new Date(),
+        id: generateUuid()
+      } as Note
+      );
     }
 
     if(actionStatus?.success) {

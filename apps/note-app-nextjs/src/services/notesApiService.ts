@@ -6,7 +6,7 @@ import { LogMessagesConstants } from '@/constants/logMessages.constants';
  */
 class NotesApiService {
   private defaultLimitConfig: number = Number(process.env.NEXT_PUBLIC_NOTES_PAGE_SIZE);
-  private baseApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/notes`;
+  private baseApiUrl = `api/notes`;
   private testAccessToken = process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN;
   private static instance: NotesApiService;
 
@@ -30,6 +30,7 @@ class NotesApiService {
 
   public async addNote(note: Note) {
     const response = await fetch(this.baseApiUrl, {
+      method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',

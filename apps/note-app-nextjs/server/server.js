@@ -30,6 +30,12 @@ app.get('/api/notes', authMiddleware, (req, res) => {
   setTimeout(() => res.json(finalNotes), 1000);
 });
 
+app.get('/api/notes/:id', authMiddleware, (req, res) => {
+  const noteId = req.params.id;
+  const note = notes.find(note => note.id === noteId);
+  setTimeout(() => res.json(note),3000);
+});
+
 app.post('/api/notes', authMiddleware, (req, res) => {
   const note = req.body;
   notes.unshift(note);
