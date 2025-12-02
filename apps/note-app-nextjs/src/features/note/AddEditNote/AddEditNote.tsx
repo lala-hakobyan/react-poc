@@ -157,8 +157,11 @@ export default function AddEditNote() {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button button={{ label: buttonName, disabled: !noteFormContract.isFormValid() || addEditNoteState.isNoteUpdateLoading }} onClick={() => submitForm()} />
-          <Button button={{ label: 'Reset', className: 'ml-xs' }} onClick={(ev?: MouseEvent) => resetForm(ev)} />
+          <Button
+            button={{ label: buttonName, name: 'submitButton', disabled: !noteFormContract.isFormValid() || addEditNoteState.isNoteUpdateLoading }}
+            onClick={() => submitForm()}
+          />
+          <Button button={{ label: 'Reset', name: 'resetButton', className: 'ml-xs' }} onClick={(ev?: MouseEvent) => resetForm(ev)} />
         </Modal.Footer>
       </Modal>
       }

@@ -5,12 +5,12 @@ function checkAccessToken(req, res, next) {
   const authHeader = req.headers['authorization'];
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Token missing or invalid' });
+    return res.status(401).json({ error: 'Token missing or invalid.' });
   }
 
   const token = authHeader.split(' ')[1];
   if (token !== testAccessToken) {
-    return res.status(401).json({ error: 'Token invalid' });
+    return res.status(401).json({ error: 'Token invalid.' });
   }
 
   // Token is valid, continue to next middleware / route handler

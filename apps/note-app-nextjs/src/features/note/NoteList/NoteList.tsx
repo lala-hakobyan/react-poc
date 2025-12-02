@@ -33,7 +33,7 @@ export  default function NoteList() {
       notesListState.fetchNotes();
     }
 
-  }, [notesListState.fetchNotes, notesListState.resetNotes]);
+  }, [notesListState, notesListState.fetchNotes, notesListState.resetNotes]);
 
   return (
     <>
@@ -45,7 +45,7 @@ export  default function NoteList() {
                 <NoteCard
                   onEdit={() => handleEditNote(note)}
                   onDelete={() => handleDeleteNote(note)}
-                  noteCard={{ note: note, showImage: true, showActions: true }}
+                  noteCard={{ note: note, showImage: true, showActions: true, dataId: note.id }}
                 />
               </li>
             ))}

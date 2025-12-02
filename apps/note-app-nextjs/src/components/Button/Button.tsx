@@ -5,6 +5,7 @@ export default function Button({ button, onClick }: ButtonProps) {
   const defaultButton: ButtonConfig = {
     type: 'button',
     style: 'primary',
+    name: 'button',
     label: '',
     disabled: false,
   }
@@ -20,6 +21,7 @@ export default function Button({ button, onClick }: ButtonProps) {
           className={className}
           onClick={onClick}
           disabled={finalButton.disabled}
+          name={finalButton.name}
           type={finalButton.type}>
           {finalButton.icon &&
             <svg className={styles.button__svgIcon} width={20} height={20}>

@@ -73,8 +73,13 @@ class NotesApiService {
         'Authorization': `Bearer ${this.testAccessToken}`
       }
     })
+
+    const data = await response.json();
+
     if(!response.ok) {
-      throw new Error(LogMessagesConstants.notes.deleteError);
+      let errorMessage = LogMessagesConstants.notes.deleteError;
+      errorMessage = data.error ? errorMessage + ' ' + data.error : errorMessage;
+      throw new Error(errorMessage);
     }
   }
 

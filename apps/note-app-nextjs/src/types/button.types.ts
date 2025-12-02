@@ -7,6 +7,7 @@ export type ButtonConfig ={
     type?: ButtonType;
     label: string;
     style?: ButtonStyle;
+    name?: string;
     className?: string;
     disabled?: boolean;
     icon?: string;
