@@ -6,7 +6,7 @@ import { LogMessagesConstants } from '@/constants/logMessages.constants';
  */
 class NotesApiService {
   private defaultLimitConfig: number = Number(process.env.NEXT_PUBLIC_NOTES_PAGE_SIZE);
-  private baseApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/notes`;
+  private baseApiUrl = `api/notes`;
   private testAccessToken = process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN;
   private static instance: NotesApiService;
 
@@ -20,8 +20,9 @@ class NotesApiService {
       }
     });
 
+
     if(!response.ok) {
-      await this.throwError(response, LogMessagesConstants.notes.addError);
+      throw new Error(LogMessagesConstants.notes.fetchError);
     }
 
     return response.json();
@@ -39,7 +40,7 @@ class NotesApiService {
     });
 
     if(!response.ok) {
-      await this.throwError(response, LogMessagesConstants.notes.addError);
+      throw new Error(LogMessagesConstants.notes.addError);
     }
 
     return response.json();
@@ -48,6 +49,7 @@ class NotesApiService {
   public async editNote(note: Note) {
     const response = await fetch(`${this.baseApiUrl}/${note.id}`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.testAccessToken}`
@@ -55,8 +57,8 @@ class NotesApiService {
       body: JSON.stringify(note)
     })
 
-    if(!response.ok) {
-      await this.throwError(response, LogMessagesConstants.notes.addError);
+    if (!response.ok) {
+      throw new Error(LogMessagesConstants.notes.editError);
     }
 
     return response.json();
@@ -65,20 +67,20 @@ class NotesApiService {
   public async deleteNote(noteId: string) {
     const response = await fetch(`${this.baseApiUrl}/${noteId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `${this.testAccessToken}`
+        'Authorization': `Bearer ${this.testAccessToken}`
       }
     })
 
-    if(!response.ok) {
-      await this.throwError(response, LogMessagesConstants.notes.addError);
-    }
-  }
+    const data = await response.json();
 
-  private async throwError(response: Response, defaultMessage: string) {
-    const result = await response.json();
-    throw new Error(result ? result.error : defaultMessage);
+    if(!response.ok) {
+      let errorMessage = LogMessagesConstants.notes.deleteError;
+      errorMessage = data.error ? errorMessage + ' ' + data.error : errorMessage;
+      throw new Error(errorMessage);
+    }
   }
 
   public static getInstance() {

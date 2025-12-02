@@ -36,7 +36,7 @@ const NoteCardComponent : React.FC<NoteCardProps> = ({ noteCard, onEdit, onDelet
   }
 
   return (
-    <article className={styles.noteCard}>
+    <article className={styles.noteCard} data-id={noteCard.dataId}>
       {noteCard.showImage && noteCard.note.image && (
         <figure className="imageWrapper">
           <Image

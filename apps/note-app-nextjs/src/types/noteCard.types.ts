@@ -8,6 +8,7 @@ export type NoteCardProps = {
 
 export type NoteCardConfig = {
     note: Note;
+    dataId?: string;
     showImage?: boolean;
     showActions?: boolean;
 }

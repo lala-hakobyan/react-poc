@@ -1,50 +1,44 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Next.js: Server-side",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "npm run dev",
-      "cwd": "${workspaceFolder}/apps/note-app-nextjs",
-      "skipFiles": [
-        "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
-        "${workspaceFolder}/apps/note-app-nextjs/.next/**",
-        "<node_internals>/**"
-      ]
-    },
-    {
-      "name": "Next.js: Client-side",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://local.react-note-app.com:3000",
-      "webRoot": "${workspaceFolder}/apps/note-app-nextjs",
-      "skipFiles": [
-        "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
-        "${workspaceFolder}/apps/note-app-nextjs/.next/**",
-        "<node_internals>/**"
-      ]
-    },
-    {
-      "name": "API: Express Server",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "npm run server",
-      "cwd": "${workspaceFolder}/apps/note-app-nextjs",
-      "skipFiles": [
-        "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
-        "<node_internals>/**"
-      ]
-    }
-  ],
-  "compounds": [
-    {
-      "name": "Debug: Full Stack",
-      "configurations": [
-        "Next.js: Server-side",
-        "Next.js: Client-side",
-        "API: Express Server"
-      ]
-    }
-  ]
-}
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Next.js: Server-side: Attach to Process",
+        "type": "node",
+        "request": "attach",
+        "port": 9230
+      },
+      {
+        "name": "Next.js: Client-side",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://local.react-note-app.com:3000",
+        "webRoot": "${workspaceFolder}/apps/note-app-nextjs",
+        "skipFiles": [
+          "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
+          "${workspaceFolder}/apps/note-app-nextjs/.next/**",
+          "<node_internals>/**"
+        ]
+      },
+      {
+        "name": "API: Express Server",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run server",
+        "cwd": "${workspaceFolder}/apps/note-app-nextjs",
+        "skipFiles": [
+          "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
+          "<node_internals>/**"
+        ]
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Debug: Full Stack",
+        "configurations": [
+          "Next.js: Server-side: Attach to Process",
+          "Next.js: Client-side",
+          "API: Express Server"
+        ]
+      }
+    ]
+  }

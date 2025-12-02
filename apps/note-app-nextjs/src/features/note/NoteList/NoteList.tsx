@@ -110,7 +110,7 @@ export  default function NoteList() {
 
     addAppTestData();
 
-  }, [notesListState.fetchNotes, notesListState.resetNotes]);
+  }, [notesListState, notesListState.fetchNotes, notesListState.resetNotes]);
 
   return (
     <>
