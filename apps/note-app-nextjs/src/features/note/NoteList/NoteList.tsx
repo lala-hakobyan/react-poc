@@ -24,7 +24,37 @@ export  default function NoteList() {
   const initializedRef = useRef(false);
 
   const loadMoreAction = () => {
-    notesListState.fetchNotes(notesListState.notes.length, 9, 'set_load_more');
+    performance.mark('load-more-started', {
+      detail: 'Load more: loading 9 notes.',
+    });
+
+    notesListState.fetchNotes(notesListState.notes.length, 9, 'set_load_more').then(() => {
+      performance.mark('load-more-ended', {
+        detail: 'Load more: loaded 9 notes.',
+      });
+
+      performance.measure('Load More Complete', {
+        start: 'load-more-started',
+        end: 'load-more-ended',
+        detail: {
+          // This data appears in the "Summary"
+          extraInfo: {
+            totalNoteCount: '18',
+            newLoadedNotes: '9'
+          },
+          devtools: {
+            dataType: 'track-entry',
+            track: 'Notes List Tasks',
+            trackGroup: 'My Notes Track',
+            color: 'tertiary-dark',
+            properties: [
+              ['Category', 'Personal'],
+            ],
+            tooltipText: 'New Notes Loaded Successfully',
+          },
+        },
+      });
+    })
   }
 
   const getNoteById = async (noteId: string) => {

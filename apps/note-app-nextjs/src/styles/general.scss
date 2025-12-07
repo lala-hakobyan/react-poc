@@ -25,7 +25,7 @@ ul, li {
 html {
   font-size: 10px;
   // Added to fix cumulative layout shift that appears after content is loaded and scroll appears
-  overflow-y: scroll;
+  // overflow-y: scroll;
 }
 
 html,
@@ -52,5 +52,65 @@ textarea, input {
   font-family: var(--font-geist-sans), var(--font-geist-mono), sans-serif, monospace;
 }
 
+/** Example of Melting text animation that can be used for titles **/
+/** Usage example in JSX: <div className="melting-text-container"><h1 className="melting-text">{title}</h1></div> **/
+.melting-text-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.melting-text {
+  font-size: 6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  animation: melt 3s infinite ease-in-out;
+  background: linear-gradient(90deg, #ff6f61, #ffbd44, #ff6f61);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.melting-text::before,
+.melting-text::after {
+  content: 'MY NOTES';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff6f61, #ffbd44, #ff6f61);
+  -webkit-background-clip: text;
+  color: transparent;
+  z-index: -1;
+  transform: scaleY(1);
+  opacity: 0.5;
+  animation: drip 3s infinite ease-in-out;
+}
+
+.melting-text::after {
+  filter: blur(10px);
+  opacity: 0.3;
+}
+
+/* Keyframes for melting effect */
+@keyframes melt {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes drip {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleY(1.5);
+    opacity: 0.7;
+  }
+}
 
 
