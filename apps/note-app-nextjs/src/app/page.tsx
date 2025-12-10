@@ -4,6 +4,7 @@ import '../styles/helpers.scss';
 import Dashboard from '@/features/home/Dashboard/Dashboard';
 import About from '@/features/home/About/About';
 import { AboutConstants } from '@/constants/about.constants';
+import ServiceWorkerRegister from '@/utils/serviceWorkerRegister';
 
 export default function Page() {
   return (
@@ -11,6 +12,7 @@ export default function Page() {
       <PageTitle title={AboutConstants.pageTitle}></PageTitle>
       <About></About>
       <Dashboard></Dashboard>
+      <ServiceWorkerRegister />
     </MainLayout>
   )
 }
