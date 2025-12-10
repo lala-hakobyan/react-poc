@@ -30,7 +30,7 @@ export default function RootLayout({
         {/* Load script in a blocking way (simulate performance leak) */}
         {/*<Script src="/assets/icons/heavy-analytics-script.js" strategy="beforeInteractive" />*/}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        {<script src="/assets/js/heavy-analytics-script.js" />}
+        { <script src="/assets/js/heavy-analytics-script.js" /> }
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}

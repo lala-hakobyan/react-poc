@@ -44,7 +44,7 @@ If this happens, you can run you can do the following:
 
 2. Find the processes that are using the port and kill them:
 **Instructions for Windows**
-   - Find and kill the process using port 3000
+   - Find and kill the processes using port 3000
    In PowerShell or Command Prompt:
    ```netstat -ano | findstr :3000```
    - You’ll see something like:

@@ -74,11 +74,18 @@ class NotesApiService {
       }
     })
 
-    const data = await response.json();
-
     if(!response.ok) {
-      let errorMessage = LogMessagesConstants.notes.deleteError;
-      errorMessage = data.error ? errorMessage + ' ' + data.error : errorMessage;
+      let errorData;
+      let errorMessage = response.status + ' ' + LogMessagesConstants.notes.deleteError;
+
+      try {
+        errorData = await response.json();
+      } catch (err) {
+        // backend might not return JSON
+        throw new Error(errorMessage);
+      }
+
+      errorMessage = errorData?.error ? errorMessage + ' ' + errorData.error : errorMessage;
       throw new Error(errorMessage);
     }
   }
