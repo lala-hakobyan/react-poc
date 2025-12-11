@@ -120,15 +120,33 @@ export  default function NoteList() {
     getNoteById(id);
   }
 
+  /**
+   * Add Test Storage Data
+   */
   const addAppTestData = () => {
-    document.cookie = 'username=Lala; expires=Thu, 18 Dec 2025 12:00:00 UTC; path=/';
+    const publicAccessToken = process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN;
 
-    const bigData = Array(100000).fill('This is a test string to fill storage');
+    document.cookie = 'rna_tracking_id=550e8400-e29b-41d4-a716-446655440000; Expires=Thu, 18 Dec 2025 12:00:00 GMT; Path=/; Domain=.react-note-app.com; SameSite=Lax';
 
-    localStorage.setItem('bigTestLocal', JSON.stringify(bigData));
+    // Domain=.react-note-app.com → sent to local.react-note-app.com, app.react-note-app.com, etc.
+    document.cookie =
+      `rna_access_token=${publicAccessToken}; ` +
+      `Expires=Thu, 18 Dec 2025 12:00:00 GMT; ` +
+      `Path=/; ` +
+      `Domain=.react-note-app.com; ` +
+      `SameSite=Lax`;
 
-    localStorage.setItem('preferences', JSON.stringify({ isDarkTheme: true, isTwoPhaseAuth: false }));
-    sessionStorage.setItem('editModalUnsavedData', JSON.stringify({ id: 54, title: 'Tomorrow Todo List', description: 'Complete Front-end debugging knowledge' }));
+    localStorage.setItem('rna_preferences', JSON.stringify({
+      language: 'English',
+      isDarkTheme: true,
+      isTwoPhaseAuth: false,
+      numberOfItemsInPage: 9,
+      numberOfItemsInDashboard: 5,
+      gridType: 'thumbnailView'
+    }));
+
+    sessionStorage.setItem('rna_add_modal_unsaved_data', JSON.stringify({ title: 'Dec 17: Todo List', description: 'Complete Front-end debugging handbook' }));
+    sessionStorage.setItem('rna_edit_modal_unsaved_data', JSON.stringify({ id: 54, title: 'DIY Cat Toys', description: '- Yarn balls\\n- Cardboard scratchers\\n- Feather wands\\n- Crumpled paper balls\\n- Any empty box or bag :)' }));
   }
 
   useEffect(() => {
