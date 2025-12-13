@@ -26,7 +26,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="light-theme">
       <head>
-        <title>My Page Notes</title>
+        <title>My Notes</title>
+        <link rel="manifest" href="/manifest.json" />
         {/* Load script in a blocking way (simulate performance leak) */}
         {/*<Script src="/assets/icons/heavy-analytics-script.js" strategy="beforeInteractive" />*/}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}

@@ -1,0 +1,41 @@
+{
+  "name": "My-note.app - Private Offline Notes",
+  "short_name": "My-notes.app",
+  "description": "Personal notes dashboard with fast filtering and private storage in your own browser via IndexedDB. Add, edit, and remove notes even when you're offline.",
+  "lang": "en",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#D26000",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "assets/images/my-notes-logo.png",
+      "sizes": "356x116",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Open notes",
+      "short_name": "Notes",
+      "description": "Jump straight to your notes list with filters.",
+      "url": "/notes",
+      "icons": [
+        {
+          "src": "assets/images/my-notes-logo.png",
+          "sizes": "356x116",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "New note",
+      "short_name": "New note",
+      "description": "Quickly create a new note in your browser.",
+      "url": "/notes/new"
+    }
+  ]
+}
