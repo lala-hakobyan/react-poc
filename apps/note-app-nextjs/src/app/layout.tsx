@@ -25,6 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light-theme">
+      <head>
+        <title>My Notes</title>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
