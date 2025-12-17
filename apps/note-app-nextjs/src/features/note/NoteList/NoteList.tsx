@@ -134,7 +134,8 @@ export  default function NoteList() {
       `Expires=Thu, 18 Dec 2025 12:00:00 GMT; ` +
       `Path=/; ` +
       `Domain=.react-note-app.com; ` +
-      `SameSite=Lax`;
+      `SameSite=Strict;` +
+      `Secure`;
 
     localStorage.setItem('rna_preferences', JSON.stringify({
       language: 'English',

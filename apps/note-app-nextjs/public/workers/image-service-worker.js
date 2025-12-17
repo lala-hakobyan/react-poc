@@ -47,3 +47,32 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
+
+self.addEventListener('push', event => {
+  // Defaults
+  let title = 'Push Message: Title';
+  let options = {
+    body: 'Push Message: Default body text'
+  };
+
+  // Guard: Check if notification permission was granted
+  // In real scenarios you may need to ask for permission to user and wait for permission to be given.
+  if (Notification.permission !== 'granted') {
+    console.warn('[Service Worker] Notification permission not granted');
+    return;
+  }
+
+  // Guard: payload may be missing
+  if (event.data) {
+    try {
+      options.body = event.data.text();
+    } catch (e) {
+      console.error('Error reading push data:', e);
+    }
+  }
+
+  // 4. Show notification
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+  );
+});

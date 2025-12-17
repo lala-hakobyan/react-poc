@@ -29,8 +29,8 @@ export default function Header() {
             <Link
               className={
                 pathname === '/notes'
-                  ? `${styles.header__navListItemLink} ${styles.header__navListItemLinkActive}`
-                  : `${styles.header__navListItemLink}`
+                  ? `${styles.header__navListItemLink} ${styles.header__navListItemLinkActive} prerender`
+                  : `${styles.header__navListItemLink} prerender`
               }
               href="/notes">
                             My Notes
@@ -40,8 +40,8 @@ export default function Header() {
             <Link
               className={
                 pathname === '/contact'
-                  ? `${styles.header__navListItemLink} ${styles.header__navListItemLinkActive}`
-                  : `${styles.header__navListItemLink}`
+                  ? `${styles.header__navListItemLink} ${styles.header__navListItemLinkActive} prefetch prerender-hover`
+                  : `${styles.header__navListItemLink} prefetch prerender-hover`
               }
               href="/contact">
                             Contact

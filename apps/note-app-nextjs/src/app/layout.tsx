@@ -32,6 +32,28 @@ export default function RootLayout({
         {/*<Script src="/assets/icons/heavy-analytics-script.js" strategy="beforeInteractive" />*/}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         { <script src="/assets/js/heavy-analytics-script.js" /> }
+
+        <script type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              prerender: [
+                {
+                  where: { selector_matches: '.prerender' },
+                  eagerness: 'immediate' // "immediate" for page load or "moderate" (on hover)
+                },
+                {
+                  where: { selector_matches: '.prerender-hover' },
+                  eagerness: 'moderate' // "immediate" for page load or "moderate" (on hover)
+                }
+              ],
+              prefetch: [{
+                where: { selector_matches: '.prefetch' },
+                eagerness: 'immediate'
+              }]
+            }),
+          }}
+        />
+
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
