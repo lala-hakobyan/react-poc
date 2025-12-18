@@ -23,7 +23,7 @@ export  default function NoteList() {
   const initializedRef = useRef(false);
 
   const loadMoreAction = () => {
-    notesListState.fetchNotes(notesListState.notes.length, 9, 'set_load_more');
+    notesListState.fetchNotes(notesListState.notes.length, 9, 'myNotesLoadMore','set_load_more');
   }
 
   useEffect(() => {

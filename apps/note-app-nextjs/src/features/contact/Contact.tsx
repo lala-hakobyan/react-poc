@@ -24,7 +24,12 @@ export  default function Contact() {
       contactFormContract.resetForm();
       setContactFormStatus({ ...contactFormStatus, ...{ isSuccess: true, isLoading: false } })
     } catch(error) {
-      loggerService.logMessage('sendMessage', 'error', error);
+      loggerService.log({
+        type: 'error',
+        context: 'contact',
+        messageType: 'sendMessage'
+      }, null, error as Error);
+
       setContactFormStatus({ ...contactFormStatus, ...{ isError: true, isLoading: false } })
     }
   }

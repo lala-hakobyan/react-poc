@@ -1,3 +1,5 @@
+import { LogContext, LogMessageType } from '@/types/logMessage.types';
+
 export const LogMessagesConstants = Object.freeze({
   notes: {
     fetchError: 'Error occurred while fetching notes.',
@@ -11,4 +13,19 @@ export const LogMessagesConstants = Object.freeze({
   global: {
     internalServerError: 'Internal server error'
   }
+});
+
+export const LogMessageTypeMapping: Record<LogMessageType, string> = Object.freeze({
+  'fetchNotes': 'Fetch Notes',
+  'addNote': 'Add Note',
+  'editNote': 'Edit Note',
+  'deleteNote': 'Delete Note',
+  'sendMessage': 'Send Message',
+})
+
+export const LogMessageContextMapping: Record<LogContext, string> = Object.freeze({
+  'dashboard': 'Dashboard',
+  'myNotes': 'My Notes',
+  'myNotesLoadMore': 'My Notes: Load More',
+  'contact': 'Contact'
 });

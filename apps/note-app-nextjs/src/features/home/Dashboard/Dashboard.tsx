@@ -21,8 +21,13 @@ export default function Dashboard() {
         const data = await notesApiService.fetchNotes(0, recentNotesSizeConfig);
         setNotes(data);
         setIsLoading(false);
-      } catch(error) {
-        loggerService.logMessage('fetchNotes', 'error', error);
+      } catch(error: unknown) {
+        loggerService.log({
+          type: 'error',
+          context: 'dashboard',
+          messageType: 'fetchNotes'
+        }, null, error as Error);
+
         setIsLoading(false);
       }
     }

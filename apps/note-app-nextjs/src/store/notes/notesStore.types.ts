@@ -1,4 +1,5 @@
 import { FetchNotesAction, Note } from '@/types/note.types';
+import { LogContext } from '@/types/logMessage.types';
 
 export type ActionStatus = {
   success: boolean;
@@ -11,7 +12,7 @@ export type NotesListSlice = {
   isNotesError: boolean,
   isLoadMoreNotesError: boolean,
   resetNotes: () => void,
-  fetchNotes: (offset?: number, limit?: number, type?: FetchNotesAction) => Promise<ActionStatus>,
+  fetchNotes: (offset?: number, limit?: number, context?: LogContext, type?: FetchNotesAction) => Promise<ActionStatus>,
 }
 
 export type AddEditNoteSlice = {

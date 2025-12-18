@@ -20,10 +20,7 @@ class NotesApiService {
       }
     });
 
-
-    if(!response.ok) {
-      throw new Error(LogMessagesConstants.notes.fetchError);
-    }
+    await this.handleError(response, LogMessagesConstants.notes.fetchError);
 
     return response.json();
   }
@@ -39,9 +36,7 @@ class NotesApiService {
       body: JSON.stringify(note)
     });
 
-    if(!response.ok) {
-      throw new Error(LogMessagesConstants.notes.addError);
-    }
+    await this.handleError(response, LogMessagesConstants.notes.addError);
 
     return response.json();
   }
@@ -57,9 +52,7 @@ class NotesApiService {
       body: JSON.stringify(note)
     })
 
-    if (!response.ok) {
-      throw new Error(LogMessagesConstants.notes.editError);
-    }
+    await this.handleError(response, LogMessagesConstants.notes.editError);
 
     return response.json();
   }
@@ -69,16 +62,26 @@ class NotesApiService {
       method: 'DELETE',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.testAccessToken}`
+        'Content-Type': 'application/json'
       }
     })
 
-    const data = await response.json();
+    await this.handleError(response, LogMessagesConstants.notes.deleteError);
+  }
 
+  private async handleError(response: Response, errorText: string) {
     if(!response.ok) {
-      let errorMessage = LogMessagesConstants.notes.deleteError;
-      errorMessage = data.error ? errorMessage + ' ' + data.error : errorMessage;
+      let errorData;
+      let errorMessage = response.status + ' ' + errorText;
+
+      try {
+        errorData = await response.json();
+      } catch (err) {
+        // backend might not return JSON
+        throw new Error(errorMessage);
+      }
+
+      errorMessage = errorData?.error ? errorMessage + ' ' + errorData.error : errorMessage;
       throw new Error(errorMessage);
     }
   }
