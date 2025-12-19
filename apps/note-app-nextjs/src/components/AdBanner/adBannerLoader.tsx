@@ -4,7 +4,7 @@ import Image from 'next/image';
 export function AdBannerLoader() {
   return (
     <figure className={styles.adBanner__imageWrapper}>
-      <Image src={'/assets/images/banner-loading.png'}
+      <Image src={'/assets/images/ad-banner-loading.png'}
         className={styles['adBanner__imageWrapper-img']}
         fill
         sizes="100vw"
