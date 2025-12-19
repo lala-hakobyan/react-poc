@@ -16,7 +16,7 @@ export const createNotesListSlice = (set: StoreApi<NotesStore>['setState']): Not
     set({ notes: [] })
   },
 
-  fetchNotes: async (offset = 0, limit = 9, type: FetchNotesAction = 'set_init') => {
+  fetchNotes: async (offset = 0, limit = 9, context = 'myNotes', type: FetchNotesAction = 'set_init') => {
     const isLoadingKey = type === 'set_load_more' ? 'isLoadMoreNotesLoading' : 'isNotesLoading';
     const isErrorKey = type === 'set_load_more'? 'isLoadMoreNotesError' : 'isNotesError';
 
@@ -35,7 +35,12 @@ export const createNotesListSlice = (set: StoreApi<NotesStore>['setState']): Not
       return { success: true };
     } catch(error: unknown) {
       set({ [isLoadingKey]: false, [isErrorKey]: true });
-      loggerService.logMessage('fetchNotes','error', error);
+      loggerService.log({
+        type: 'error',
+        context: context,
+        messageType: 'fetchNotes'
+      }, null, error as Error);
+
       return { success: false };
     }
   },

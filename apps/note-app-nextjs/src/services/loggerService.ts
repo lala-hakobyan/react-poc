@@ -1,4 +1,5 @@
-import { LogMessageType, LogType } from '@/types/logMessage.types';
+import { LogInfo } from '@/types/logMessage.types';
+import { LogMessageContextMapping, LogMessageTypeMapping } from '@/constants/logMessages.constants';
 
 /**
  * This is a singleton service which handles logging functionality
@@ -7,39 +8,38 @@ import { LogMessageType, LogType } from '@/types/logMessage.types';
 class LoggerService {
   private static instance: LoggerService;
 
-  private readonly logMessageTypeMapping = {
-    'fetchNotes': 'Fetch Notes',
-    'addNote': 'Add Note',
-    'editNote': 'Edit Note',
-    'deleteNote': 'Delete Note',
-    'sendMessage': 'Send Message',
-  }
+  private constructor() {}
 
-  public logMessage(logMessageType: LogMessageType, logType: LogType = 'error', details?: unknown) {
-    let messageDetails = '';
-    const message = this.logMessageTypeMapping[logMessageType];
+  public log(logInfo: LogInfo,  messageDetails?: string | null, error?: Error | null) {
+    const type = LogMessageTypeMapping[logInfo.messageType];
+    const context = LogMessageContextMapping[logInfo.context];
 
-    console.log('details', details);
+    const finalMessage = messageDetails ? `${context}: ${type}: ${messageDetails}:` : `${context}: ${type}:`;
 
-    if(details) {
-      messageDetails = details instanceof Error ? details.message : String(details);
-    }
-
-    switch (logType) {
-      case 'error':
-        console.error(`${message}:`, messageDetails);
-        break;
+    switch (logInfo.type) {
       case 'info':
-        console.info(`${message}:`, messageDetails);
+        console.info(finalMessage);
+        // Send specific context to monitoring platform
+        // datadogLogs.logger.info(finalMessage, {context})
         break;
-      case 'warning':
-        console.warn(`${message}:`, messageDetails);
+      case 'warn':
+        console.warn(finalMessage);
+        // Send specific context to monitoring platform
+        // datadogLogs.logger.warn(finalMessage, {context})
         break;
+      case 'error':
       default:
-        console.error(`${message}:`, messageDetails);
+        if(error) {
+          console.error(finalMessage, error);
+          // Send specific context to monitoring platform
+          // datadogLogs.logger.error(finalMessage, {context}, error);
+        } else {
+          console.error(finalMessage);
+          // Send specific context to monitoring platform
+          // datadogLogs.logger.error(finalMessage, {context});
+        }
         break;
     }
-
   }
 
   public static getInstance() {

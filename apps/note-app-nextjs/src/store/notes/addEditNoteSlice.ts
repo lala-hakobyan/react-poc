@@ -37,9 +37,13 @@ export const createAddEditNoteSlice = (set: StoreApi<NotesStore>['setState']): A
 
       return { success: true };
     } catch(error: unknown) {
-
       set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
-      loggerService.logMessage('addNote', 'error', error);
+
+      loggerService.log({
+        type: 'error',
+        context: 'myNotes',
+        messageType: 'addNote'
+      }, null, error as Error);
 
       return { success: false };
     }
@@ -63,7 +67,12 @@ export const createAddEditNoteSlice = (set: StoreApi<NotesStore>['setState']): A
       return { success: true };
     } catch(error: unknown) {
       set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
-      loggerService.logMessage('editNote', 'error', error);
+
+      loggerService.log({
+        type: 'error',
+        context: 'myNotes',
+        messageType: 'editNote'
+      }, null, error as Error);
 
       return { success: false };
     }

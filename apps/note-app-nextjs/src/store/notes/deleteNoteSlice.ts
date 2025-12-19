@@ -37,7 +37,12 @@ export const createDeleteNoteSlice = (set: StoreApi<NotesStore>['setState']): De
     }
     catch(error: unknown) {
       set({ isNoteDeleteLoading: false, isNoteDeleteError: true });
-      loggerService.logMessage('deleteNote', 'error', error);
+
+      loggerService.log({
+        type: 'error',
+        context: 'myNotes',
+        messageType: 'deleteNote'
+      }, null, error as Error);
 
       return { success: false };
     }

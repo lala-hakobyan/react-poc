@@ -20,10 +20,7 @@ class NotesApiService {
       }
     });
 
-
-    if(!response.ok) {
-      throw new Error(LogMessagesConstants.notes.fetchError);
-    }
+    await this.handleError(response, LogMessagesConstants.notes.fetchError);
 
     return response.json();
   }
@@ -39,9 +36,7 @@ class NotesApiService {
       body: JSON.stringify(note)
     });
 
-    if(!response.ok) {
-      throw new Error(LogMessagesConstants.notes.addError);
-    }
+    await this.handleError(response, LogMessagesConstants.notes.addError);
 
     return response.json();
   }
@@ -57,9 +52,7 @@ class NotesApiService {
       body: JSON.stringify(note)
     })
 
-    if (!response.ok) {
-      throw new Error(LogMessagesConstants.notes.editError);
-    }
+    await this.handleError(response, LogMessagesConstants.notes.editError);
 
     return response.json();
   }
@@ -70,16 +63,21 @@ class NotesApiService {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.testAccessToken}`
+        'Authorization': `Bearer ${this.testAccessToken}`,
       }
     })
 
+    await this.handleError(response, LogMessagesConstants.notes.deleteError);
+  }
+
+  private async handleError(response: Response, errorText: string) {
     if(!response.ok) {
       let errorData;
-      let errorMessage = response.status + ' ' + LogMessagesConstants.notes.deleteError;
+      let errorMessage = response.status + ' ' + errorText;
 
       try {
         errorData = await response.json();
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         // backend might not return JSON
         throw new Error(errorMessage);

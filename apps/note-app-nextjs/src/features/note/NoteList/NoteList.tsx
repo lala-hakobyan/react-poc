@@ -28,7 +28,7 @@ export  default function NoteList() {
       detail: 'Load more: loading 9 notes.',
     });
 
-    notesListState.fetchNotes(notesListState.notes.length, 9, 'set_load_more').then(() => {
+    notesListState.fetchNotes(notesListState.notes.length, 9, 'myNotesLoadMore', 'set_load_more').then(() => {
       performance.mark('load-more-ended', {
         detail: 'Load more: loaded 9 notes.',
       });
