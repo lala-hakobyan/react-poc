@@ -66,6 +66,10 @@ app.post('/api/messages/error', authMiddleware, (req, res) => {
   setTimeout(() => res.status(200).send({ success: true }), 1000);
 })
 
+app.get('/api/banners/ad', authMiddleware, (req, res) => {
+  setTimeout(() => res.json('/assets/images/fe-debugging-handbook-ad-banner.png'), 1000);
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

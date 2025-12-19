@@ -1,0 +1,25 @@
+.adBanner {
+  //max-height: 400px;
+  //overflow: hidden;
+  width: 100%;
+
+
+  &__loader {
+    height: 400px;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__imageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3.75 / 1;
+    height: auto;
+    margin: auto;
+
+    &-img {
+      object-fit: cover;
+    }
+  }
+
+}
