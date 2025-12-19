@@ -62,7 +62,8 @@ class NotesApiService {
       method: 'DELETE',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.testAccessToken}`,
       }
     })
 
@@ -76,6 +77,7 @@ class NotesApiService {
 
       try {
         errorData = await response.json();
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         // backend might not return JSON
         throw new Error(errorMessage);
