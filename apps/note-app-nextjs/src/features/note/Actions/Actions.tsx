@@ -7,8 +7,10 @@ import { useShallow } from 'zustand/react/shallow';
 import Icon from '@/components/Icon/Icon';
 import { Profiler } from 'react';
 
-function onRender(id: string, phase: unknown, actualDuration: number, baseDuration: number, startTime: number, commitTime: number) {
-  const slowThreshold = 16; // ms
+type ProfilerPhase = 'mount' | 'update' | 'nested-update';
+
+function onRender(id: string, phase: ProfilerPhase, actualDuration: number, baseDuration: number, startTime: number, commitTime: number): void {
+  const slowThreshold = 1; // ms
   if (actualDuration > slowThreshold) {
     console.warn(`[Profiler][${id}] ${phase} render took ${actualDuration.toFixed(2)}ms`, {
       baseDuration: baseDuration.toFixed(2),
@@ -19,7 +21,7 @@ function onRender(id: string, phase: unknown, actualDuration: number, baseDurati
 }
 
 export default function Actions() {
-  const { setIsAddEditModalOpen, isAddEditModalOpen, isDeleteModalOpen } = useNotesStore(useShallow((state) => ({
+  const { setIsAddEditModalOpen, isAddEditModalOpen } = useNotesStore(useShallow((state) => ({
     setIsAddEditModalOpen: state.setIsAddEditModalOpen,
     isAddEditModalOpen: state.isAddEditModalOpen,
     isDeleteModalOpen: state.isDeleteModalOpen,
