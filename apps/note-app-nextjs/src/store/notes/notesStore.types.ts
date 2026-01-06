@@ -1,5 +1,6 @@
 import { FetchNotesAction, Note } from '@/types/note.types';
 import { LogContext } from '@/types/logMessage.types';
+import { StateCreator } from 'zustand';
 
 export type ActionStatus = {
   success: boolean;
@@ -39,3 +40,10 @@ export type DeleteNoteSlice = {
 }
 
 export type NotesStore = NotesListSlice & AddEditNoteSlice & DeleteNoteSlice;
+
+export type NotesSlice<T> = StateCreator<
+  NotesStore,
+  [['zustand/devtools', never]],
+  [],
+  T
+>

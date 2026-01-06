@@ -1,11 +1,11 @@
 import { StoreApi } from 'zustand/index';
-import { NotesListSlice, NotesStore } from '@/store/notes/notesStore.types';
+import {NotesListSlice, NotesSlice, NotesStore} from '@/store/notes/notesStore.types';
 import { FetchNotesAction } from '@/types/note.types';
 import notesApiService from '@/services/notesApiService';
 import loggerService from '@/services/loggerService';
 import notesCacheService from '@/services/notesCacheService';
 
-export const createNotesListSlice = (set: StoreApi<NotesStore>['setState']): NotesListSlice => ({
+export const createNotesListSlice: NotesSlice<NotesListSlice> = (set: StoreApi<NotesStore>['setState']): NotesListSlice => ({
   notes: [],
   isNotesLoading: true,
   isLoadMoreNotesLoading: false,
