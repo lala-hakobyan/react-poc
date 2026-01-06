@@ -11,6 +11,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { NotesStore } from '@/store/notes/notesStore.types';
 import { NoteCard } from '@/components/NoteCard/NoteCard';
 import DeleteNote from '@/features/note/DeleteNote/DeleteNote';
+import { getAllVersions, getCompatibleVersions } from 'baseline-browser-mapping';
 
 export  default function NoteList() {
   const notesListState = useNotesStore(useShallow(selectNotesListSlice));
@@ -150,6 +151,11 @@ export  default function NoteList() {
     sessionStorage.setItem('rna_edit_modal_unsaved_data', JSON.stringify({ id: 54, title: 'DIY Cat Toys', description: '- Yarn balls\\n- Cardboard scratchers\\n- Feather wands\\n- Crumpled paper balls\\n- Any empty box or bag :)' }));
   }
 
+  const getBrowserCompatibilityInfo = () => {
+    console.log('Widely available baseline', getCompatibleVersions());
+    console.log('Baseline feature set support of all browser versions',  getAllVersions());
+  }
+
   useEffect(() => {
     if(!initializedRef.current) {
       notesListState.resetNotes();
@@ -158,6 +164,7 @@ export  default function NoteList() {
     }
 
     addAppTestData();
+    getBrowserCompatibilityInfo();
 
   }, [notesListState, notesListState.fetchNotes, notesListState.resetNotes]);
 
