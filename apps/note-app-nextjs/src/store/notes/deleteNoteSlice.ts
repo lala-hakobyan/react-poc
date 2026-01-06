@@ -1,10 +1,10 @@
 import { StoreApi } from 'zustand/index';
-import { DeleteNoteSlice, NotesStore } from '@/store/notes/notesStore.types';
+import {DeleteNoteSlice, NotesSlice, NotesStore} from '@/store/notes/notesStore.types';
 import { Note } from '@/types/note.types';
 import notesApiService from '@/services/notesApiService';
 import loggerService from '@/services/loggerService';
 
-export const createDeleteNoteSlice = (set: StoreApi<NotesStore>['setState']): DeleteNoteSlice => ({
+export const createDeleteNoteSlice: NotesSlice<DeleteNoteSlice> = (set: StoreApi<NotesStore>['setState']): DeleteNoteSlice => ({
   isDeleteModalOpen: false,
 
   currentDeleteNote: null,

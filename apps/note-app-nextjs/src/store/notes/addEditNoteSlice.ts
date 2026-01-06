@@ -1,10 +1,10 @@
 import { StoreApi } from 'zustand/index';
-import { ActionStatus, AddEditNoteSlice, NotesStore } from '@/store/notes/notesStore.types';
+import { ActionStatus, AddEditNoteSlice, NotesSlice, NotesStore } from '@/store/notes/notesStore.types';
 import { Note } from '@/types/note.types';
 import notesApiService from '@/services/notesApiService';
 import loggerService from '@/services/loggerService';
 
-export const createAddEditNoteSlice = (set: StoreApi<NotesStore>['setState']): AddEditNoteSlice => ({
+export const createAddEditNoteSlice: NotesSlice<AddEditNoteSlice> = (set: StoreApi<NotesStore>['setState']): AddEditNoteSlice => ({
   isAddEditModalOpen: false,
 
   currentEditNote: null,
