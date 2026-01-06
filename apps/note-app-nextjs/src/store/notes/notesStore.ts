@@ -3,12 +3,21 @@ import { NotesStore } from '@/store/notes/notesStore.types';
 import { createNotesListSlice } from '@/store/notes/notesListSlice';
 import { createAddEditNoteSlice } from '@/store/notes/addEditNoteSlice';
 import { createDeleteNoteSlice } from '@/store/notes/deleteNoteSlice';
+import { devtools } from 'zustand/middleware';
 
-export const useNotesStore = create((set: StoreApi<NotesStore>['setState']) => ({
-  ...createDeleteNoteSlice(set),
-  ...createAddEditNoteSlice(set),
-  ...createNotesListSlice(set)
-}))
+export const useNotesStore = create(
+  devtools((set: StoreApi<NotesStore>['setState']) => ({
+    ...createDeleteNoteSlice(set),
+    ...createAddEditNoteSlice(set),
+    ...createNotesListSlice(set)
+  }),
+  {
+    name: 'NotesStore',
+    trace: true,
+    enabled: typeof window !== 'undefined'
+  }
+  )
+)
 
 export const selectAddEditNoteSlice = (state: NotesStore) => ({
   currentEditNote: state.currentEditNote,
