@@ -24,7 +24,7 @@ export class ProxyRequestService {
         backendUrl.searchParams.set(key, value);
       });
 
-      // Forward headers (important: cookies, authorization, etc.)
+      // Forward response Headers (important: cookies, authorization, etc.)
       const headers = new Headers(req.headers);
 
       if (req.method === 'GET' || req.method === 'HEAD') {
@@ -53,12 +53,17 @@ export class ProxyRequestService {
       }
 
       const responseBody = await response.text();
+      // Forward request Headers (important: ETag, etc.)
+      const responseHeaders = new Headers(response.headers);
+
+      responseHeaders.set(
+        'content-type',
+        response.headers.get('content-type') ?? 'text/plain'
+      );
 
       return new NextResponse(responseBody, {
         status: response.status,
-        headers: {
-          'content-type': response.headers.get('content-type') || 'text/plain',
-        },
+        headers: responseHeaders
       });
     } catch (err: unknown) {
       let message = LogMessagesConstants.global.internalServerError;
