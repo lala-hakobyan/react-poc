@@ -127,12 +127,22 @@ export  default function NoteList() {
   const addAppTestData = () => {
     const publicAccessToken = process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN;
 
-    document.cookie = 'rna_tracking_id=550e8400-e29b-41d4-a716-446655440000; Expires=Thu, 18 Dec 2025 12:00:00 GMT; Path=/; Domain=.react-note-app.com; SameSite=Lax';
+    document.cookie = 'rna_tracking_id=550e8400-e29b-41d4-a716-446655440000; Expires=Thu, 22 Jan 2026 12:00:00 GMT; Path=/; Domain=.react-note-app.com; SameSite=Lax; Secure';
+
+    const csrfToken = 'd9428888-1d2a-47f8-b5c6-993475730b21';
+
+    document.cookie =
+      `rna_csrf_token=${csrfToken}; ` +
+      `Expires=Thu, 22 Jan 2026 12:00:00 GMT; ` +
+      `Path=/; ` +
+      `Domain=.react-note-app.com; ` +
+      `SameSite=Strict;` +
+      `Secure`;
 
     // Domain=.react-note-app.com → sent to local.react-note-app.com, app.react-note-app.com, etc.
     document.cookie =
       `rna_access_token=${publicAccessToken}; ` +
-      `Expires=Thu, 18 Dec 2025 12:00:00 GMT; ` +
+      `Expires=Thu, 22 Jan 2026 12:00:00 GMT; ` +
       `Path=/; ` +
       `Domain=.react-note-app.com; ` +
       `SameSite=Strict;` +
