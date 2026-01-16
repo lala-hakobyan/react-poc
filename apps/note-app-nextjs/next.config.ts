@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
             // 1 minute for API requests
             value: 'public, max-age=60, must-revalidate',
           },
+          { key: 'Access-Control-Allow-Origin',
+            value: 'http://local.react-note-app.com'
+          },
         ],
       },
     ];
