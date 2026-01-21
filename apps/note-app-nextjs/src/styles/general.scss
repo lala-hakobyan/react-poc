@@ -52,7 +52,8 @@ textarea, input {
   font-family: var(--font-geist-sans), var(--font-geist-mono), sans-serif, monospace;
 }
 
-/** Example of Melting text animation that can be used for titles **/
+/** ------- Animations ------- **/
+/** Melting text animation that can be used for titles **/
 /** Usage example in JSX: <div className="melting-text-container"><h1 className="melting-text">{title}</h1></div> **/
 .melting-text-container {
   position: relative;
@@ -110,6 +111,27 @@ textarea, input {
   50% {
     transform: scaleY(1.5);
     opacity: 0.7;
+  }
+}
+
+/** Bouncing box animation that can be used for titles **/
+.animated-box {
+  background-color: #EC7724;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 5px;
+  box-shadow: 13px 10px 17px 0 rgba(0, 0, 0, 0.75);
+  animation: move 3s ease infinite;
+  z-index: 3000;
+}
+
+@keyframes move {
+  50% {
+    top: calc(90vh - 160px);
+    left: calc(90vw - 200px);
   }
 }
 

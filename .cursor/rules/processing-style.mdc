@@ -1,0 +1,5 @@
+---
+globs:
+alwaysApply: true
+---
+- Each time when a specific task is given, don't overstep from your role. Always ask to confirm next steps before processing.
