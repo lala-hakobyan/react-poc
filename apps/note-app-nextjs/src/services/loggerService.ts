@@ -10,6 +10,10 @@ class LoggerService {
 
   private constructor() {}
 
+  /**
+   * Logs message in the Console
+   * And sends log message with specific context to monitoring platform
+   */
   public log(logInfo: LogInfo,  messageDetails?: string | null, error?: Error | null) {
     const type = LogMessageTypeMapping[logInfo.messageType];
     const context = LogMessageContextMapping[logInfo.context];
