@@ -6,7 +6,7 @@ export default function PageTitle({ title }: {title: string}) {
     //   <span className={'melting-text'}>{title}</span>
     // </h1>
     <>
-      <div className="animated-box"></div>
+      {/*<div className="animated-box"></div>*/}
       <h1 className={styles['pageTitle']}>{title}</h1>
     </>
     // <h1 className={styles['pageTitle']}>{title}</h1>

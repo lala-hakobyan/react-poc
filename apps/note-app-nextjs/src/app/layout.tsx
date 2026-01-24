@@ -32,6 +32,8 @@ export default function RootLayout({
         {/*<Script src="/assets/icons/heavy-analytics-script.js" strategy="beforeInteractive" />*/}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         { <script src="/assets/js/heavy-analytics-script.js" /> }
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossOrigin="anonymous" />
 
         <script type="speculationrules"
           dangerouslySetInnerHTML={{

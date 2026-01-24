@@ -3,18 +3,27 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  allowedDevOrigins: ['local.react-note-app.com'],
+  allowedDevOrigins: ['local.react-note-app.com', 'local.react-app.com'],
   productionBrowserSourceMaps: true,
   async headers() {
     return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.note-app-domain.com; style-src 'self' 'unsafe-inline' https://cdn.note-app-domain.com; img-src 'self' blob: data: https://cdn.note-app-domain.com;",
+          },
+        ],
+      },
       {
         source: '/:all*(svg|jpg|png|css|js)',
         headers: [
           {
             key: 'Cache-Control',
             // 30 days for static assets
-            value: 'public, max-age=2592000, must-revalidate',
-          },
+            value: 'public, max-age=31536000, immutable',
+          }
         ],
       },
       {
@@ -27,18 +36,18 @@ const nextConfig: NextConfig = {
           {
             key: 'Cache-Control',
             // 1 minute for API requests
-            value: 'public, max-age=60, must-revalidate',
+            value: 'private, no-cache',
           },
           {
             key: 'Last-Modified',
             value: new Date().toUTCString(), // Set at build time
           },
           { key: 'Access-Control-Allow-Origin',
-            value: 'http://local.react-note-app.com'
+            value: 'http://local.react-note-app.com:3000'
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' blob: data: https:;",
+            value: "default-src 'none'; frame-ancestors 'none';",
           },
         ],
       },
