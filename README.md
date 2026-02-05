@@ -1,2 +1,2 @@
 # react-poc
-React POC Project - a starter skeleton designed to reflect best practices in modern React development. This project serves as a foundation for real-world apps and is also intended for benchmarking performance, maintainability, and architectural clarity.
+A collection of React POC starter projects designed to reflect best practices in modern React development. The projects are intended for experimenting and debugging React features and frameworks, benchmarking performance and creating maintainable, scalable architecture POCs as a foundation for real production apps.
