@@ -1,5 +1,5 @@
 # React Todo POC App with Vite
-A lightweight React POC Todo app to experiment with Redux library.
+A lightweight React POC Todo application to experiment with Redux library.
 
 ## Compatibility
 The project is compatible with the following technology versions:
