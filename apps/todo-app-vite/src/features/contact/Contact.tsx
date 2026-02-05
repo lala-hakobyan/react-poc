@@ -8,7 +8,7 @@ export default function Contact() {
 
         <div>
             <h3>Open an issue on Github</h3>
-            <p>Github Issues Tab: <a href="https://github.com/lala-hakobyan/todo-app-vite/issues">https://github.com/lala-hakobyan/todo-app-vite/issues</a></p>
+            <p>Github Issues Tab: <a href="https://github.com/lala-hakobyan/todo-app-vite/issues">github.com/lala-hakobyan/react-poc/issues</a></p>
         </div>
 
         <div>
