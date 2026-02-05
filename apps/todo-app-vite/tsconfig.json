@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    // Controls which JavaScript features TypeScript will down-compile to.
+    "target": "es2020", // Modern syntax, async/await, optional chaining etc.
+    // Controls how modules are imported/exported (i.e., CommonJS vs ESM).
+    "module": "esnext", // Keeps import/export syntax; bundler handles resolution
+    "erasableSyntaxOnly": false
+  }
+}

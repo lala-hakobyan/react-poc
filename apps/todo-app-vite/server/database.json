@@ -1,0 +1,12 @@
+[
+  {
+    "id": "789794654464464",
+    "text": "TODO 1: Finish reviewing the Front-end Debugging Handbook.",
+    "isCompleted": false
+  },
+  {
+    "id": "189794654464464",
+    "text": "TODO 2: Book a call with the PO to discuss the project roadmap.",
+    "isCompleted": true
+  }
+]
