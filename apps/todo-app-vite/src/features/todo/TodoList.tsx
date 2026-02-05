@@ -17,18 +17,20 @@ export default function TodoList() {
      
             <NewTodoForm isOnline={isOnline} />
             {todosAreLoading
-                ? 'Loading...'
+                ? <span className="loading-text">Loading...</span>
                 : (<>
-                    <h3 className="todo-list-subtitle">Incomplete Todos</h3>
-                    {incompleteTodos.map((item: Todo) => (
-                        <TodoListItem todo={item} key={item.id} />
-                    ))}
-
-                    <h3 className="todo-list-subtitle">Completed Todos</h3>
-                    {completedTodos.map((item: Todo) => (
-                        <TodoListItem todo={item} key={item.id} />
-                    ))}
-
+                    <div>
+                        <h3 className="todo-list-subtitle">Incomplete Todos</h3>
+                        {incompleteTodos.map((item: Todo) => (
+                            <TodoListItem todo={item} key={item.id} />
+                        ))}
+                    </div>
+                    <div>
+                        <h3 className="todo-list-subtitle">Completed Todos</h3>
+                        {completedTodos.map((item: Todo) => (
+                            <TodoListItem todo={item} key={item.id} />
+                        ))}
+                    </div>
                    </>)
             }
         </section>

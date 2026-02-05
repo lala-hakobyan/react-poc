@@ -1,3 +1,4 @@
+/** *********** General Styles: Start *********** **/
 * {
   box-sizing: border-box;
   padding: 0;
@@ -20,6 +21,7 @@
 
 html {
   height: 100%;
+  font-size: 10px;
 }
 
 body {
@@ -28,6 +30,7 @@ body {
   padding: 0 0 100px 0;
   min-height: 100%;
   line-height: 1.5;
+  font-size: 1.6rem;
 }
 
 main {
@@ -36,11 +39,13 @@ main {
   padding: 20px;
   text-align: center;
 }
+
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 a {
   color: #43A047;
   font-weight: 500;
@@ -50,10 +55,20 @@ a:hover {
   text-decoration: underline;
 }
 
-/** Typography Styles **/
+input {
+  height: 38px;
+  padding: 0.75rem;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  font-family: inherit;
+}
+/** *********** General Styles: End *********** **/
+
+
+/** *********** Typography Styles: Start *********** **/
 h1 {
   margin: 0;
-  font-size: 2em;
+  font-size: 2.2rem;
   line-height: 1.1;
   color: #43A047;
 }
@@ -73,19 +88,26 @@ p {
 .primary-text {
   color: #43A047;
 }
+/** *********** Typography Styles: End *********** **/
 
+
+/** *********** Button Styles: Start *********** **/
 button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.4em 1.2em;
+  white-space: nowrap;
   height: 38px;
-  font-size: 1em;
+  font-size: 1.6rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #43A047;
   color: #ffffff;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+.btn-danger {
+  background-color: #D32F2F;
 }
 button:hover {
   border-color: #43A047;
@@ -94,16 +116,12 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+/** *********** Button Styles: End *********** **/
 
-input {
-  height: 38px;
-  padding: 0.75rem;
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
-  font-family: inherit;
-}
 
+/** *********** Todo Styles: Start *********** **/
 .todo-card {
+  position: relative;
   border: 1px solid #E0E0E0;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgb(0,0,0,0.1);
@@ -116,28 +134,63 @@ input {
   padding: 20px 0 0 0;
   border-bottom: 1px solid #E0E0E0;
 }
+/** *********** Todo Styles: End *********** **/
 
+
+/** *********** Todo Form Styles: Start *********** **/
+.todo-form {
+  display: inline-block;
+}
 .todo-form-group {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.todo-form-group input {
+  max-width: 400px;
+  width: 100%;
+}
+.input-error {
+  border: 1px solid #D32F2F;
+}
+.error-message {
+  color: #D32F2F;
+  text-align: left;
+}
+/** *********** Todo Form Styles: End *********** **/
 
-/** Header Styles **/
+
+/** *********** Header Styles: Start *********** **/
 .app-header {
   padding: 20px;
-  display: flex;
-  align-items: center;
   border-bottom: 1px solid #E0E0E0;
 }
+.app-header-content {
+  align-items: center;
+  display: flex;
+}
+
 .app-header-title {
+  display: flex;
+  justify-content: center;
   text-align: center;
+  align-items: center;
+}
+
+.app-header-title .logo-icon {
+  margin-right: 10px;
 }
 
 .app-nav {
   display: flex;
   flex-grow: 1;
   justify-content: center;
+}
+.app-nav.app-nav-mobile {
+  margin-top: 10px;
+}
+.app-nav.app-nav-desktop {
+  display: none;
 }
 .app-nav ul {
   margin: 0;
@@ -165,7 +218,6 @@ input {
 .app-header-sync-status {
   margin-left: auto;
   margin-bottom: 0;
-  width: 167px;
   text-align: right;
   color: #43A047;
 }
@@ -174,7 +226,28 @@ input {
   margin: 0;
 }
 
-/** Footer Styles **/
+@media screen and (min-width: 768px) {
+  .app-nav-mobile {
+    display: none;
+  }
+  .app-nav.app-nav-desktop {
+    display: flex;
+  }
+  .app-header-sync-status {
+    width: 167px;
+  }
+  .app-header-title .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .app-header-title .logo-text {
+    font-size: 2.8rem
+  }
+}
+/** *********** Header Styles: End *********** **/
+
+
+/** *********** Footer Styles: Start *********** **/
 .app-footer {
   width: 100%;
   position: absolute;
@@ -187,8 +260,10 @@ input {
 .app-footer p {
   margin: 0;
 }
+/** *********** Footer Styles: End *********** **/
 
-/** Light Mode Styles **/
+
+/** *********** Light Mode Styles *********** **/
 @media (prefers-color-scheme: dark) {
   :root {
     color: rgba(255, 255, 255, 0.87);
@@ -198,3 +273,4 @@ input {
     color: #BDBDBD;
   }
 }
+

@@ -8,26 +8,37 @@ interface IProps {
     $important?: boolean;
 }
 
-const getBackground = ({$important} : IProps) => {
+const showIcon = ({$important} : IProps) => {
     if($important) {
-        return 'background-color: #FFF4E5;';
+        return `
+          display: inline-block;
+          position: absolute;
+          left: 10px;
+          top: 10px;
+          line-height: 15px;
+        `;
+    } else {
+        return 'display: none; ';
     }
 }
 
 const CardContainer = styled.div<IProps>`
     ${props => props.$important && 'background-color: #FFF4E5'};
-    ${getBackground};
+`
+const ImportantIcon = styled.div<IProps>`
+    ${showIcon};
 `
 
 export default function TodoListItem({todo}: TodoListItemParams) {
     const dispatch: Dispatch<any> = useDispatch();
+    const isImportant = todo.text.endsWith('!');
 
     return (
-        <CardContainer className="todo-card" $important={todo.text.endsWith('!')}>
+        <CardContainer className="todo-card" $important={isImportant}>
+            <ImportantIcon className="important-icon" $important={isImportant}>⚠️</ImportantIcon>
             <p><strong>{todo.text}</strong></p>
-            {todo.isCompleted && <p>Complete!</p>}
             {todo.isCompleted
-                ? <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete Item</button>
+                ? <button className="btn-danger" onClick={() => dispatch(deleteTodo(todo.id))}>Delete Item</button>
                 : <button onClick={() => dispatch(markTodoAsCompleted(todo.id))}>Mark as Completed</button>
             }
         </CardContainer>
