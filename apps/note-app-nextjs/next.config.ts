@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.note-app-domain.com; style-src 'self' 'unsafe-inline' https://cdn.note-app-domain.com; img-src 'self' blob: data: https://cdn.note-app-domain.com;",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.note-app-domain.com; style-src 'self' 'unsafe-inline' https://cdn.note-app-domain.com; img-src 'self' blob: data: https://cdn.note-app-domain.com; connect-src 'self' http://localhost:3010 https://note-app-domain.com; ",
           },
         ],
       },
@@ -44,11 +44,7 @@ const nextConfig: NextConfig = {
           },
           { key: 'Access-Control-Allow-Origin',
             value: 'http://local.react-note-app.com:3000'
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: "default-src 'none'; frame-ancestors 'none';",
-          },
+          }
         ],
       },
     ];
