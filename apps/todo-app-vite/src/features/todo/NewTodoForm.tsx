@@ -4,24 +4,37 @@ import {createTodo} from "../../store/thunks";
 
 export default function NewTodoForm({isOnline} = {isOnline: true}) {
     const [inputText, setInputText] = useState('');
-    const dispatch: Dispatch<any>  = useDispatch();
+    const [error, setError] = useState(false);
+    const dispatch: Dispatch<any> = useDispatch();
+    
+    
+    const handleAddTodo = () => {
+        if(inputText.trim() === '') {
+            setError(true);
+            return;
+        } 
+
+        dispatch(createTodo(inputText))
+        setInputText('');
+        setError(false);
+    }
 
     return (
         <div>
-            <form>
+            <form className="todo-form">
+                <p>💡 <strong>Note:</strong> You can add a <strong>!</strong> to the end of a todo to make it important.</p>
+
                 <div className="todo-form-group">
                     <input
                         type="text"
                         name="AddTodo"
                         value={inputText}
+                        className={error ? 'input-error' : ''}
                         onChange={(e) => setInputText(e.target.value)}
                     />
-                    <button type="button" onClick={ () => {
-                        dispatch(createTodo(inputText))
-                        setInputText('');
-                        }
-                    }>{isOnline ? 'Add Todo' : 'Reconnecting...'}</button>
+                    <button type="button" onClick={handleAddTodo}>{isOnline ? 'Add Todo' : 'Reconnecting...'}</button>
                 </div>
+                {error && <p className="error-message">Please enter a todo.</p>}
             </form>
         </div>
     )

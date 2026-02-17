@@ -6,7 +6,10 @@ const app = express();
 const port = 3040;
 
 app.use(cors({
-    origin: 'http://localhost:5173', // allow only this domain
+    origin: [
+      'http://local.react-todo-app.com:4210', // allow only these domains
+      'http://localhost:4210'
+    ],
     credentials: true, // optional: allow cookies/auth headers
 }));
 

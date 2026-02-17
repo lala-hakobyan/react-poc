@@ -17,7 +17,7 @@ export const loadTodos = () => async (dispatch: Dispatch<any>)=> {
 
 export const createTodo = (newTodoText: string) => async (dispatch: Dispatch<any>, getState: any) => {
     try {
-        const response = await axios.post('http://localhost:3040/api/todioos', { text: newTodoText } );
+        const response = await axios.post('http://localhost:3040/api/todos', { text: newTodoText } );
         // const updatedTodos = getState().todos.value.concat(response.data)
         dispatch(todoAdded(response.data));
     } catch(error) {

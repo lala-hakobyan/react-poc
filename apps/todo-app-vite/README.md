@@ -1,54 +1,56 @@
-# React + TypeScript + Vite
+# React Todo POC App with Vite
+A lightweight React POC Todo application to experiment with Redux library.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Compatibility
+The project is compatible with the following technology versions:
+- **react:** `^19.1.0`
+- **Node.js:** `v20+`   
+  This project was tested with **Node.js** `v22.17.0`.
 
-Currently, two official plugins are available:
+## Features and Best Practices
+While this is not a full production ready application, there are several features and best practices you can explore to adapt in your production ready applications:
+- Responsive, mobile first layout
+- Scalable folder structure
+- Redux pattern applied following generic best practices
+  (Please be aware that Redux pattern should not be prefered for this kind of small and simple applications, it is more for complex application which require a complex syncronization between different features).
+- Indicator showing if user is offline/online which is useful when apps support also offline functionality.   
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to Run
 
-## Expanding the ESLint configuration
+### Setup Project Locally
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Follow these steps to set up the project locally:
+- Go to the root of this project, specifically the `apps/todo-app-vite` folder and do `npm install`
+- Open your hosts file and add the following line of code:
+  `127.0.0.1       local.react-todo-app.com`   
+  Below are the hosts file paths for different operating systems: 
+  - **Windows:** `C:\Windows\System32\drivers\etc\hosts`
+  - **macOS / Linux:** `/etc/hosts`
+  This maps your local IP to the custom local host name which will be used when running development server.
+- Make sure you have compatible Node.js version installed. You can use **Node Version Manager (NVM)** to simulate different **Node.js** versions on your machine. Example of compatible Node.js version: `v22.17.0`   
+For the full compatibility information, please check [Compatibility](#compatibility) section.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+After finishing these steps, you can use the commands provided in the section below to run the project. 
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Run Project
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Start a local development server:** `npm run dev`     
+  Once the server is running, open your browser and navigate to `local.react-todo-app.com:4210/`. The application will automatically reload whenever you modify any of the source files.
+- **Start the local API server:**: `npm run server`
+  This runs the local mock APIs required for the application to function. 
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Troubleshooting
+
+### Error: port is already in use
+`Error: listen EADDRINUSE: address already in use :::4210`
+If this happens, you need to find and kill the processes using a specific port (e.g. `4210`). For that, execute these commands in **PowerShell** or **Command Prompt**:
+- Find all processes using port `4210`:
+  - **Windows:** `netstat -ano | findstr :4210`
+  - **Mac / Linux:** `lsof -i :4210`
+- It will return results like these:
+  - **Windows:** `TCP    0.0.0.0:4210     0.0.0.0:0     LISTENING     12345`
+  - **Mac / Linux:** `node    98765   youruser   0u  IPv4  12345678      0t0  TCP *:4210 (LISTEN)`
+- The last number (`12345` or `98765`) is the PID. You need to kill all found PIDs using this command:
+  - **Windows:** `taskkill /PID 12345 /F`
+  - **Mac / Linux:** `kill -9 98765`
+

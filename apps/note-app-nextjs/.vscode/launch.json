@@ -12,10 +12,10 @@
         "type": "chrome",
         "request": "launch",
         "url": "http://local.react-note-app.com:3000",
-        "webRoot": "${workspaceFolder}/apps/note-app-nextjs",
+        "webRoot": "${workspaceFolder}",
         "skipFiles": [
-          "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
-          "${workspaceFolder}/apps/note-app-nextjs/.next/**",
+          "${workspaceFolder}/node_modules/**",
+          "${workspaceFolder}/.next/**",
           "<node_internals>/**"
         ]
       },
@@ -24,9 +24,9 @@
         "type": "node-terminal",
         "request": "launch",
         "command": "npm run server",
-        "cwd": "${workspaceFolder}/apps/note-app-nextjs",
+        "cwd": "${workspaceFolder}",
         "skipFiles": [
-          "${workspaceFolder}/apps/note-app-nextjs/node_modules/**",
+          "${workspaceFolder}/node_modules/**",
           "<node_internals>/**"
         ]
       }

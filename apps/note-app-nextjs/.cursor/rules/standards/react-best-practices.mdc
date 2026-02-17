@@ -1,0 +1,7 @@
+---
+description: React Best Practices & Code Style Guidelines
+globs: "**/*.ts", "**/*.tsx"
+alwaysApply: false
+---
+
+# React Best Practices & Code Style Guidelines

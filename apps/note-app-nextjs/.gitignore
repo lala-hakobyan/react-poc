@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Ignore the contents of .idea, but not the folder itself
+.idea/*
+
+# Allow the runConfigurations directory
+!.idea/runConfigurations/
+
+# If there are files inside runConfigurations you need, ensure they aren't ignored
+!.idea/runConfigurations/**
