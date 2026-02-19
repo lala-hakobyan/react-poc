@@ -5,9 +5,12 @@ import Loader from '@/components/Loader/Loader';
 import { DeleteNoteConstants } from '@/constants/deleteNote.constants';
 import { useShallow } from 'zustand/react/shallow';
 import { ActionStatus } from '@/store/notes/notesStore.types';
+import { useRef } from 'react';
+import { ModalNewHandle } from '@/types/modal.types';
 
 export default function DeleteNote() {
   const deleteNoteState = useNotesStore(useShallow(selectDeleteNoteSlice));
+  const modalRef = useRef<ModalNewHandle>(null);
 
   const deleteAction = async() => {
     let actionStatus: ActionStatus | null = null;
@@ -17,17 +20,23 @@ export default function DeleteNote() {
     }
 
     if(actionStatus?.success) {
-      closeDeleteModal();
+      modalRef.current?.close();
+      resetDeleteModal();
     }
   }
 
-  const closeDeleteModal = () => {
+  const resetDeleteModal = () => {
     deleteNoteState.setCurrentDeleteNote(null, false);
   }
 
-  const closeErrorModal = () => {
+  const resetErrorModal = () => {
     deleteNoteState.setIsNoteDeleteError(false);
-    closeDeleteModal();
+    resetDeleteModal();
+  }
+
+  const closeDeleteModal = () => {
+    resetDeleteModal();
+    modalRef.current?.close();
   }
 
   return (
@@ -36,9 +45,10 @@ export default function DeleteNote() {
 
       {!deleteNoteState.isNoteDeleteError && deleteNoteState.currentDeleteNote &&
         <Modal
+          ref={modalRef}
           isOpen={true}
           title={`Delete Note: ${deleteNoteState.currentDeleteNote?.title}`}
-          onClosed={() => deleteNoteState.setCurrentDeleteNote(null, false)}
+          onClosed={() => resetDeleteModal()}
         >
           <Modal.Body>
             {DeleteNoteConstants.confirmDeleteMessage}
@@ -49,14 +59,14 @@ export default function DeleteNote() {
               onClick={() => deleteAction()}/>
             <Button
               button={{ label: 'No', className: 'ml-xs' }}
-              onClick={() => deleteNoteState.setCurrentDeleteNote(null, false)}
+              onClick={() => closeDeleteModal()}
             />
           </Modal.Footer>
         </Modal>
       }
 
       {deleteNoteState.isNoteDeleteError &&
-        <Modal isOpen={true} title="Error happened" onClosed={closeErrorModal}>
+        <Modal isOpen={true} title="Error happened" onClosed={() => resetErrorModal()}>
           <Modal.Body>
             {DeleteNoteConstants.deleteErrorMessage}
           </Modal.Body>

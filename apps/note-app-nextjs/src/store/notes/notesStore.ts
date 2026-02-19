@@ -46,5 +46,6 @@ export const selectNotesListSlice = (state: NotesStore) => ({
   isNotesError: state.isNotesError,
   isLoadMoreNotesError: state.isLoadMoreNotesError,
   resetNotes: state.resetNotes,
-  fetchNotes: state.fetchNotes
+  fetchNotes: state.fetchNotes,
+  fetchNotesOffline: state.fetchNotesOffline,
 });

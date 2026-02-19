@@ -51,11 +51,3 @@ If this happens, you can run you can do the following:
    ```TCP    0.0.0.0:3000     0.0.0.0:0     LISTENING     12345```
    - That last number (12345) is the PID (process ID). Kill it:
     ```taskkill /PID 12345 /F```
-
-## Author
-If you found resource valuable, consider **starring the GitHub repository** or **sharing the project link** with your teammates to help more people discover it:
-<span><img src="https://cdn.simpleicons.org/github" height="14" class="link-icon" style="vertical-align:middle; margin-right:4px;"><span class="primary-link" style="vertical-align:middle">**[github.com/lala-hakobyan/front-end-debugging-handbook](https://github.com/lala-hakobyan/front-end-debugging-handbook)**</span></span>
-
-**I'd love to hear from you. For feedback, questions, updates or just to connect over meaningful tech conversations, you can find me on Linkedin:**
-<span><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" height="14" style="vertical-align:middle; margin-right:4px;"><span style="vertical-align:middle" class="primary-link">**[linkedin.com/in/lala-hakobyan](https://www.linkedin.com/in/lala-hakobyan/)**</span></span>
-

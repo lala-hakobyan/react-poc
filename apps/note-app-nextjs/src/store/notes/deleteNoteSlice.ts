@@ -1,8 +1,9 @@
 import { StoreApi } from 'zustand/index';
-import {DeleteNoteSlice, NotesSlice, NotesStore} from '@/store/notes/notesStore.types';
+import { DeleteNoteSlice, NotesSlice, NotesStore } from '@/store/notes/notesStore.types';
 import { Note } from '@/types/note.types';
 import notesApiService from '@/services/notesApiService';
 import loggerService from '@/services/loggerService';
+import notesCacheService from '@/services/notesCacheService';
 
 export const createDeleteNoteSlice: NotesSlice<DeleteNoteSlice> = (set: StoreApi<NotesStore>['setState']): DeleteNoteSlice => ({
   isDeleteModalOpen: false,
@@ -32,6 +33,8 @@ export const createDeleteNoteSlice: NotesSlice<DeleteNoteSlice> = (set: StoreApi
           isNoteDeleteError: false
         };
       });
+
+      notesCacheService.deleteNotes([noteId]).catch(console.error);
 
       return { success: true };
     }

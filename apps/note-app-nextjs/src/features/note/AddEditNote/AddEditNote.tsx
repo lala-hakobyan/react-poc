@@ -1,5 +1,4 @@
 'use client';
-import Modal from '@/components/Modal/Modal';
 import { selectAddEditNoteSlice, useNotesStore } from '@/store/notes/notesStore';
 import Button from '@/components/Button/Button';
 import './../../../styles/form.scss'
@@ -15,6 +14,8 @@ import { ActionStatus, AddEditNoteSlice } from '@/store/notes/notesStore.types';
 import { useShallow } from 'zustand/react/shallow';
 import BrowseLabel from '@/components/BrowseLabel/BrowseLabel';
 import { generateUuid } from '@/utils/random';
+import Modal from '@/components/Modal/Modal';
+import { ModalNewHandle } from '@/types/modal.types';
 
 
 export default function AddEditNote() {
@@ -23,6 +24,7 @@ export default function AddEditNote() {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const title = addEditNoteState.currentEditNote ? `Edit Note: ${addEditNoteState.currentEditNote.title}`: 'Add New Note';
   const buttonName = addEditNoteState.currentEditNote ? `Edit Note`: 'Add Note';
+  const modalRef = useRef<ModalNewHandle>(null);
 
   const submitForm = async () => {
     let actionStatus: ActionStatus;
@@ -45,18 +47,19 @@ export default function AddEditNote() {
     }
 
     if(actionStatus?.success) {
-      closeAddEditModal();
+      resetAddEditModal();
+      modalRef.current?.close(); // Call modal close function
     }
   }
 
-  const closeAddEditModal = () => {
+  const resetAddEditModal = () => {
     addEditNoteState.setCurrentEditNote(null, false);
     resetForm();
   }
 
-  const closeErrorModal= () => {
+  const resetErrorModal= () => {
     addEditNoteState.setIsNoteUpdateError(false);
-    closeAddEditModal();
+    resetAddEditModal();
   }
 
   const resetForm = (ev?: MouseEvent) => {
@@ -88,7 +91,8 @@ export default function AddEditNote() {
       {addEditNoteState.isNoteUpdateLoading && <Loader></Loader>}
 
       {!addEditNoteState.isNoteUpdateError &&
-      <Modal isOpen={true} title={title} onClosed={() => closeAddEditModal()} >
+      <Modal ref={modalRef} isOpen={true} title={title} onClosed={() => resetAddEditModal()} >
+        <Modal.Header />
         <Modal.Body>
           <form className="form">
             <div className="formGroup">
@@ -155,18 +159,17 @@ export default function AddEditNote() {
             </div>
           </form>
         </Modal.Body>
-
         <Modal.Footer>
           <Button
             button={{ label: buttonName, name: 'submitButton', disabled: !noteFormContract.isFormValid() || addEditNoteState.isNoteUpdateLoading }}
-            onClick={() => submitForm()}
+            onClick={() => { submitForm(); }}
           />
           <Button button={{ label: 'Reset', name: 'resetButton', className: 'ml-xs' }} onClick={(ev?: MouseEvent) => resetForm(ev)} />
         </Modal.Footer>
       </Modal>
       }
 
-      <Modal isOpen={addEditNoteState.isNoteUpdateError} title="Error happened" onClosed={() => closeErrorModal()}>
+      <Modal isOpen={addEditNoteState.isNoteUpdateError} title="Error happened" onClosed={() => resetErrorModal()}>
         <Modal.Body>
           {AddEditNoteConstants.ui.addEditError}
         </Modal.Body>

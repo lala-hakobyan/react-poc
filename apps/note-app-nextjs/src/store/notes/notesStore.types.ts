@@ -14,6 +14,7 @@ export type NotesListSlice = {
   isLoadMoreNotesError: boolean,
   resetNotes: () => void,
   fetchNotes: (offset?: number, limit?: number, context?: LogContext, type?: FetchNotesAction) => Promise<ActionStatus>,
+  fetchNotesOffline: (offset?: number, limit?: number, callback?: (notes: Note[]) => void) => void,
 }
 
 export type AddEditNoteSlice = {

@@ -3,6 +3,7 @@ import { ActionStatus, AddEditNoteSlice, NotesSlice, NotesStore } from '@/store/
 import { Note } from '@/types/note.types';
 import notesApiService from '@/services/notesApiService';
 import loggerService from '@/services/loggerService';
+import notesCacheService from '@/services/notesCacheService';
 
 export const createAddEditNoteSlice: NotesSlice<AddEditNoteSlice> = (set: StoreApi<NotesStore>['setState']): AddEditNoteSlice => ({
   isAddEditModalOpen: false,
@@ -35,6 +36,10 @@ export const createAddEditNoteSlice: NotesSlice<AddEditNoteSlice> = (set: StoreA
         }
       ));
 
+      if(result) {
+        notesCacheService.saveNotes([note]).catch(console.error);
+      }
+
       return { success: true };
     } catch(error: unknown) {
       set({ isNoteUpdateLoading: false, isNoteUpdateError: true });
@@ -62,6 +67,10 @@ export const createAddEditNoteSlice: NotesSlice<AddEditNoteSlice> = (set: StoreA
           isNoteUpdateError: false
         }
       ))
+
+      if(result) {
+        notesCacheService.saveNotes([note]).catch(console.error);
+      }
 
       return { success: true };
     } catch(error: unknown) {
