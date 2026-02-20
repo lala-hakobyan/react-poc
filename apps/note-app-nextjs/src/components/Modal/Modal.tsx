@@ -28,8 +28,6 @@ const ModalBase = forwardRef<ModalNewHandle, ModalProps>(function ModalNew({ chi
     setModalClass(modalInactiveClass);
     document.documentElement.classList.remove(`${styles['modal--open']}`);
 
-    console.log('yes, close action is clld');
-
     if(ev) {
       ev.preventDefault();
     }

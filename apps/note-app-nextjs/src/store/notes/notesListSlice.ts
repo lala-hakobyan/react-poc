@@ -50,16 +50,6 @@ export const createNotesListSlice: NotesSlice<NotesListSlice> = (set: StoreApi<N
             { notes: [...state.notes, ...res], [isLoadingKey]: false, [isErrorKey]: true }
           ))
         );
-        // notesCacheService.loadNotes(offset, limit)
-        //   .then((result: Note[]) => {
-        //     console.log('result', result);
-        //     set((state: NotesStore) => (
-        //       { notes: [...state.notes, ...result], [isLoadingKey]: false, [isErrorKey]: true }
-        //     ));
-        //   })
-        //   .catch((error) => {
-        //     console.error(error);
-        //   })
       } else {
         set({ [isLoadingKey]: false, [isErrorKey]: true });
       }
@@ -71,7 +61,6 @@ export const createNotesListSlice: NotesSlice<NotesListSlice> = (set: StoreApi<N
   fetchNotesOffline: async (offset = 0, limit = 9, callback = () => {}) => {
     notesCacheService.loadNotes(offset, limit)
       .then((result: Note[]) => {
-        console.log('result', result);
         callback(result);
       })
       .catch((error) => {

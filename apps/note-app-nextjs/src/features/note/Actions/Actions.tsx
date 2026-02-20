@@ -6,6 +6,7 @@ import { useNotesStore } from '@/store/notes/notesStore';
 import { useShallow } from 'zustand/react/shallow';
 import DeleteNote from '@/features/note/DeleteNote/DeleteNote';
 import Icon from '@/components/Icon/Icon';
+import './../../../styles/tooltip.scss';
 
 
 export default function Actions() {
@@ -24,15 +25,15 @@ export default function Actions() {
 
       {isDeleteModalOpen && <DeleteNote />}
 
-      <a href="#" className={`${styles.actions__iconLink} svg-link`}>
+      <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
         <Icon icon={{ iconName: 'icon-sort-up', color: 'secondary' }} />
       </a>
 
-      <a href="#" className={`${styles.actions__iconLink} svg-link`}>
+      <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
         <Icon icon={{ iconName: 'icon-filter', color: 'secondary' }} />
       </a>
 
-      <a href="#" className={`${styles.actions__iconLink} svg-link`}>
+      <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
         <Icon icon={{ iconName: 'icon-search', color: 'secondary' }} />
       </a>
     </div>

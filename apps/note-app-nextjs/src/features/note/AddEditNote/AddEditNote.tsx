@@ -73,6 +73,12 @@ export default function AddEditNote() {
     noteFormContract.resetForm();
   }
 
+  const imageInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const file = ev.target.files?.[0];
+    const name = file?.name ?? '';
+    setImageFileName(name);
+  }
+
   function extractFileName(path: string) {
     let fileName = '';
 
@@ -82,14 +88,6 @@ export default function AddEditNote() {
     }
 
     return fileName;
-  }
-
-  const imageInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Image changed', ev);
-    const file = ev.target.files?.[0];
-    const name = file?.name ?? '';
-    console.log('name', name);
-    setImageFileName(name);
   }
 
   return (
