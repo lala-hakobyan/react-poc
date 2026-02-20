@@ -1,20 +1,18 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
+import { defineConfig } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+const eslintConfig = defineConfig([
+  {
+    // Ignore static public files (like service workers) so React rules don't scan them and crash
+    ignores: ['**/*', '!src/**'],
+  },
+  ...nextVitals,
+  ...nextTs,
   // Our custom overrides
   {
     rules: {
-      // 2 spaces indentation
+      // 1 space indentation
       indent: ['error', 2, { SwitchCase: 1 }],
 
       // Single quotes in JS/TS, allow double for escaping
@@ -28,6 +26,8 @@ const eslintConfig = [
       'object-curly-spacing': ['error', 'always']
     },
   },
-];
+]);
 
 export default eslintConfig;
+
+

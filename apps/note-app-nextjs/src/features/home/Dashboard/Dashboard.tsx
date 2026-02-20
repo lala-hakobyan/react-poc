@@ -17,39 +17,43 @@ const recentNotesSizeConfig = Number(process.env.NEXT_PUBLIC_DASHBOARD_ITEM_COUN
 const isOfflineModeOn = process.env.NEXT_PUBLIC_ENABLE_OFFLINE_MODE_ON_ERROR === 'true';
 
 export default function Dashboard() {
-  const [notes, setNotes] = useState<Note[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
   const notesListState = useNotesStore(useShallow(selectNotesListSlice));
-
-  const fetchApiData = async () => {
-    try {
-      const data = await notesApiService.fetchNotes(0, recentNotesSizeConfig);
-      setNotes(data);
-      setIsLoading(false);
-      setIsError(false);
-    } catch(error: unknown) {
-      loggerService.log({
-        type: 'error',
-        context: 'dashboard',
-        messageType: 'fetchNotes'
-      }, null, error as Error);
-
-      setIsLoading(false);
-      setIsError(true);
-      notesListState.fetchNotesOffline(0, recentNotesSizeConfig, (result) => setNotes(result));
-    }
-  }
+  const [notes, setNotes] = useState<Note[]>(notesListState.notes.slice(0, recentNotesSizeConfig));
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
-    if(notesListState.notes && notesListState.notes.length!==0) {
-      setIsLoading(false);
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    const fetchApiData = async () => {
+      setIsLoading(true);
       setIsError(false);
-      setNotes(notesListState.notes.slice(0, recentNotesSizeConfig));
-    } else {
+
+      try {
+        const data = await notesApiService.fetchNotes(0, recentNotesSizeConfig, signal);
+        setNotes(data);
+        setIsLoading(false);
+        setIsError(false);
+      } catch(error: unknown) {
+        loggerService.log({
+          type: 'error',
+          context: 'dashboard',
+          messageType: 'fetchNotes'
+        }, null, error as Error);
+
+        setIsLoading(false);
+        setIsError(true);
+        notesListState.fetchNotesOffline(0, recentNotesSizeConfig, (result) => setNotes(result));
+      }
+    }
+
+    if(!(notesListState.notes && notesListState.notes.length!==0)) {
       fetchApiData();
     }
-  }, []);
+
+    return () => abortController.abort();
+  }, [notesListState, notesListState.notes]);
 
   return (
     <section className={`mb-md ${styles.dashboard}`}>

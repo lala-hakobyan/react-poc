@@ -7,8 +7,8 @@
     "dev:https": "cross-env NODE_OPTIONS=\"--inspect\" next dev --experimental-https -p 3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "server": "nodemon NODE_OPTIONS=\"--inspect\" server/server.js"
   },
   "dependencies": {
@@ -26,7 +26,7 @@
     "@types/react-dom": "^19",
     "cross-env": "^10.0.0",
     "eslint": "^9",
-    "eslint-config-next": "15.4.3",
+    "eslint-config-next": "16.0.3",
     "nodemon": "^3.1.10",
     "sass": "^1.89.2",
     "typescript": "^5"

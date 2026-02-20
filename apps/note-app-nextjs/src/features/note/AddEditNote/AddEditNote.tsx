@@ -3,7 +3,7 @@ import { selectAddEditNoteSlice, useNotesStore } from '@/store/notes/notesStore'
 import Button from '@/components/Button/Button';
 import './../../../styles/form.scss'
 import './../../../styles/imageWrapper.scss'
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Note } from '@/types/note.types';
 import useNoteForm from '@/features/note/AddEditNote/useNoteForm';
@@ -21,10 +21,11 @@ import { ModalNewHandle } from '@/types/modal.types';
 export default function AddEditNote() {
   const addEditNoteState: AddEditNoteSlice = useNotesStore(useShallow(selectAddEditNoteSlice));
   const noteFormContract: NoteFormContract = useNoteForm(addEditNoteState.currentEditNote as NoteForm);
-  const imageInputRef = useRef<HTMLInputElement>(null);
   const title = addEditNoteState.currentEditNote ? `Edit Note: ${addEditNoteState.currentEditNote.title}`: 'Add New Note';
   const buttonName = addEditNoteState.currentEditNote ? `Edit Note`: 'Add Note';
   const modalRef = useRef<ModalNewHandle>(null);
+
+  const [imageFileName, setImageFileName] = useState(extractFileName(noteFormContract.notesFormState.form.image ?? ''));
 
   const submitForm = async () => {
     let actionStatus: ActionStatus;
@@ -67,16 +68,13 @@ export default function AddEditNote() {
       ev.preventDefault();
     }
 
-    if(imageInputRef.current) {
-      imageInputRef.current.value = ''
-    }
+    setImageFileName('');
 
     noteFormContract.resetForm();
   }
 
-  const getImageFileName = () => {
+  function extractFileName(path: string) {
     let fileName = '';
-    const path = imageInputRef.current?.value ? imageInputRef.current.value : noteFormContract.notesFormState.form.image;
 
     if(path) {
       const imgPartsListArr = path.split('/');
@@ -84,6 +82,14 @@ export default function AddEditNote() {
     }
 
     return fileName;
+  }
+
+  const imageInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Image changed', ev);
+    const file = ev.target.files?.[0];
+    const name = file?.name ?? '';
+    console.log('name', name);
+    setImageFileName(name);
   }
 
   return (
@@ -137,16 +143,18 @@ export default function AddEditNote() {
             <div className="formGroup">
               <BrowseLabel browseLabel={{
                 buttonName: 'Browse Image',
-                text: getImageFileName(),
+                text: imageFileName,
                 attributeName: 'imageField'
               }} />
               <input className="formGroup__formControl visually-hidden"
-                ref={imageInputRef}
                 type="file"
                 name="image"
                 id="imageField"
                 accept=".png, .jpg, image/gif"
-                onChange={noteFormContract.handleImageChange} />
+                onChange={(e) => {
+                  noteFormContract.handleImageChange(e);
+                  imageInputChange(e);
+                }} />
               {noteFormContract.notesFormState.form.image &&
                 <figure className="imageWrapper">
                   <Image src={noteFormContract.notesFormState.form.image}

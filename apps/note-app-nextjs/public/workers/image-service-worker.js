@@ -1,5 +1,3 @@
-
-
 // Name of your image cache
 const imageCache = 'image-cache-v1';
 
@@ -33,7 +31,7 @@ self.addEventListener('fetch', (event) => {
   if (request.destination === 'image') {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
-        // If exists in cache → return instantly
+        // If exists in cache, return instantly
         if (cachedResponse) return cachedResponse;
 
         // Otherwise fetch from network and add to cache dynamically

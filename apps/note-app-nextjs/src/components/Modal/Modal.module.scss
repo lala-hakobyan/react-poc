@@ -61,6 +61,7 @@
 
   &__closeIcon {
     display: block;
+    color: var(--primary-bg-color);
   }
 
   @include mixins.media-breakpoint-up(sm) {
