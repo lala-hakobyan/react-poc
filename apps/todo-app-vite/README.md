@@ -4,18 +4,20 @@ A lightweight React POC Todo application to experiment with Redux library.
 
 ## Compatibility
 The project is compatible with the following technology versions:
-- **react:** `^19.1.0`
+- **React:** `^19.1.0`
 - **Node.js:** `v20+`
   This project was tested with **Node.js** `v22.17.0`.
 
 
 ## Features and Best Practices
 While this is not a full production-ready application, there are several features and best practices you can explore to adapt in your production-ready applications:
+- TypeScript-based, fully typed code.
+  Using TypeScript over JavaScript makes code more understandable and maintainable as well as helps to catch errors early in the development process (at compile time) rather than at runtime.
 - Responsive, mobile-first layout.
 - Scalable folder structure.
 - Redux pattern applied following generic best practices.
   **Note:** Please be aware that Redux pattern should not be preferred for this kind of small and simple application. It is more for complex applications which require a complex synchronization between different features.
-- Indicator showing if user is offline/online which is useful when apps support also offline functionality.
+- Indicator showing if user is offline/online which is useful when apps also support offline functionality.
 
 
 ## How to Run
@@ -23,31 +25,47 @@ While this is not a full production-ready application, there are several feature
 ### Setup Project Locally
 
 Follow these steps to set up the project locally:
-- Go to the root of this project, specifically the `apps/todo-app-vite` folder and do `npm install`
+- Go to the root of this project, specifically the `apps/todo-app-vite` folder and do `npm install`.
 - Open your hosts file and add the following line of code:
   `127.0.0.1       local.react-todo-app.com`
   Below are the hosts file paths for different operating systems:
   - **Windows:** `C:\Windows\System32\drivers\etc\hosts`
   - **macOS / Linux:** `/etc/hosts`
-  This maps your local IP to the custom local host name which will be used when running development server.
-- Make sure you have compatible Node.js version installed. You can use **Node Version Manager (NVM)** to simulate different **Node.js** versions on your machine. Example of compatible Node.js version: `v22.17.0`
-For the full compatibility information, please check [Compatibility](#compatibility) section.
+    This maps your local IP to the custom local host name which will be used when running the development server.
+- Make sure you have a compatible Node.js version installed. You can use **Node Version Manager (NVM)** to simulate different **Node.js** versions on your machine. Example of a compatible Node.js version: `v22.17.0`.
+  For the full compatibility information, please check the [Compatibility](#compatibility) section.
 
 After finishing these steps, you can use the commands provided in the section below to run the project.
 
 ### Run Project
-In order to run the project, you need to run the development server and API server in separate terminal windows:
-- **Run the local API server:** `npm run server`
+Below are some of the workflows and commands for local development:
+
+**Run Development Server**
+In order to run the project locally, you need to run the development server and API server in separate terminal windows:
+- **Start the local API server:** `npm run server`
   This runs the local mock APIs required for the application to function.
-- **Run the local development server:** `npm run dev`
+- **Start the local development server:** `npm run dev`
   Once the server is running, open your browser and navigate to `local.react-todo-app.com:4210/`. The application will automatically reload whenever you modify any of the source files.
 
+**Serve Production Build**
+- **Run production build locally:** `npm run build`
+- **Serve production build locally:** `npm run start`
+  This serves the application from the built production files under the `.vite` folder.
+
+**Linting**
+- **Run linting:** `npm run lint`
+- **Auto-fix linting issues:** `npm run lint:fix`
+
+**Unit Testing**
+- **Check type compatibility of unit test files:** `npm run test:build`
+- **Run unit tests for loading reducers:** `npm run test:loading-reducers`
+- **Run unit tests for selectors:** `npm run test:selectors`
 
 ## Troubleshooting
 
 ### Error: port is already in use
 `Error: listen EADDRINUSE: address already in use :::4210`
-If this happens, you need to find and kill the processes using a specific port (e.g. `4210`). For that, execute these commands in **PowerShell** or **Command Prompt** in **Windows** and  in **Terminal** for **macOS / Linux**:
+If this happens, you need to find and kill the processes using a specific port (e.g. `4210`). For that, execute these commands in **PowerShell** or **Command Prompt** in **Windows** and in **Terminal** for **macOS / Linux**:
 
 - Find all processes using port `4210`:
   - **Windows:** `netstat -ano | findstr :4210`

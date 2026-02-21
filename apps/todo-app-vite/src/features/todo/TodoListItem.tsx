@@ -1,8 +1,8 @@
 import type {TodoListItemParams} from "../../data/data.ts";
 import {useDispatch} from "react-redux";
 import {deleteTodo,markTodoAsCompleted} from "../../store/thunks.ts";
-import type {Dispatch} from "react";
 import styled from "styled-components";
+import type {AppDispatch} from "../../store/store.ts";
 
 interface IProps {
     $important?: boolean;
@@ -30,7 +30,7 @@ const ImportantIcon = styled.div<IProps>`
 `
 
 export default function TodoListItem({todo}: TodoListItemParams) {
-    const dispatch: Dispatch<any> = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
     const isImportant = todo.text.endsWith('!');
 
     return (

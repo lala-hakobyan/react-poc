@@ -1,44 +1,43 @@
 import axios from 'axios';
 import { loadingStarted, loadingCompleted, loadingFailed } from "./loadingSlice.ts";
-import type {Dispatch} from "react";
-import {todoAdded, todoCompleted, todoDeleted} from "./todosSlice.ts";
+import { todoAdded, todoCompleted, todoDeleted } from "./todosSlice.ts";
+import type {AppDispatch, RootState} from "./store.ts";
 
-export const loadTodos = () => async (dispatch: Dispatch<any>)=> {
+const apiUrl = 'http://localhost:3040/api/todos';
+
+export const loadTodos = () => async (dispatch: AppDispatch)=> {
     dispatch(loadingStarted());
     try {
-        const response = await axios.get('http://localhost:3040/api/todos');
+        const response = await axios.get(apiUrl);
         const todos = response.data;
         dispatch(loadingCompleted(todos));
-        console.log('todos', todos);
-    } catch (error: any) {
-        dispatch(loadingFailed(error));
+    } catch (error: unknown) {
+        dispatch(loadingFailed(error as Error));
     }
 }
 
-export const createTodo = (newTodoText: string) => async (dispatch: Dispatch<any>, getState: any) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const createTodo = (newTodoText: string) => async (dispatch: AppDispatch, _getState: () => RootState) => {
     try {
-        const response = await axios.post('http://localhost:3040/api/todos', { text: newTodoText } );
-        // const updatedTodos = getState().todos.value.concat(response.data)
+        const response = await axios.post(apiUrl, { text: newTodoText } );
         dispatch(todoAdded(response.data));
     } catch(error) {
         console.log(error);
     }
 }
 
-export const deleteTodo = (deleteTodoId: string) => async(dispatch: Dispatch<any>, getState: any) => {
+export const deleteTodo = (deleteTodoId: string) => async(dispatch: AppDispatch) => {
     try {
-        // const updatedTodos = getState().todos.value.filter((item: Todo) => item.id!== deleteTodoId);
-        await axios.delete(`http://localhost:3040/api/todos/${deleteTodoId}`);
+        await axios.delete(`${apiUrl}/${deleteTodoId}`);
         dispatch(todoDeleted(deleteTodoId));
     } catch(error) {
         console.log(error);
     }
 }
 
-export const markTodoAsCompleted = (todoId: string) => async (dispatch: Dispatch<any>, getState: any) => {
+export const markTodoAsCompleted = (todoId: string) => async (dispatch: AppDispatch) => {
     try {
-        const response =  await axios.put(`http://localhost:3040/api/todos/${todoId}`, {isCompleted: true});
-        // const updatedTodos: Todo[] = getState().todos.value.map((item: Todo) => item.id === todoId ? response.data : item);
+        await axios.put(`${apiUrl}/${todoId}`, {isCompleted: true});
         dispatch(todoCompleted(todoId));
     } catch(error) {
         console.log(error);

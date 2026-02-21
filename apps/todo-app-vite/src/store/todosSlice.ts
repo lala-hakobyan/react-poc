@@ -1,17 +1,17 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
 import {loadingCompleted} from "./loadingSlice.ts";
 import type {Todo, TodosState} from "../data/data.ts";
 
 export const todosSlice = createSlice({
     name: 'todos',
     initialState: {
-        value: []
+        value: [] as Todo[]
     },
     reducers: {
-        todosUpdated: (state: TodosState, action) => {
+        todosUpdated: (state: TodosState, action: {payload: Todo[]}) => {
             state.value = action.payload;
         },
-        todoAdded: (state: TodosState, action) => {
+        todoAdded: (state: TodosState, action: {payload: Todo}) => {
             state.value = [...state.value, action.payload];
         },
         todoDeleted: (state: TodosState, action: {payload: string}) => {
@@ -22,7 +22,8 @@ export const todosSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(loadingCompleted, (state, action: {payload: any, type: any}) => {
+      // Runs when `loadingCompleted` is dispatched, updates the todos list from the action payload
+      builder.addCase(loadingCompleted, (state, action: PayloadAction<Todo[]>) => {
             state.value = action.payload;
         })
     }

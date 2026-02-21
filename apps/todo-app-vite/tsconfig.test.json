@@ -1,9 +1,18 @@
 {
   "extends": "./tsconfig.json",
   "include": [
-    "src/**/*.test.ts"
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".vite"
   ],
   "compilerOptions": {
-    "outDir": "./dist/test"
+    "outDir": "./dist/test",
+    "skipLibCheck": true,
+    "moduleResolution": "node"
   }
 }
