@@ -17,7 +17,7 @@ export const loadingSliceDef = {
             state.successful = true;
             console.log('loadingCompleted', action);
         },
-        loadingFailed: (state: LoadingState, action: {payload: Error}) => {
+        loadingFailed: (state: LoadingState, action: {payload: string}) => {
             state.completed = true;
             state.successful = false;
             console.log('loadingFailed', action);

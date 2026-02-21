@@ -3,7 +3,7 @@ import { loadingStarted, loadingCompleted, loadingFailed } from "./loadingSlice.
 import { todoAdded, todoCompleted, todoDeleted } from "./todosSlice.ts";
 import type {AppDispatch, RootState} from "./store.ts";
 
-const apiUrl = 'http://localhost:3040/api/todos';
+const apiUrl = 'http://localhost:3040/api/bunyutodos';
 
 export const loadTodos = () => async (dispatch: AppDispatch)=> {
     dispatch(loadingStarted());
@@ -12,7 +12,8 @@ export const loadTodos = () => async (dispatch: AppDispatch)=> {
         const todos = response.data;
         dispatch(loadingCompleted(todos));
     } catch (error: unknown) {
-        dispatch(loadingFailed(error as Error));
+        const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        dispatch(loadingFailed(errorMessage));
     }
 }
 
