@@ -22,6 +22,28 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
+  const logMessage = (error: unknown) => {
+    loggerService.log({
+      type: 'error',
+      context: 'dashboard',
+      messageType: 'fetchNotes'
+    }, null, error as Error);
+  }
+
+  const cacheImages = (data: Note[]) => {
+    const imageList = data.map(item => item.image).filter(item => item);
+
+    navigator.serviceWorker.ready.then((registration: ServiceWorkerRegistration) => {
+      if(registration.active && imageList.length!==0) {
+        registration.active.postMessage({
+          type: 'CACHE_NEW_IMAGES',
+          payload: imageList
+        });
+      }
+    });
+  }
+
+
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
@@ -31,17 +53,13 @@ export default function Dashboard() {
       setIsError(false);
 
       try {
-        const data = await notesApiService.fetchNotes(0, recentNotesSizeConfig, signal);
+        const data: Note[] = await notesApiService.fetchNotes(0, recentNotesSizeConfig, signal);
         setNotes(data);
         setIsLoading(false);
         setIsError(false);
+        cacheImages(data);
       } catch(error: unknown) {
-        loggerService.log({
-          type: 'error',
-          context: 'dashboard',
-          messageType: 'fetchNotes'
-        }, null, error as Error);
-
+        logMessage(error);
         setIsLoading(false);
         setIsError(true);
         notesListState.fetchNotesOffline(0, recentNotesSizeConfig, (result) => setNotes(result));

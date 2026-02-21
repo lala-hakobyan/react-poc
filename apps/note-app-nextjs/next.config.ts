@@ -45,6 +45,13 @@ const nextConfig: NextConfig = {
           }
         ],
       },
+      {
+        source: '/workers/image-service-worker.js',
+        headers: [
+          { key: 'Service-Worker-Allowed', value: '/' },
+          // { key: 'Cache-Control', value: 'no-store' }, // optional, but helpful during debugging
+        ],
+      },
     ];
   },
 };
