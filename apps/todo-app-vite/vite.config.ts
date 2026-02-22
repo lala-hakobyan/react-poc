@@ -14,5 +14,8 @@ export default defineConfig({
     port: 4210,
     strictPort: true, // Prevents Vite from switching to 4211 if 4210 is busy
     host: 'local.react-todo-app.com',
+    watch: {
+      ignored: ['**/*.md'] // Turn of Vite HMR .md file watching because it auto-removes spaces
+    }
   }
 })
