@@ -1,4 +1,5 @@
-# react-poc
+# React POC Projects
+
 A collection of React POC starter projects designed to reflect best practices in modern React development. The projects are intended for experimenting and debugging React features and frameworks, benchmarking performance and creating maintainable, scalable architecture POCs as a foundation for real production apps.
 
 ## Projects
@@ -22,8 +23,6 @@ It contains the following useful features and best practices:
 - **React design patterns (Layout, Custom Hooks, Compound, Singleton)**
 - **Integrated linting**
 - **Advanced error handling**
-- The [debugging-handbook-demo-v1](https://github.com/lala-hakobyan/react-poc/tree/debugging-handbook-demo-v1) branch of this project is the version used for [Front-end Debugging Tools Handbook](https://github.com/lala-hakobyan/front-end-debugging-handbook) specific React features experimentation and debugging.
-  **Note:** It may contain only slight visual changes compared to screenshots presented in the handbook.
 
 ### [React Todo POC App with Vite (`todo-app-vite`)](./apps/todo-app-vite)
 
@@ -36,6 +35,9 @@ While this is not a full production-ready application, there are several feature
 - **Redux library used for state management**
 - **Online/offline sync indicator**
 - **Integrated linting**
+
+> **Note:** The [debugging-handbook-demo-v1](https://github.com/lala-hakobyan/react-poc/tree/debugging-handbook-demo-v1) branch of this repository is the version used for [Front-end Debugging Tools Handbook](https://github.com/lala-hakobyan/front-end-debugging-handbook) specific React features and Redux state experimentation and debugging.
+The projects may contain only slight visual changes compared to screenshots presented in the handbook.
 
 
 ## License
