@@ -20,37 +20,37 @@ The project is compatible with the following technology versions:
 ## Features and Best Practices
 This application can be used as a foundation for real production apps due to its maintainable and scalable architecture and isolation of layers: data (API), state, logger, cache.
 It contains the following useful features and best practices:
-- **Server Components through Next.js**
+- **Server components through Next.js**
 - **Responsive, mobile-first layout**
-- **Dark/Light themes support**
+- **Dark/light themes support**
   **Note:** Theme toggle icon will be added in the header soon.
 - **Scalable and maintainable architecture:**
   - Separate state layer with Zustand store.
   - Scalable folder structure.
   - Isolation of data (API), cache, logger layers through separate dedicated services.
   - Separate `proxyRequestService.ts` to universally handle API requests passing through Next.js server components.
-- **State Management with Zustand**
+- **State management with Zustand**
   - Centralized state management with **Zustand** using slicing to separate state into stand-alone layers.
   - **Zustand** integration with Redux DevTools through middleware.
 - **Security headers (CORS, CSP)**
-- **Caching Functionality:**
+- **Caching functionality:**
   - Notes data is stored in the browser IndexedDB database upon each action.
   - When any failure happens on the API side or the user is offline, they can still view their notes in read-only mode from the IndexedDB cache until issues are resolved.
   - A separate service worker (`image-service-worker.js`) caches necessary image files (logos, icons and latest note media files) on the Home page so that the Notes List page loads this media from the service worker cache.
     **Note:** For the service worker to work, you need to run the application with https (`npm run dev:https`) and access it under localhost instead of a custom local domain, like: `https://localhost:3000`.
-- **Logging Functionality:**
+- **Logging functionality:**
   A separate dedicated singleton logger service to send error messages and necessary context to a front-end monitoring platform. The platform integration is a mock but functional example.
-- **React Design Patterns:**
+- **React design patterns:**
   - Layout design pattern for arranging components on the screen (`header`, `footer`, `mainLayout`).
   - Hooks pattern used to isolate primary business logic (e.g., `useNoteForm`).
   - Compound Components pattern used for the Modal.
   - Singleton pattern used for all services.
-- **Integrated Linting:**
+- **Integrated linting:**
   Linting helps to write universal code that follows **React Rules of Hooks** (via the `eslint-config-next` package which uses `eslint-plugin-react-hooks` under the hood), resulting in more maintainable and performant applications.
 - **Styling:**
   - BEM approach for class names for better maintainability.
   - SASS modules (concept of CSS modules) used for styles isolation per each component.
-- **Advanced Error Handling:**
+- **Advanced error handling:**
   User-friendly errors are displayed for each API failure to provide a better user experience.
 
 ## What is Missing

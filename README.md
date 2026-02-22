@@ -10,18 +10,18 @@ A scalable and maintainable React Next.js POC Note management application to ser
 This application can be used as a foundation for real production apps due to its maintainable and scalable architecture and isolation of layers: data (API), state, logger, cache.
 It contains the following useful features and best practices:
 - **Responsive, mobile-first layout and styling through SASS modules**
-- **Dark/Light themes support**
+- **Dark/light themes support**
 - **Scalable and maintainable architecture:**
   - Separate state layer with Zustand store.
   - Scalable folder structure.
   - Isolation of data (API), cache, logger layers through separate dedicated services.
   - Separate `proxyRequestService.ts` to universally handle API requests passing through Next.js server components.
 - **Security headers (CORS, CSP)**
-- **Caching functionality through IndexDB and web workers**
+- **Caching functionality through IndexedDB and Web Workers**
 - **Logging functionality**
-- **React Design Patterns (Layout, Custom Hooks, Compound, Singleton)**
-- **Integrated Linting**
-- **Advanced Error Handling**
+- **React design patterns (Layout, Custom Hooks, Compound, Singleton)**
+- **Integrated linting**
+- **Advanced error handling**
 - The [debugging-handbook-demo-v1](https://github.com/lala-hakobyan/react-poc/tree/debugging-handbook-demo-v1) branch of this project is the version used for [Front-end Debugging Tools Handbook](https://github.com/lala-hakobyan/front-end-debugging-handbook) specific React features experimentation and debugging.
   **Note:** It may contain only slight visual changes compared to screenshots presented in the handbook.
 
@@ -34,7 +34,7 @@ While this is not a full production-ready application, there are several feature
 - **Responsive, mobile-first layout**
 - **Scalable folder structure**
 - **Redux library used for state management**
-- **Online/Offline Sync Indicator**
+- **Online/offline sync indicator**
 - **Integrated linting**
 
 

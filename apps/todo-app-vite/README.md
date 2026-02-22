@@ -27,7 +27,7 @@ While this is not a full production-ready application, there are several feature
 - **Redux library used for state management.**<br>
   The Redux pattern is applied through the `react-redux` library, following generic best practices.<br>
   **Note:** Please be aware that the Redux library should not be preferred for this kind of small and simple application. It is intended more for advanced applications which require advanced synchronization between different features.
-- **Online/Offline Sync Indicator.**<br>
+- **Online/offline sync indicator.**<br>
   This indicator shows if user is offline/online which is useful when apps also support offline functionality.
 - **Integrated linting.**<br>
   Linting helps to write universal code that follows **React Rules of Hooks** (via `eslint-plugin-react-hooks` package), resulting in more maintainable and performant applications.
