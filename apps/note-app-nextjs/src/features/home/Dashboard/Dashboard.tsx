@@ -31,6 +31,8 @@ export default function Dashboard() {
   }
 
   const cacheImages = (data: Note[]) => {
+    if (!('serviceWorker' in navigator)) return;
+
     const imageList = data.map(item => item.image).filter(item => item);
 
     navigator.serviceWorker.ready.then((registration: ServiceWorkerRegistration) => {
