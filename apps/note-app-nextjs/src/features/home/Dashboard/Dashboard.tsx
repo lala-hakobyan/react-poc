@@ -8,32 +8,70 @@ import { Note } from '@/types/note.types';
 import notesApiService from '@/services/notesApiService';
 import { DashboardConstants } from '@/constants/dashboard.constants';
 import loggerService from '@/services/loggerService';
+import { selectNotesListSlice, useNotesStore } from '@/store/notes/notesStore';
+import { useShallow } from 'zustand/react/shallow';
+import Alert from '@/components/Alert/Alert';
+import { NoteListConstants } from '@/constants/noteList.constants';
 
 const recentNotesSizeConfig = Number(process.env.NEXT_PUBLIC_DASHBOARD_ITEM_COUNT);
+const isOfflineModeOn = process.env.NEXT_PUBLIC_ENABLE_OFFLINE_MODE_ON_ERROR === 'true';
 
 export default function Dashboard() {
-  const [notes, setNotes] = useState<Note[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const notesListState = useNotesStore(useShallow(selectNotesListSlice));
+  const [notes, setNotes] = useState<Note[]>(notesListState.notes.slice(0, recentNotesSizeConfig));
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+
+  const logMessage = (error: unknown) => {
+    loggerService.log({
+      type: 'error',
+      context: 'dashboard',
+      messageType: 'fetchNotes'
+    }, null, error as Error);
+  }
+
+  const cacheImages = (data: Note[]) => {
+    const imageList = data.map(item => item.image).filter(item => item);
+
+    navigator.serviceWorker.ready.then((registration: ServiceWorkerRegistration) => {
+      if(registration.active && imageList.length!==0) {
+        registration.active.postMessage({
+          type: 'CACHE_NEW_IMAGES',
+          payload: imageList
+        });
+      }
+    });
+  }
+
 
   useEffect(() => {
-    const getApiData = async () => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    const fetchApiData = async () => {
+      setIsLoading(true);
+      setIsError(false);
+
       try {
-        const data = await notesApiService.fetchNotes(0, recentNotesSizeConfig);
+        const data: Note[] = await notesApiService.fetchNotes(0, recentNotesSizeConfig, signal);
         setNotes(data);
         setIsLoading(false);
+        setIsError(false);
+        cacheImages(data);
       } catch(error: unknown) {
-        loggerService.log({
-          type: 'error',
-          context: 'dashboard',
-          messageType: 'fetchNotes'
-        }, null, error as Error);
-
+        logMessage(error);
         setIsLoading(false);
+        setIsError(true);
+        notesListState.fetchNotesOffline(0, recentNotesSizeConfig, (result) => setNotes(result));
       }
     }
 
-    getApiData();
-  }, []);
+    if(!(notesListState.notes && notesListState.notes.length!==0)) {
+      fetchApiData();
+    }
+
+    return () => abortController.abort();
+  }, [notesListState, notesListState.notes]);
 
   return (
     <section className={`mb-md ${styles.dashboard}`}>
@@ -41,6 +79,9 @@ export default function Dashboard() {
 
       {!isLoading &&
         <>
+          {isError && !isOfflineModeOn &&
+            <Alert alert={{ type: 'danger', className: 'mb-sm' }}>{NoteListConstants.fetchErrorMessage}</Alert>
+          }
           <CardCarousel notes={notes}></CardCarousel>
           <p className="text-right mt-sm"><a href={'/notes'} className="primary-link">View All Notes</a></p>
         </>

@@ -1,28 +1,6 @@
 import {useSyncExternalStore} from "react";
 
-// import {useEffect, useState} from "react";
-// export function useOnlineStatus1() {
-//     const [isOnline, setIsOnline] = useState(true);
-//
-//     useEffect(() => {
-//         function setOnline(value: boolean) {
-//             setIsOnline(value);
-//         }
-//
-//         window.addEventListener('online', setOnline.bind(null,true));
-//         window.addEventListener('offline', setOnline.bind(null,false));
-//
-//         return () => {
-//             window.removeEventListener('online', setOnline.bind(null,true));
-//             window.removeEventListener('offline', setOnline.bind(null,false));
-//         }
-//
-//     }, []);
-//
-//     return isOnline;
-// }
-
-function subscribe(callback: any) {
+function subscribe(callback: () => void) {
     window.addEventListener('online', callback);
     window.addEventListener('offline', callback);
 

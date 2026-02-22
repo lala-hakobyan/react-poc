@@ -1,5 +1,5 @@
 import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
-import type {LoadingState} from "../data/data.ts";
+import type {LoadingState, Todo} from "../data/data.ts";
 
 export const loadingSliceDef = {
     name: 'loading',
@@ -12,12 +12,12 @@ export const loadingSliceDef = {
             state.completed = false;
             console.log('loadingCompleted', action);
         },
-        loadingCompleted: (state: LoadingState, action: PayloadAction) => {
+        loadingCompleted: (state: LoadingState, action: {payload: Todo[]}) => {
             state.completed = true;
             state.successful = true;
             console.log('loadingCompleted', action);
         },
-        loadingFailed: (state: LoadingState, action: PayloadAction) => {
+        loadingFailed: (state: LoadingState, action: {payload: string}) => {
             state.completed = true;
             state.successful = false;
             console.log('loadingFailed', action);

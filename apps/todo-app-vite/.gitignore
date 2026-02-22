@@ -27,3 +27,6 @@ dist-ssr
 # Dist Files
 /.vite/
 /.vite/deps/_metadata.json
+
+# Js Files Generated After Unit Tests Compilation
+src/**/*.js

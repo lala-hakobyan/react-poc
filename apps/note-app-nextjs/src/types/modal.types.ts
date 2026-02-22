@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, SyntheticEvent } from 'react';
 
 export type ModalProps = {
     isOpen: boolean;
@@ -27,4 +27,11 @@ export type ModalSlotDisplayName = 'Modal.Header' | 'Modal.Body' | 'Modal.Footer
 
 export type ModalSlotType = {
   displayName?: ModalSlotDisplayName
+}
+
+export type ModalNewHandle = { close: () => void };
+
+export type ModalContextType = {
+  close: (ev?: SyntheticEvent) => void,
+  title: string
 }

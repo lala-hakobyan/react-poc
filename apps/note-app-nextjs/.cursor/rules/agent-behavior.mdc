@@ -6,4 +6,4 @@ alwaysApply: true
 # Agent Behavior
 
 - Each time when a specific task is given, don't overstep from your role. Always ask to confirm next steps before processing.
-- During the planning stage always check rules and never modify any files. 
+- During the planning stage always check rules and never modify any source files. You can only modify your plan files.

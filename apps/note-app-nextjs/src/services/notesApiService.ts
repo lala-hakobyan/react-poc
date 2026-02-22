@@ -10,14 +10,15 @@ class NotesApiService {
   private testAccessToken = process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN;
   private static instance: NotesApiService;
 
-  public async fetchNotes(offset = 0, limit = this.defaultLimitConfig) {
+  public async fetchNotes(offset = 0, limit = this.defaultLimitConfig, signal?:AbortSignal) {
     const response: Response = await fetch(`${this.baseApiUrl}?offset=${offset}&limit=${limit}`, {
       method: 'GET',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.testAccessToken}`,
-      }
+      },
+      signal
     });
 
     await this.handleError(response, LogMessagesConstants.notes.fetchError);

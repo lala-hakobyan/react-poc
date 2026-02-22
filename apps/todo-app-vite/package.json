@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "start": "vite preview",
     "server": "node --watch server/server.js",
     "test:loading-reducers": "tsc src/store/loadingSlice.test.ts && node src/store/loadingSlice.test.js",
     "test:selectors": "tsc src/store/selectors.test.ts && node src/store/selectors.test.js",

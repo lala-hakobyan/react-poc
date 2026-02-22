@@ -11,8 +11,8 @@ export default function Page() {
     <MainLayout>
       <PageTitle title={AboutConstants.pageTitle}></PageTitle>
       <About></About>
-      <Dashboard></Dashboard>
       <ServiceWorkerRegister />
+      <Dashboard></Dashboard>
     </MainLayout>
   )
 }

@@ -2,7 +2,6 @@ import type { NextConfig } from 'next';
 
 
 const nextConfig: NextConfig = {
-  /* config options here */
   allowedDevOrigins: ['local.react-note-app.com', 'local.react-app.com'],
   productionBrowserSourceMaps: true,
   async headers() {
@@ -35,7 +34,6 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Cache-Control',
-            // 1 minute for API requests
             value: 'private, no-cache',
           },
           {
@@ -45,6 +43,13 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin',
             value: 'http://local.react-note-app.com:3000'
           }
+        ],
+      },
+      {
+        source: '/workers/image-service-worker.js',
+        headers: [
+          { key: 'Service-Worker-Allowed', value: '/' },
+          // { key: 'Cache-Control', value: 'no-store' }, // optional, but helpful during debugging
         ],
       },
     ];

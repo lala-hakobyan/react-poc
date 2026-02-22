@@ -13,6 +13,8 @@ import { NoteCard } from '@/components/NoteCard/NoteCard';
 import DeleteNote from '@/features/note/DeleteNote/DeleteNote';
 import { getAllVersions, getCompatibleVersions } from 'baseline-browser-mapping';
 
+const isOfflineModeOn = process.env.NEXT_PUBLIC_ENABLE_OFFLINE_MODE_ON_ERROR === 'true';
+
 export  default function NoteList() {
   const notesListState = useNotesStore(useShallow(selectNotesListSlice));
   const { setCurrentEditNote, setCurrentDeleteNote } = useNotesStore(useShallow((state: NotesStore) => ({
@@ -180,15 +182,27 @@ export  default function NoteList() {
 
   return (
     <>
+      {notesListState.isNotesError &&
+        <div className="mb-md">
+          <Alert alert={{ type: 'danger' }}>
+            <p dangerouslySetInnerHTML={{
+              __html: isOfflineModeOn
+                ? NoteListConstants.fetchErrorMessageOffline
+                : NoteListConstants.fetchErrorMessage
+            }} />
+          </Alert>
+        </div>
+      }
+
       {!notesListState.isNotesLoading &&
         <>
           <ul className={styles.noteList}>
             {notesListState.notes.map((note: Note) => (
-              <li className={styles.noteList__item} key={note.id} data-note-id={note.id}>
+              <li className={styles.noteList__item} key={note.id}>
                 <NoteCard
                   onEdit={() => setEditNote(note.id)}
                   onDelete={() => handleDeleteNote(note)}
-                  noteCard={{ note: note, showImage: true, showActions: true }}
+                  noteCard={{ note: note, showImage: true, showActions: true, dataId: note.id, isReadonly: notesListState.isNotesError }}
                 />
               </li>
             ))}
@@ -200,9 +214,9 @@ export  default function NoteList() {
 
       {notesListState.isNotesLoading && <Loader />}
 
-      {!notesListState.isNotesLoading && !notesListState.isNotesError &&
+      {!notesListState.isNotesLoading && notesListState.notes && notesListState.notes.length!==0 &&
         <div className="text-center mt-md">
-          {notesListState.isLoadMoreNotesError &&
+          {notesListState.isLoadMoreNotesError && !isOfflineModeOn &&
             <Alert alert={{ type: 'danger', className: 'mb-sm' }}>{NoteListConstants.loadMoreErrorMessage}</Alert>
           }
           <Button
@@ -217,10 +231,6 @@ export  default function NoteList() {
             onClick={loadMoreAction}
           />
         </div>
-      }
-
-      {notesListState.isNotesError &&
-        <Alert alert={{ type: 'danger' }}>{ NoteListConstants.fetchErrorMessage }</Alert>
       }
     </>
   )

@@ -54,12 +54,17 @@ const NoteCardComponent : React.FC<NoteCardProps> = ({ noteCard, onEdit, onDelet
               <Icon icon={{ iconName: 'icon-link' }} />
             </a>
           }
-          <a href="#" onClick={onEditAction} className="ml-xs svg-link">
-            <Icon icon={{ iconName: 'icon-edit' }} />
-          </a>
-          <a href="#" onClick={onDeleteAction} className="ml-xs svg-link">
-            <Icon icon={{ iconName: 'icon-trash' }} />
-          </a>
+          {!noteCard.isReadonly &&
+          <>
+            <a href="#" onClick={onEditAction} className="ml-xs svg-link">
+              <Icon icon={{ iconName: 'icon-edit' }} />
+            </a>
+
+            <a href="#" onClick={onDeleteAction} className="ml-xs svg-link">
+              <Icon icon={{ iconName: 'icon-trash' }} />
+            </a>
+          </>
+          }
         </div>
       }
       <div className={styles.noteCard__content}>

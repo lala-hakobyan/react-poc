@@ -1,0 +1,48 @@
+.tooltip {
+  position: relative;
+
+  &::before, &::after {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* The text box */
+  &::before {
+    display: inline-block;
+    content: attr(data-tooltip); /* Pulls the text directly from the HTML attribute */
+    background-color: var(--primary-color);
+    color: var(--primary-bg-color);
+    text-align: center;
+    border-radius: 4px;
+    padding: 6px 12px;
+    line-height: normal;
+    font-size: 12px;
+    font-weight: 500;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+    white-space: nowrap;
+  }
+
+  /* Bottom Arrow */
+  &::after {
+    content: "";
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent var(--primary-color) transparent;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
+}

@@ -4,15 +4,6 @@ export interface Todo {
     isCompleted: boolean;
 }
 
-export enum Status {
-    Completed  = 'completed',
-    InProgress = 'inProgress'
-}
-
-export interface TodoListParams {
-    onCreateClicked?: Function | undefined,
-}
-
 export interface TodoListItemParams {
     todo: Todo,
 }

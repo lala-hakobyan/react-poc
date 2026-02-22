@@ -11,4 +11,5 @@ export type NoteCardConfig = {
     dataId?: string;
     showImage?: boolean;
     showActions?: boolean;
+    isReadonly?: boolean;
 }

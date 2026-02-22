@@ -1,6 +1,5 @@
 import { Note } from '@/types/note.types';
 
-
 class NotesCacheService {
   private static instance: NotesCacheService;
   private static readonly dbName = 'react-note-app';
@@ -24,7 +23,8 @@ class NotesCacheService {
         request.onupgradeneeded = () => {
           const db = request.result;
           if (!db.objectStoreNames.contains(NotesCacheService.storeName)) {
-            db.createObjectStore(NotesCacheService.storeName, { keyPath: 'id' });
+            const store = db.createObjectStore(NotesCacheService.storeName, { keyPath: 'id' });
+            store.createIndex('creationDate', 'creationDate', { unique: false });
           }
         };
 
@@ -52,7 +52,24 @@ class NotesCacheService {
     });
   }
 
-  async loadNotes(): Promise<Note[]> {
+  async deleteNotes(noteIds: string[]): Promise<void> {
+    const db = await this.getDb();
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(NotesCacheService.storeName, 'readwrite');
+      const store = tx.objectStore(NotesCacheService.storeName);
+
+      // Loop through and delete all of them in the same transaction
+      noteIds.forEach((id) => {
+        store.delete(id);
+      });
+
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async loadAllNotes(): Promise<Note[]> {
     const db = await this.getDb();
 
     return new Promise((resolve, reject) => {
@@ -63,6 +80,48 @@ class NotesCacheService {
       request.onsuccess = () => {
         resolve(request.result as Note[]);
       };
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async loadNotes(offset: number = 0, limit: number = 9): Promise<Note[]> {
+    const db = await this.getDb();
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(NotesCacheService.storeName, 'readonly');
+      const store = tx.objectStore(NotesCacheService.storeName);
+      const results: Note[] = [];
+      let advanced = false;
+
+      const index = store.index('creationDate');
+      const request = index.openCursor(null, 'prev');
+
+      request.onsuccess = (event: Event) => {
+        const target = event.target as IDBRequest<IDBCursorWithValue | null>;
+        const cursor = target.result;
+
+        if (!cursor) {
+          resolve(results); // End of store
+          return;
+        }
+
+        // 1. Move to the starting point (the Offset)
+        if (offset > 0 && !advanced) {
+          advanced = true;
+          cursor.advance(offset);
+          return;
+        }
+
+        // 2. Collect notes until the Limit is reached
+        results.push(cursor.value);
+
+        if (results.length < limit) {
+          cursor.continue();
+        } else {
+          resolve(results); // Limit reached
+        }
+      };
+
       request.onerror = () => reject(request.error);
     });
   }

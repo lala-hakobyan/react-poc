@@ -1,18 +1,19 @@
-import {type Dispatch, useState} from "react";
+import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {createTodo} from "../../store/thunks";
+import type {AppDispatch} from "../../store/store.ts";
 
 export default function NewTodoForm({isOnline} = {isOnline: true}) {
     const [inputText, setInputText] = useState('');
     const [error, setError] = useState(false);
-    const dispatch: Dispatch<any> = useDispatch();
-    
-    
+    const dispatch: AppDispatch = useDispatch();
+
+
     const handleAddTodo = () => {
         if(inputText.trim() === '') {
             setError(true);
             return;
-        } 
+        }
 
         dispatch(createTodo(inputText))
         setInputText('');
