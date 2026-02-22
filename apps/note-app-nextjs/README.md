@@ -11,7 +11,7 @@ This project is designed to work locally with a mock back-end API. It provides t
 
 ## Compatibility
 The project is compatible with the following technology versions:
-- **Next.js**: `v16.0.3`
+- **Next.js**: `v16.0.7`
 - **React**: `v19.1.0`
 - **Node.js**: `v20+`
   This project was tested with **Node.js** `v22.17.0`.
