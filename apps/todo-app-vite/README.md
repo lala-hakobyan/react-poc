@@ -1,5 +1,5 @@
 # React Todo POC App with Vite
-A lightweight React POC **Todo app** built with **Vite** to experiment with **Redux**, served by a local mock back-end API.
+A lightweight React POC **Todo application** built with **Vite** to experiment with **Redux**, served by a local mock back-end API.
 
 ## About
 This is a simple React POC Todo application built with **Vite** which is designed to work locally with mock back-end API. It provides the following functionalities:
@@ -24,8 +24,9 @@ While this is not a full production-ready application, there are several feature
   Using TypeScript over JavaScript makes code more understandable and maintainable as well as helps to catch errors early in the development process (at compile time) rather than at runtime.
 - **Responsive, mobile-first layout.**
 - **Scalable folder structure.**
-- **Redux pattern applied following generic best practices.**<br>
-  **Note:** Please be aware that the Redux pattern should not be preferred for this kind of small and simple application. It is intended more for advanced applications which require sophisticated synchronization between different features.
+- **Redux library used for state management.**<br>
+  The Redux pattern is applied through the `react-redux` library, following generic best practices.<br>
+  **Note:** Please be aware that the Redux library should not be preferred for this kind of small and simple application. It is intended more for advanced applications which require advanced synchronization between different features.
 - **Online/Offline Sync Indicator.**<br>
   This indicator shows if user is offline/online which is useful when apps also support offline functionality.
 - **Integrated linting.**<br>
@@ -60,7 +61,7 @@ In order to run the project locally, you need to run the development server and 
 **Serve Production Build**
 - **Run production build locally to:** `npm run build`
 - **Serve production build locally:** `npm run start`<br>
-  This serves the application from the built production files under the `.vite` folder.
+  This serves the application from the built production files under the `dist` folder.
 
 **Linting**
 - **Run linting:** `npm run lint`
@@ -70,6 +71,16 @@ In order to run the project locally, you need to run the development server and 
 - **Check type compatibility of unit test files:** `npm run test:build`
 - **Run unit tests for loading reducers:** `npm run test:loading-reducers`
 - **Run unit tests for selectors:** `npm run test:selectors`
+
+
+## How to Debug
+You can use the Redux DevTools browser extension to inspect application state. It's a free browser extension available in major browsers:
+- **Chrome:** <span class="primary-link">[Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)</span>
+- **Firefox:** <span class="primary-link">[Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/reduxdevtools/)</span>
+- **Edge:** <span class="primary-link">[Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/redux-devtools/nnkgneoiohoecpdiaponcejilbhhikei)</span>
+
+> **Note:** To learn more about the details of inspecting state with **Redux DevTools**, check the **Redux DevTools** chapter in my [Front-end Debugging Tools Handbook](https://github.com/lala-hakobyan/front-end-debugging-handbook).
+
 
 ## Troubleshooting
 
