@@ -18,6 +18,7 @@ It contains the following useful features and best practices:
   - Isolation of data (API), cache, logger layers through separate dedicated services.
   - Separate `proxyRequestService.ts` to universally handle API requests passing through Next.js server components.
 - **Security headers (CORS, CSP)**
+- **IDE productive workflows for debugging and AI feature generation**
 - **Caching functionality through IndexedDB and Web Workers**
 - **Logging functionality**
 - **React design patterns (Layout, Custom Hooks, Compound, Singleton)**

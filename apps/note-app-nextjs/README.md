@@ -32,6 +32,10 @@ It contains the following useful features and best practices:
 - **State management with Zustand**
   - Centralized state management with **Zustand** using slicing to separate state into stand-alone layers.
   - **Zustand** integration with Redux DevTools through middleware.
+- **IDE productive workflows:**
+  - WebStorm debugging setup (`.run` folder)
+  - Cursor debugging configurations (`.vscode/launch.json`)
+  - Cursor AI agent starter rules, commands, skills and feature specs (`.cursor` folder)
 - **Security headers (CORS, CSP)**
 - **Caching functionality:**
   - Notes data is stored in the browser IndexedDB database upon each action.
@@ -55,13 +59,13 @@ It contains the following useful features and best practices:
 
 ## What is Missing
 Below are the features that are missing to make this POC fully applicable for a production app foundation:
-- **Enhanced accessibility integration**
+- **Enhanced accessibility integration (WCAG compliance)**
+- **Security enhancement through authentication integration**
 - **Testing:**
-  - **Unit testing:** Testing with mock dependencies.
-  - **Component testing:** Testing with mock dependencies.
-  - **E2E testing:** Testing with real dependencies on real lower (dev, staging) environments, which preferably mimic production environments.
-    **Note:** One of the good approaches to testing is to use the **Shift Left** strategy where we write as many tests as possible in the Unit Testing and Component testing layers inside the repository.
-    This helps to catch bugs at early stages before even committing to a shared repository.
+  - **Unit testing:** Testing isolated functions and logic with mock dependencies to ensure core reliability.
+  - **Component testing:** Testing integrated UI pieces with mock dependencies to verify behavior.
+  - **E2E testing:** Testing complete user flows with real dependencies on real lower (dev, staging) environments, which preferably mimic production environments.
+    **Note:** A standard best practice here is the **Shift Left** strategy. By writing as many tests as possible in the unit and component layers, we catch bugs at early stages before even committing to a shared repository.
 - **Pre-commit hooks (e.g., Husky):**
   These hooks automatically enforce linting, unit testing and [conventional commit rules](https://www.conventionalcommits.org/en/v1.0.0/) on every commit. This prevents code that violates established best practices from being pushed to the shared repository.
 - **CI/CD pipeline**
