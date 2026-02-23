@@ -1,5 +1,6 @@
 import styles from '@/components/AdBanner/AdBanner.module.scss';
 import Image from 'next/image';
+import { AdBannerConstants } from '@/components/AdBanner/adBanner.data';
 
 export function AdBannerLoader() {
   return (
@@ -9,10 +10,7 @@ export function AdBannerLoader() {
         fill
         sizes="100vw"
         priority={true}
-        alt="FE Debugging Handbook Ad Banner" />
+        alt={AdBannerConstants.bannerImageTitle} />
     </figure>
-    // <div className={styles.adBanner__loader}>
-    //   <p>LOADING SPONSORED <br/> CONTENT...</p>
-    // </div>
   )
 }

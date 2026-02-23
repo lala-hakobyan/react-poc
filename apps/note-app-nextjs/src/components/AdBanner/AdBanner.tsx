@@ -1,23 +1,23 @@
 import Image from 'next/image';
 import styles from './AdBanner.module.scss';
+import { AdBannerConstants } from '@/components/AdBanner/adBanner.data';
 
 export default async function AdBanner() {
   let imageUrl = null;
-  const testAccessToken = process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN;
 
   try {
-    const data = await fetch('http://local.react-note-app.com:3000/api/banners/ad',
+    const data = await fetch(AdBannerConstants.bannerApiUrl,
       {
         method: 'GET',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${testAccessToken}`,
+          'Authorization': `Bearer ${AdBannerConstants.testAccessToken}`,
         }
       });
     imageUrl = await data.json();
   } catch (error) {
-    console.error('Failed to load banner:', error);
+    console.error(AdBannerConstants.loadErrorMessage, error);
     return null; // Return null to render nothing on error
   }
 
@@ -26,12 +26,12 @@ export default async function AdBanner() {
   return (
     <aside className={styles.adBanner}>
       <figure className={styles.adBanner__imageWrapper}>
-        <a href={'https://github.com/lala-hakobyan/front-end-debugging-handbook'} target={'_blank'}>
+        <a href={AdBannerConstants.bannerLink} target={'_blank'}>
           <Image src={imageUrl}
             className={styles['adBanner__imageWrapper-img']}
             fill
             sizes="100vw"
-            alt="Front-end Debugging Handbook Ad Banner" />
+            alt={AdBannerConstants.bannerImageTitle} />
         </a>
       </figure>
     </aside>

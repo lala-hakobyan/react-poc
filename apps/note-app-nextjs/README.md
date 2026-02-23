@@ -118,6 +118,13 @@ In order to run the project locally, you need to run the development server and 
 
 ## How to Debug
 
+### Debug Experiments
+
+> **Note:** Speculation rules are an experimental technology and are not intended for single-page applications.
+> This feature was added using the `NEXT_PUBLIC_ENABLE_SPECULATION_RULES` flag to help you understand the technology and debug it in the **Application** panel.
+> You must turn this off during **React DevTools** profiling because it introduces unexpected internal issues in **React DevTools** like the following error:
+> `Uncaught Error: Cannot add child "225" to parent "211" because parent node was not found in the Store.`
+
 ### IDE Debugging
 Below are instructions on how to set up an IDE debugger for this Next.js project which will work for all Next.js projects, starting from v16.0.3.
 

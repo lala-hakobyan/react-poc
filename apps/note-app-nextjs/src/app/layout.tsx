@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../styles/general.scss';
 import '../styles/helpers.scss';
+import {debugFlags} from "@/debug-experiments/debugFlags";
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,13 +29,15 @@ export default function RootLayout({
       <head>
         <title>My Notes</title>
         <link rel="manifest" href="/manifest.json" />
-        {/* Load script in a blocking way (simulate performance leak) */}
-        {/*<Script src="/assets/icons/heavy-analytics-script.js" strategy="beforeInteractive" />*/}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        { <script src="/assets/js/heavy-analytics-script.js" /> }
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossOrigin="anonymous" />
+        { debugFlags.enableRenderBlockingScript && <script src="/assets/js/heavy-analytics-script.js" /> }
 
+        { debugFlags.enableCSPViolationScript &&
+          /* eslint-disable-next-line @next/next/no-sync-scripts */
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossOrigin="anonymous" />
+        }
+
+        { debugFlags.enableSpeculationRules &&
         <script type="speculationrules"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -55,7 +58,7 @@ export default function RootLayout({
             }),
           }}
         />
-
+        }
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}

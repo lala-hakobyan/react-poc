@@ -1,5 +1,6 @@
 import { Note } from '@/types/note.types';
 import { LogMessagesConstants } from '@/constants/logMessages.constants';
+import { debugFlags } from '@/debug-experiments/debugFlags';
 
 /**
  * Singleton class for abstracting API requests related to Notes
@@ -64,7 +65,7 @@ class NotesApiService {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.testAccessToken}`,
+        'Authorization': debugFlags.enableDeleteAuthAPIError ? `${this.testAccessToken}` : `Bearer ${this.testAccessToken}`,
       }
     })
 

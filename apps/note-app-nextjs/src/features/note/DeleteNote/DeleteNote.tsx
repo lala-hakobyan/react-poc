@@ -1,16 +1,21 @@
 import Modal from '@/components/Modal/Modal';
 import Button from '@/components/Button/Button';
-import { selectDeleteNoteSlice, useNotesStore } from '@/store/notes/notesStore';
+import { selectDeleteNoteSlice, selectNotesListSlice, useNotesStore } from '@/store/notes/notesStore';
 import Loader from '@/components/Loader/Loader';
 import { DeleteNoteConstants } from '@/constants/deleteNote.constants';
 import { useShallow } from 'zustand/react/shallow';
 import { ActionStatus } from '@/store/notes/notesStore.types';
 import { useRef } from 'react';
 import { ModalNewHandle } from '@/types/modal.types';
+import { debugFlags } from '@/debug-experiments/debugFlags';
 
 export default function DeleteNote() {
-  const deleteNoteState = useNotesStore(useShallow(selectDeleteNoteSlice));
   const modalRef = useRef<ModalNewHandle>(null);
+  const deleteNoteState = useNotesStore(useShallow(selectDeleteNoteSlice));
+  if(debugFlags.enableReactUnnecessaryRerender) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const noteListState = useNotesStore(useShallow(selectNotesListSlice));
+  }
 
   const deleteAction = async() => {
     let actionStatus: ActionStatus | null = null;

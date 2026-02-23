@@ -6,21 +6,10 @@ import { useNotesStore } from '@/store/notes/notesStore';
 import { useShallow } from 'zustand/react/shallow';
 import DeleteNote from '@/features/note/DeleteNote/DeleteNote';
 import Icon from '@/components/Icon/Icon';
-import { Profiler } from 'react';
 import './../../../styles/tooltip.scss';
+import { ConditionalProfiler } from '@/debug-experiments/ConditionalProfiler';
+import { debugFlags } from '@/debug-experiments/debugFlags';
 
-type ProfilerPhase = 'mount' | 'update' | 'nested-update';
-
-function onRender(id: string, phase: ProfilerPhase, actualDuration: number, baseDuration: number, startTime: number, commitTime: number): void {
-  const slowThreshold = 1; // ms
-  if (actualDuration > slowThreshold) {
-    console.warn(`[Profiler][${id}] ${phase} render took ${actualDuration.toFixed(2)}ms`, {
-      baseDuration: baseDuration.toFixed(2),
-      startedAt: startTime.toFixed(2),
-      committedAt: commitTime.toFixed(2)
-    });
-  }
-}
 
 export default function Actions() {
   const { setIsAddEditModalOpen, isAddEditModalOpen, isDeleteModalOpen } = useNotesStore(useShallow((state) => ({
@@ -31,26 +20,26 @@ export default function Actions() {
   })));
 
   return (
-    <Profiler id="profilerActions" onRender={onRender}>
+    <ConditionalProfiler>
       <div className={`${styles.actions} mb-sm`}>
         <Button button={{ label: 'Add New' }} onClick={() => setIsAddEditModalOpen(true)}></Button>
 
-      {isAddEditModalOpen && <AddEditNote></AddEditNote>}
+        {isAddEditModalOpen && <AddEditNote />}
 
-      {isDeleteModalOpen && <DeleteNote />}
+        {!debugFlags.enableReactUnnecessaryRerender && isDeleteModalOpen && <DeleteNote />}
 
-      <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
-        <Icon icon={{ iconName: 'icon-sort-up', color: 'secondary' }} />
-      </a>
+        <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
+          <Icon icon={{ iconName: 'icon-sort-up', color: 'secondary' }} />
+        </a>
 
-      <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
-        <Icon icon={{ iconName: 'icon-filter', color: 'secondary' }} />
-      </a>
+        <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
+          <Icon icon={{ iconName: 'icon-filter', color: 'secondary' }} />
+        </a>
 
-      <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
-        <Icon icon={{ iconName: 'icon-search', color: 'secondary' }} />
-      </a>
-    </div>
-    </Profiler>
+        <a href="#" className={`${styles.actions__iconLink} svg-link tooltip`} data-tooltip={'Coming soon...'}>
+          <Icon icon={{ iconName: 'icon-search', color: 'secondary' }} />
+        </a>
+      </div>
+    </ConditionalProfiler>
   )
 }
