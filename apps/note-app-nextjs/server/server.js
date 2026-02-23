@@ -13,9 +13,12 @@ const port = 3010;
 app.use(cors({
   origin: [
     'http://local.react-note-app.com:3000',
-    'http://localhost:3000'
-  ], // allow only this domains
-  credentials: true, // optional: allow cookies/auth headers
+    'http://local.react-app.com:3000',
+    'http://localhost:3000',
+  ], // Specify allowed domains
+  methods: 'GET, POST, PUT', // Specify the allowed methods
+  allowedHeaders: 'Content-Type, Authorization', // Specify allowed headers
+  credentials: true, // Allow cookies/auth headers
 }));
 
 app.use(express.json());
@@ -62,7 +65,7 @@ app.put('/api/notes/:id', authMiddleware, (req, res) => {
   setTimeout(() => res.json(notes[noteIndex]), 1000);
 });
 
-app.post('/api/messages/error', authMiddleware, (req, res) => {
+app.post('/api/messages', authMiddleware, (req, res) => {
   setTimeout(() => res.status(200).send({ success: true }), 1000);
 })
 

@@ -6,11 +6,11 @@ import { DeleteNoteConstants } from '@/constants/deleteNote.constants';
 import { useShallow } from 'zustand/react/shallow';
 import { ActionStatus } from '@/store/notes/notesStore.types';
 import { useRef } from 'react';
-import { ModalNewHandle } from '@/types/modal.types';
+import { ModalRef } from '@/types/modal.types';
 
 export default function DeleteNote() {
   const deleteNoteState = useNotesStore(useShallow(selectDeleteNoteSlice));
-  const modalRef = useRef<ModalNewHandle>(null);
+  const modalRef = useRef<ModalRef>(null);
 
   const deleteAction = async() => {
     let actionStatus: ActionStatus | null = null;
