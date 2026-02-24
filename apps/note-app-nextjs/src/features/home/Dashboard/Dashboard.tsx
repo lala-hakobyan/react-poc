@@ -45,7 +45,6 @@ export default function Dashboard() {
     });
   }
 
-
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;

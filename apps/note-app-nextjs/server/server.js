@@ -1,3 +1,4 @@
+const { loadEnvConfig } = require('@next/env');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 let express = require('express');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -7,15 +8,20 @@ const cors = require('cors');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const authMiddleware = require('./authMiddleware');
 
+// Tell Next.js to parse the .env files in your root directory
+// The second argument determines if it should load development overrides
+const projectDir = process.cwd();
+loadEnvConfig(projectDir, process.env.NODE_ENV !== 'production');
+
 const app = express();
 const port = 3010;
+const enabledCORSError = process.env.NEXT_PUBLIC_ENABLE_CONTACT_CORS_API_ERROR === 'true';
+const corsDomains = enabledCORSError ?
+  ['http://localhost:3000'] :
+  ['http://localhost:3000','http://local.react-note-app.com:3000']
 
 app.use(cors({
-  origin: [
-    'http://local.react-note-app.com:3000',
-    'http://local.react-app.com:3000',
-    'http://localhost:3000',
-  ], // Specify allowed domains
+  origin: corsDomains, // Specify allowed domains
   methods: 'GET, POST, PUT', // Specify the allowed methods
   allowedHeaders: 'Content-Type, Authorization', // Specify allowed headers
   credentials: true, // Allow cookies/auth headers

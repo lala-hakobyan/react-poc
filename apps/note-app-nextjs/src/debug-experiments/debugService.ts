@@ -143,7 +143,7 @@ class DebugService {
   public async measurePerformanceOfGettingNote (noteId: string, callback: (res: Note, open: boolean) => void) {
     const start = performance.now();
     try {
-      const response: Response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notes/${noteId}`, {
+      const response: Response = await fetch(`api/notes/${noteId}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -152,7 +152,7 @@ class DebugService {
       });
 
       if (!response.ok) {
-        throw new Error('Could not the find note.');
+        throw new Error('Could not the find the note.');
       }
 
       const result = await response.json();

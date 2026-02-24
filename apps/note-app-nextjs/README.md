@@ -1,5 +1,7 @@
 # React Note POC App with Next.js
 A scalable and maintainable React Next.js POC Note management application to serve as a foundation for real production apps, served by a local mock back-end API.
+This branch contains specific **debugging experiments** and **performance bottleneck simulations** to help you master debugging tools and concepts described in my **[Front-end Debugging Tools Handbook](https://github.com/lala-hakobyan/front-end-debugging-handbook)**.
+
 
 ## About
 This project is designed to work locally with a mock back-end API. It provides the following functionalities:
@@ -120,10 +122,61 @@ In order to run the project locally, you need to run the development server and 
 
 ### Debug Experiments
 
-> **Note:** Speculation rules are an experimental technology and are not intended for single-page applications.
-> This feature was added using the `NEXT_PUBLIC_ENABLE_SPECULATION_RULES` flag to help you understand the technology and debug it in the **Application** panel.
-> You must turn this off during **React DevTools** profiling because it introduces unexpected internal issues in **React DevTools** like the following error:
-> `Uncaught Error: Cannot add child "225" to parent "211" because parent node was not found in the Store.`
+All debug experiments in this branch are controlled via flags in environment files: `.env.development` and `.env.production`.
+Set `NEXT_PUBLIC_ENABLE_ALL_DEBUG_EXPERIMENTS=true` to enable every experiment at once, or toggle each flag individually.
+
+- **`NEXT_PUBLIC_ENABLE_ALL_DEBUG_EXPERIMENTS`:** Enables all debug experiments at once. When `true`, forces every individual debug flag below to active regardless of its own value.
+
+- **`NEXT_PUBLIC_ENABLE_MOCK_STORAGE_DATA`:** Populates **Application** panel storage with pre-set test data on **My Notes** page load: **cookies**, `localStorage` and `sessionStorage`.
+  The cookies that are set as **Secure** can be inspected only when running project with **HTTPS**.<br>
+  Useful for inspecting storage state in **Application** panel without manual setup.
+
+- **`NEXT_PUBLIC_ENABLE_SPECULATION_RULES`:** Injects speculation rules script into `<head>` with prerender and prefetch rules (`.prerender`: immediate, `.prerender-hover`: moderate, `.prefetch`: immediate).<br>
+  Useful for understanding Speculation Rules and inspecting the **Speculation Rules** section in the **Application** panel.
+
+  > **Note:** Speculation rules are an experimental technology and are not intended for single-page applications.<br>
+  > This feature was added using the `NEXT_PUBLIC_ENABLE_SPECULATION_RULES` flag to help you understand the technology and debug it in the **Application** panel.<br>
+  > You must turn this off during **React DevTools** profiling because it introduces unexpected internal issues in **React DevTools** like the following error:<br>
+  > `Uncaught Error: Cannot add child "225" to parent "211" because parent node was not found in the Store.`
+
+- **`NEXT_PUBLIC_ENABLE_RENDER_BLOCKING_SCRIPT`:** Adds a synchronous heavy analytics script to `<head>`. The script blocks HTML parsing and delays first paint.<br>
+  Useful for debugging the render-blocking resources in the **Performance** and **Lighthouse** panels.
+
+- **`NEXT_PUBLIC_ENABLE_NOTE_EDIT_DELAY`:** Delays rendering of the Note edit modal opening by calling two unnecessary functions:
+  - `highlightOtherNotesWithDelay`: Highlights all notes besides current one in grey color. During highlighting adds given delay (`100ms`) in Main thread rendering for each note (via `performance.now`) thus causing aggregated bigger delay.
+  - `measurePerformanceOfGettingNote`: Gets note by ID from the API (while the note already exists in the UI) and calculates the speed of that operation using `performance.now` and prints to the screen.
+
+  Useful for debugging slow INP metric on **Performance** panel and understanding `performance.now` method use cases.
+
+- **`NEXT_PUBLIC_ENABLE_ACTIONS_PROFILER`:** Wraps the `Actions` component with the React Profiler API `<Profiler>` wrapper. Any render taking longer than 1 ms emits a `console.warn` with phase, actual duration, base duration, start time and commit time.<br>
+  Useful for debugging performance measurements for React components programmatically with **React Profiler** API.
+
+- **`NEXT_PUBLIC_ENABLE_REACT_UNNECESSARY_RERENDER`:** Artificially introduces unnecessary re-renders of `DeleteNote` component.
+  - It is rendered outside of `Actions`, always mounted in the `NoteList`.
+  - It subscribes to the `noteListState` Zustand slice without using its data, causing a re-render on every notes-list state change.
+    Therefore, when `NoteList` rerenders after editing or adding a note, `DeleteNote` also rerenders unnecessarily.
+
+  Useful for practicing detection of unnecessary re-renders with **React DevTools Profiler**.
+
+- **`NEXT_PUBLIC_ENABLE_LOAD_MORE_CUSTOM_PERFORMANCE_TRACK`:** Adds custom **Performance Track** with marks and measure around the **Load More** action (`load-more-started`, `load-more-ended`, `Load More Complete`).
+  The measure is placed on the custom track **Notes List Tasks** inside the **My Notes Track** group, visible in the **Performance** panel's custom track lane.<br>
+  Useful for experimenting with custom performance tracks on **Performance** panel.
+
+- **`NEXT_PUBLIC_ENABLE_BROWSER_COMPATIBILITY_INFO`:** Logs browser compatibility data (widely available baseline versions and full per-browser version support) on mount via the `baseline-browser-mapping` package and outputs result in the **Console** panel.
+  `npm run baseline-browser-mapping:refresh` command can be used to keep this package always up to date for latest fresh data.<br>
+  Useful for **cross-browser support** investigations.
+
+- **`NEXT_PUBLIC_ENABLE_CSP_VIOLATION_SCRIPT`:** Injects an external Bootstrap CDN script into `<head>` which violates the app's CSP policy so the script is blocked.<br>
+  Useful for understanding how CSP works and inspecting **CSP violation** in the **Console** and **Network** panels.
+
+- **`NEXT_PUBLIC_ENABLE_SUSPENSE_BANNER`:** When enabled, loads the `AdBanner` async server component (in the Footer) in a `Suspense` boundary with an `AdBannerLoader` skeleton fallback. When disabled, the banner is not rendered at all.<br>
+  Useful for observing Suspense streaming behavior in the **React DevTools Components** panel and viewing it in **Server Requests** React custom track in Performance panel.
+
+- **`NEXT_PUBLIC_ENABLE_DELETE_AUTH_API_ERROR`:** Simulates **401 Unauthorized** error for `deleteNote` API call by stripping the `Bearer ` prefix, sending `Authorization: <token>` instead of `Authorization: Bearer <token>`.<br>
+  Useful for inspecting authentication API errors in the **Network** and **Console** panels.
+
+- **`NEXT_PUBLIC_ENABLE_CONTACT_AUTH_API_ERROR`:** Simulates **CORS** error for Contact page `messages` API by performing direct call to back-end server (bypassing Next.js proxy) and eliminating caller domain from back-end server CORS policies.<br>
+  Useful for inspecting CORS API errors in the **Network** and **Console** panels.
 
 ### IDE Debugging
 Below are instructions on how to set up an IDE debugger for this Next.js project which will work for all Next.js projects, starting from v16.0.3.

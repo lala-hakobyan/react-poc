@@ -15,6 +15,7 @@ export default async function AdBanner() {
           'Authorization': `Bearer ${AdBannerConstants.testAccessToken}`,
         }
       });
+
     imageUrl = await data.json();
   } catch (error) {
     console.error(AdBannerConstants.loadErrorMessage, error);

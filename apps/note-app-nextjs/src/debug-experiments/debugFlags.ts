@@ -11,5 +11,6 @@ export const debugFlags = {
   enableBrowserCompatibilityInfo: enableAllDebugExperiments || process.env.NEXT_PUBLIC_ENABLE_BROWSER_COMPATIBILITY_INFO === 'true',
   enableCSPViolationScript: enableAllDebugExperiments || process.env.NEXT_PUBLIC_ENABLE_CSP_VIOLATION_SCRIPT === 'true',
   enableSuspenseBanner: enableAllDebugExperiments || process.env.NEXT_PUBLIC_ENABLE_SUSPENSE_BANNER === 'true',
-  enableDeleteAuthAPIError: enableAllDebugExperiments || process.env.NEXT_PUBLIC_ENABLE_DELETE_AUTH_API_ERROR === 'true',
+  enableDeleteAuthApiError: enableAllDebugExperiments || process.env.NEXT_PUBLIC_ENABLE_DELETE_AUTH_API_ERROR === 'true',
+  enableContactCorsApiError: enableAllDebugExperiments || process.env.NEXT_PUBLIC_ENABLE_CONTACT_CORS_API_ERROR === 'true'
 }

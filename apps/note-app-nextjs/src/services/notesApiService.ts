@@ -65,14 +65,14 @@ class NotesApiService {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': debugFlags.enableDeleteAuthAPIError ? `${this.testAccessToken}` : `Bearer ${this.testAccessToken}`,
+        'Authorization': debugFlags.enableDeleteAuthApiError ? `${this.testAccessToken}` : `Bearer ${this.testAccessToken}`,
       }
     })
 
     await this.handleError(response, LogMessagesConstants.notes.deleteError);
   }
 
-  private async handleError(response: Response, errorText: string) {
+  public async handleError(response: Response, errorText: string) {
     if(!response.ok) {
       let errorData;
       let errorMessage = response.status + ' ' + errorText;

@@ -1,6 +1,8 @@
 # React POC Projects
 
 A collection of React POC starter projects designed to reflect best practices in modern React development. The projects are intended for experimenting and debugging React features and frameworks, benchmarking performance and creating maintainable, scalable architecture POCs as a foundation for real production apps.
+This branch contains specific **debugging experiments** and **performance bottleneck simulations** to help you master debugging tools and concepts described in my **[Front-end Debugging Tools Handbook](https://github.com/lala-hakobyan/front-end-debugging-handbook)**.
+Most of the specific debugging experiments and performance bottleneck simulations are located in the Next.js project (`apps/note-app-nextjs`).
 
 ## Projects
 
