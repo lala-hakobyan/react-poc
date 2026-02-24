@@ -64,6 +64,11 @@ The underlying source code and CSS authored by Lala Hakobyan are licensed under 
 **Official Source**<br>
 For the latest updates, please refer to the official repository: https://github.com/lala-hakobyan/react-poc
 
+**Attribution Example**<br>
+If you reference this project or use the source code in your own documentation, you can use the following format:
+
+> **Source:** "My Notes App POC" by Lala Hakobyan. Copyright © 2026. All rights reserved. Available at: https://github.com/lala-hakobyan/react-poc
+
 
 ## Feedback and Issues
 - If you found a bug or have feedback, please feel free to reach out via [LinkedIn](https://www.linkedin.com/in/lala-hakobyan) or submit an issue on the [**Issues page**](https://github.com/lala-hakobyan/react-poc/issues) on GitHub.
