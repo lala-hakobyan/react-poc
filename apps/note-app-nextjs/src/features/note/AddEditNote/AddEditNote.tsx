@@ -15,7 +15,7 @@ import { useShallow } from 'zustand/react/shallow';
 import BrowseLabel from '@/components/BrowseLabel/BrowseLabel';
 import { generateUuid } from '@/utils/random';
 import Modal from '@/components/Modal/Modal';
-import { ModalNewHandle } from '@/types/modal.types';
+import { ModalRef } from '@/types/modal.types';
 
 
 export default function AddEditNote() {
@@ -23,7 +23,7 @@ export default function AddEditNote() {
   const noteFormContract: NoteFormContract = useNoteForm(addEditNoteState.currentEditNote as NoteForm);
   const title = addEditNoteState.currentEditNote ? `Edit Note: ${addEditNoteState.currentEditNote.title}`: 'Add New Note';
   const buttonName = addEditNoteState.currentEditNote ? `Edit Note`: 'Add Note';
-  const modalRef = useRef<ModalNewHandle>(null);
+  const modalRef = useRef<ModalRef>(null);
 
   const [imageFileName, setImageFileName] = useState(extractFileName(noteFormContract.notesFormState.form.image ?? ''));
 

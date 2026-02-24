@@ -6,11 +6,11 @@ import { DeleteNoteConstants } from '@/constants/deleteNote.constants';
 import { useShallow } from 'zustand/react/shallow';
 import { ActionStatus } from '@/store/notes/notesStore.types';
 import { useRef } from 'react';
-import { ModalNewHandle } from '@/types/modal.types';
+import { ModalRef } from '@/types/modal.types';
 import { debugFlags } from '@/debug-experiments/debugFlags';
 
 export default function DeleteNote() {
-  const modalRef = useRef<ModalNewHandle>(null);
+  const modalRef = useRef<ModalRef>(null);
   const deleteNoteState = useNotesStore(useShallow(selectDeleteNoteSlice));
   if(debugFlags.enableReactUnnecessaryRerender) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -55,6 +55,7 @@ export default function DeleteNote() {
           title={`Delete Note: ${deleteNoteState.currentDeleteNote?.title}`}
           onClosed={() => resetDeleteModal()}
         >
+          <Modal.Header />
           <Modal.Body>
             {DeleteNoteConstants.confirmDeleteMessage}
           </Modal.Body>
@@ -72,6 +73,7 @@ export default function DeleteNote() {
 
       {deleteNoteState.isNoteDeleteError &&
         <Modal isOpen={true} title="Error happened" onClosed={() => resetErrorModal()}>
+          <Modal.Header />
           <Modal.Body>
             {DeleteNoteConstants.deleteErrorMessage}
           </Modal.Body>

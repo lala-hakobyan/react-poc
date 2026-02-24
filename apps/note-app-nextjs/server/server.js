@@ -71,7 +71,7 @@ app.put('/api/notes/:id', authMiddleware, (req, res) => {
   setTimeout(() => res.json(notes[noteIndex]), 1000);
 });
 
-app.post('/api/messages/error', authMiddleware, (req, res) => {
+app.post('/api/messages', authMiddleware, (req, res) => {
   setTimeout(() => res.status(200).send({ success: true }), 1000);
 })
 

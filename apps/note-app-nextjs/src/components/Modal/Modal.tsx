@@ -2,7 +2,7 @@
 import styles from './Modal.module.scss';
 import {
   ModalContextType,
-  ModalNewHandle,
+  ModalRef,
   ModalProps,
 } from '@/types/modal.types';
 import Button from '@/components/Button/Button';
@@ -23,7 +23,7 @@ const modalActiveClass = `${styles.modal} ${styles['modal--active']}`;
 
 const ModalContext  = createContext<ModalContextType | null>(null);
 
-const ModalBase = forwardRef<ModalNewHandle, ModalProps>(function ModalNew({ children, isOpen, title, onClosed }, ref: ForwardedRef<ModalNewHandle>) {
+const ModalBase = forwardRef<ModalRef, ModalProps>(function ModalNew({ children, isOpen, title, onClosed }, ref: ForwardedRef<ModalRef>) {
   const closeModalAction = (ev?: SyntheticEvent) => {
     setModalClass(modalInactiveClass);
     document.documentElement.classList.remove(`${styles['modal--open']}`);

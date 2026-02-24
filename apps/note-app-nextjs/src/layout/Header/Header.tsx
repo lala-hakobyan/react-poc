@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.header__logo}>
-        <Image src="/assets/images/my-notes-logo.png" alt="My Notes App" width="178" height="58" />
+        <Image src="/assets/images/my-notes-logo.png" alt="My Notes App POC" width="178" height="58" />
       </div>
       <nav className={styles.header__nav}>
         <ul className={styles.header__navList}>

@@ -41,7 +41,7 @@ It contains the following useful features and best practices:
 - **Security headers (CORS, CSP)**
 - **Caching functionality:**
   - Notes data is stored in the browser IndexedDB database upon each action.
-  - When any failure happens on the API side or the user is offline, they can still view their notes in read-only mode from the IndexedDB cache until issues are resolved.
+  - When any failure happens on the API side or the user is offline, they can still view their notes in read-only mode from the IndexedDB cache until issues are resolved. You can this mode on/off with `NEXT_PUBLIC_ENABLE_OFFLINE_MODE_ON_ERROR` option.
   - A separate service worker (`image-service-worker.js`) caches necessary image files (logos, icons and latest note media files) on the Home page so that the Notes List page loads this media from the service worker cache.
     **Note:** For the service worker to work, you need to run the application with https (`npm run dev:https`) and access it under localhost instead of a custom local domain, like: `https://localhost:3000`.
 - **Logging functionality:**
@@ -62,7 +62,9 @@ It contains the following useful features and best practices:
 ## What is Missing
 Below are the features that are missing to make this POC fully applicable for a production app foundation:
 - **Enhanced accessibility integration (WCAG compliance)**
+- **Image optimizations**
 - **Security enhancement through authentication integration**
+- **React Compiler integration for automatic memoization and optimizations**
 - **Testing:**
   - **Unit testing:** Testing isolated functions and logic with mock dependencies to ensure core reliability.
   - **Component testing:** Testing integrated UI pieces with mock dependencies to verify behavior.

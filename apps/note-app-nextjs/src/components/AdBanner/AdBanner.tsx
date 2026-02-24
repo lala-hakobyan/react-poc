@@ -22,10 +22,12 @@ export default async function AdBanner() {
     return null; // Return null to render nothing on error
   }
 
+  console.log('imageUrl', imageUrl);
+
   if (!imageUrl) return null;
 
   return (
-    <aside className={styles.adBanner}>
+    <div className={styles.adBanner}>
       <figure className={styles.adBanner__imageWrapper}>
         <a href={AdBannerConstants.bannerLink} target={'_blank'}>
           <Image src={imageUrl}
@@ -35,7 +37,7 @@ export default async function AdBanner() {
             alt={AdBannerConstants.bannerImageTitle} />
         </a>
       </figure>
-    </aside>
+    </div>
   );
 }
 
