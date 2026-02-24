@@ -1,8 +1,6 @@
 // Name of your image cache
 const imageCache = 'image-cache-v1';
 
-console.log('image-service-worker');
-
 // List of local images to pre-cache during installation
 const cacheImagesList = [
   '/assets/icons/arrow-down-short-wide-solid-full.svg',
@@ -16,7 +14,6 @@ const cacheImagesList = [
 
 // Install Event
 self.addEventListener('install', (event) => {
-  console.log('install++');
   event.waitUntil(
     caches.open(imageCache).then((cache) => {
       return cache.addAll(cacheImagesList);
@@ -28,8 +25,6 @@ self.addEventListener('message', (event) => {
   // Check if the message has the data you want to cache
   if (event.data && event.data.type === 'CACHE_NEW_IMAGES') {
     const urlsToCache = event.data.payload;
-
-    console.log('I listen to message');
 
     event.waitUntil(
       caches.open(imageCache).then((cache) => {
