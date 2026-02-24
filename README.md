@@ -46,17 +46,16 @@ The projects may contain only slight visual changes compared to screenshots pres
 
 Copyright © 2026 Lala Hakobyan. All rights reserved.
 
-This repository contains front-end projects that also serve as the official companions for the Front-end Debugging Tools Handbook by Lala Hakobyan.
+This repository features proof-of-concept front-end starter applications that also serve as the **official demonstration projects** for the **Front-end Debugging Tools Handbook** by **Lala Hakobyan**.
 
 **You MAY**<br>
 - Fork, clone and run this application locally for learning, debugging and educational purposes.
-- Extract and reuse the source code, architecture and CSS styles in your own personal or commercial projects.
-- Reference this project and the handbook, and link to the official repositories in your own applications and documentation.
+- Extract and reuse the source code, architecture and CSS styles in your own personal or commercial projects under the terms of the MIT License.
 
 **You MAY NOT** (without prior written permission from the author)<br>
 - Host, publish or distribute a copy or derivative of this application that could reasonably be mistaken for the official project.
 - Reuse the specific branding assets, including the brand colors, custom images and official logos to claim the project's visual identity as your own.
-- Impersonate the official handbook or its author.
+- Use this project to present your work as the official handbook, impersonate its author or use it as material for any other handbook or related article.
 
 **Source Code**<br>
 The underlying source code and CSS authored by Lala Hakobyan are licensed under the [MIT License](./LICENSE-CODE) and may be used in personal and commercial projects.
@@ -65,7 +64,7 @@ The underlying source code and CSS authored by Lala Hakobyan are licensed under 
 For the latest updates, please refer to the official repository: https://github.com/lala-hakobyan/react-poc
 
 **Attribution Example**<br>
-If you reference this project or use the source code in your own documentation, you can use the following format:
+If you reference this project or use the source code in your own documentation, you can use the following attribution format:
 
 > **Source:** "My Notes App POC" by Lala Hakobyan. Copyright © 2026. All rights reserved. Available at: https://github.com/lala-hakobyan/react-poc
 

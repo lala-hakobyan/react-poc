@@ -29,7 +29,7 @@ It contains the following useful features and best practices:
   - Scalable folder structure.
   - Isolation of data (API), cache, logger layers through separate dedicated services.
   - Separate `proxyRequestService.ts` to universally handle API requests passing through Next.js server components.
-- **State management with Zustand**
+- **State management with Zustand:**
   - Centralized state management with **Zustand** using slicing to separate state into stand-alone layers.
   - **Zustand** integration with Redux DevTools through middleware.
 - **IDE productive workflows:**
