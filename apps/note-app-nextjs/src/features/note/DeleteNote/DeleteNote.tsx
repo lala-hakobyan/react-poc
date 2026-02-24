@@ -9,8 +9,8 @@ import { useRef } from 'react';
 import { ModalRef } from '@/types/modal.types';
 
 export default function DeleteNote() {
-  const deleteNoteState = useNotesStore(useShallow(selectDeleteNoteSlice));
   const modalRef = useRef<ModalRef>(null);
+  const deleteNoteState = useNotesStore(useShallow(selectDeleteNoteSlice));
 
   const deleteAction = async() => {
     let actionStatus: ActionStatus | null = null;
