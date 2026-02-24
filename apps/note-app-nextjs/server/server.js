@@ -13,7 +13,6 @@ const port = 3010;
 app.use(cors({
   origin: [
     'http://local.react-note-app.com:3000',
-    'http://local.react-app.com:3000',
     'http://localhost:3000',
   ], // Specify allowed domains
   methods: 'GET, POST, PUT', // Specify the allowed methods

@@ -1,9 +1,11 @@
 import styles from './Footer.module.scss';
+import { GlobalConstants } from '@/constants/global.constants';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className={styles.footer}>
-      <p>© 2025 My Notes App POC - Made by <a className="primary-link" href="https://www.linkedin.com/in/lala-hakobyan-71aa64b8/" target="_blank">Lala Hakobyan</a></p>
+      <p>© {currentYear} My Notes App POC - Made by <a className="primary-link" href={GlobalConstants.linkedinUrl} target="_blank">Lala Hakobyan</a></p>
     </footer>
   )
 }

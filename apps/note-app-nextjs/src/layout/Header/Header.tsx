@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.header__logo}>
-        <Image src="/assets/images/my-notes-logo.png" alt="My Page" width="178" height="58" />
+        <Image src="/assets/images/my-notes-logo.png" alt="My Notes App POC" width="178" height="58" />
       </div>
       <nav className={styles.header__nav}>
         <ul className={styles.header__navList}>
@@ -22,7 +22,7 @@ export default function Header() {
                   : `${styles.header__navListItemLink}`
               }
               href="/">
-                            Home
+                Home
             </Link>
           </li>
           <li className={styles.header__navListItem}>
@@ -33,7 +33,7 @@ export default function Header() {
                   : `${styles.header__navListItemLink}`
               }
               href="/notes">
-                            My Notes
+                My Notes
             </Link>
           </li>
           <li className={styles.header__navListItem}>
@@ -44,7 +44,7 @@ export default function Header() {
                   : `${styles.header__navListItemLink}`
               }
               href="/contact">
-                            Contact
+                Contact
             </Link>
           </li>
         </ul>

@@ -21,7 +21,7 @@ export default function Actions() {
     <div className={`${styles.actions} mb-sm`}>
       <Button button={{ label: 'Add New' }} onClick={() => setIsAddEditModalOpen(true)}></Button>
 
-      {isAddEditModalOpen && <AddEditNote></AddEditNote>}
+      {isAddEditModalOpen && <AddEditNote />}
 
       {isDeleteModalOpen && <DeleteNote />}
 

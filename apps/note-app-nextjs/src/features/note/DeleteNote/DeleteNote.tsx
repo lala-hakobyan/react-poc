@@ -50,6 +50,7 @@ export default function DeleteNote() {
           title={`Delete Note: ${deleteNoteState.currentDeleteNote?.title}`}
           onClosed={() => resetDeleteModal()}
         >
+          <Modal.Header />
           <Modal.Body>
             {DeleteNoteConstants.confirmDeleteMessage}
           </Modal.Body>
@@ -67,6 +68,7 @@ export default function DeleteNote() {
 
       {deleteNoteState.isNoteDeleteError &&
         <Modal isOpen={true} title="Error happened" onClosed={() => resetErrorModal()}>
+          <Modal.Header />
           <Modal.Body>
             {DeleteNoteConstants.deleteErrorMessage}
           </Modal.Body>
