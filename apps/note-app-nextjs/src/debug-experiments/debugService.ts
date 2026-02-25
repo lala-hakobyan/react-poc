@@ -57,14 +57,12 @@ class DebugService {
       performance.mark('load-more-started', {
         detail: 'Load more: loading 9 notes.',
       });
-      console.log('yes mark started');
     }
 
     const performanceMarkEnd = () => {
       performance.mark('load-more-ended', {
         detail: 'Load more: loaded 9 notes.',
       });
-      console.log('yes mark ended');
     }
 
     const performanceMeasureAdd = () => {
@@ -89,7 +87,6 @@ class DebugService {
           },
         },
       });
-      console.log('yes Load More Complete');
     }
 
     return {
@@ -167,8 +164,8 @@ class DebugService {
   }
 
   public getBrowserCompatibilityInfo()  {
-    console.log('Widely available baseline', getCompatibleVersions());
-    console.log('Baseline feature set support of all browser versions',  getAllVersions());
+    console.log('Browser Compatibility Info: Widely available baseline:', getCompatibleVersions());
+    console.log('Browser Compatibility Info: Baseline feature set support of all browser versions:',  getAllVersions());
   }
 
   public static getInstance() {

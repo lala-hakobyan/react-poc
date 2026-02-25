@@ -124,7 +124,9 @@ In order to run the project locally, you need to run the development server and 
 
 ### Debug Experiments
 
-All debug experiments in this branch are controlled via flags in environment files: `.env.development` and `.env.production`.
+#### Debug Experiments: Feature Flags
+
+Main debug experiments in this branch are controlled via flags in environment files: `.env.development` and `.env.production`.
 Set `NEXT_PUBLIC_ENABLE_ALL_DEBUG_EXPERIMENTS=true` to enable every experiment at once, or toggle each flag individually.
 
 - **`NEXT_PUBLIC_ENABLE_ALL_DEBUG_EXPERIMENTS`:** Enables all debug experiments at once. When `true`, forces every individual debug flag below to active regardless of its own value.
@@ -179,6 +181,30 @@ Set `NEXT_PUBLIC_ENABLE_ALL_DEBUG_EXPERIMENTS=true` to enable every experiment a
 
 - **`NEXT_PUBLIC_ENABLE_CONTACT_AUTH_API_ERROR`:** Simulates **CORS** error for Contact page `messages` API by performing direct call to back-end server (bypassing Next.js proxy) and eliminating caller domain from back-end server CORS policies.<br>
   Useful for inspecting CORS API errors in the **Network** and **Console** panels.
+
+#### Debug Experiments: Other Scenarios
+
+There are other debug scenarios you can leverage in this branch:
+- **Trigger a push notification from DevTools to your browser**:<br>
+  The `image-service-worker.js` image caching service worker (under `public/workers`) contains specific code to catch push notifications and trigger a notification alert in the browser or OS.
+  To experiment with it, perform the following steps:
+  - Make sure you allow Notifications to be displayed in your browser from **Site Settings > Privacy and Security > Notifications**.
+  - Service workers run only under HTTPS so run project via `npm run dev:https`.
+  - Navigate to `https://localhost:3000` and reload the application.
+  - Open Chrome DevTools.
+  - Go to **Application panel > Notifications** and click the **Start recording events** icon so that notifications activity is recorded for 3 days.
+  - Go to **Application panel > Service workers** and push a test notification from the given UI.
+  - You should see notification alert in the browser. The notification will also be recorded in the **Application panel > Notifications** section.
+
+- **Run PerformanceObserver based LCP highlighting browser snippet:**<br>
+  - Make sure that `NEXT_PUBLIC_ENABLE_SUSPENSE_BANNER` is `false` in `env.development` file. If it is on, the snippet will not work because lazy loaded banner conflicts with PerformanceObserver interface.
+  - Grab the browser snippet code under `snippets/perf-observer-lcp-highlight-browser-snippet.js`.
+  - Open Chrome DevTools and go to **Sources > Snippets**.
+  - Press **+ Snippet**, paste the code in the editor and save it.
+  - Right-click the snippet and press **Run**.
+  - You will see LCP element highlighted and LCP data logged in the **Console**.
+
+> **Note:** For more details and insights on front-end debugging tools and techniques, refer to my [Front-end Debugging Tools Handbook](https://github.com/lala-hakobyan/front-end-debugging-handbook).
 
 ### IDE Debugging
 Below are instructions on how to set up an IDE debugger for this Next.js project which will work for all Next.js projects, starting from v16.0.3.
