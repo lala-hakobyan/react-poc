@@ -31,7 +31,6 @@ app.post('/api/todos', (req, res) => {
 
 app.delete('/api/todos/:id', (req, res) => {
     const todoId = req.params.id;
-    console.log('todoId', todoId);
     todos = todos.filter(todo => todo.id !== todoId);
     res.send();
 });
@@ -39,11 +38,7 @@ app.delete('/api/todos/:id', (req, res) => {
 app.put('/api/todos/:id', (req, res) => {
     const todoId = req.params.id;
     const updatedTodo = req.body;
-    console.log('todos', todos);
-    console.log('todoId', todoId);
-
     const todoIndex = todos.findIndex(todo => todo.id === todoId);
-    console.log('todoIndex', todoIndex);
 
     if (todoIndex === -1) {
         return res.status(404).json({ message: 'Todo not found' });
