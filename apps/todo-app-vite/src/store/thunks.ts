@@ -3,7 +3,7 @@ import { loadingStarted, loadingCompleted, loadingFailed } from "./loadingSlice.
 import { todoAdded, todoCompleted, todoDeleted } from "./todosSlice.ts";
 import type {AppDispatch, RootState} from "./store.ts";
 
-const apiUrl = 'http://localhost:3040/api/bunyutodos';
+const apiUrl = 'http://localhost:3040/api/todos';
 
 export const loadTodos = () => async (dispatch: AppDispatch)=> {
     dispatch(loadingStarted());
@@ -23,7 +23,7 @@ export const createTodo = (newTodoText: string) => async (dispatch: AppDispatch,
         const response = await axios.post(apiUrl, { text: newTodoText } );
         dispatch(todoAdded(response.data));
     } catch(error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -32,7 +32,7 @@ export const deleteTodo = (deleteTodoId: string) => async(dispatch: AppDispatch)
         await axios.delete(`${apiUrl}/${deleteTodoId}`);
         dispatch(todoDeleted(deleteTodoId));
     } catch(error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -41,6 +41,6 @@ export const markTodoAsCompleted = (todoId: string) => async (dispatch: AppDispa
         await axios.put(`${apiUrl}/${todoId}`, {isCompleted: true});
         dispatch(todoCompleted(todoId));
     } catch(error) {
-        console.log(error);
+        console.error(error);
     }
 }

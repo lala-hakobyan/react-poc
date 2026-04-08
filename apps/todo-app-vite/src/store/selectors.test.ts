@@ -26,9 +26,9 @@ function testSelectors() {
     const result = getCompletedTodos(fakeStore);
 
     if(result.length === 1 && result[0].isCompleted) {
-        console.log('testSelectors: Test works');
+        console.log('testSelectors Test Case: worked');
     } else {
-        throw new Error('testSelectors: Test fails');
+        throw new Error('testSelectors Test Case: failed.');
     }
 }
 

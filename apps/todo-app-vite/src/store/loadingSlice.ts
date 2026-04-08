@@ -10,14 +10,14 @@ export const loadingSliceDef = {
     reducers: {
         loadingStarted: (state: LoadingState, action: PayloadAction) => {
             state.completed = false;
-            console.log('loadingCompleted', action);
+            console.log('loadingStarted', action);
         },
-        loadingCompleted: (state: LoadingState, action: {payload: Todo[]}) => {
+        loadingCompleted: (state: LoadingState, action: PayloadAction<Todo[]>) => {
             state.completed = true;
             state.successful = true;
             console.log('loadingCompleted', action);
         },
-        loadingFailed: (state: LoadingState, action: {payload: string}) => {
+        loadingFailed: (state: LoadingState, action: PayloadAction<string>) => {
             state.completed = true;
             state.successful = false;
             console.log('loadingFailed', action);
