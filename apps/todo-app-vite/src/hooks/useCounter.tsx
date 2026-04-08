@@ -10,7 +10,7 @@ export default function useCounter() {
         }, 1000);
 
         return () => {
-            console.log('console.log("✅ ChildComponent unmounted");');
+            console.log("✅ ChildComponent unmounted");
             clearInterval(interval);
         }
     }, []);

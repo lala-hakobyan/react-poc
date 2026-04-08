@@ -15,9 +15,9 @@ function testLoadingSlice() {
     loadingSliceDef.reducers.loadingStarted(fakeState, mockAction);
 
     if(fakeState.completed) {
-        throw new Error('Test case failed');
+        throw new Error('LoadingSlice Test Case: loadingStarted reducer failed.');
     } else {
-        console.log('loadingStarted reducer works');
+        console.log('LoadingSlice Test Case: loadingStarted reducer worked.');
     }
 }
 
