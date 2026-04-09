@@ -48,7 +48,7 @@ You are an expert Senior TypeScript Engineer. You must follow these strict rules
 - **Types/Interfaces:** PascalCase (e.g., `UserProfile`, `AuthResponse`).
 - **Booleans:** Prefix with `is`, `has`, `should`, or `can` (e.g., `isVisible`, `hasAccess`).
 - **Constants:** UPPER_SNAKE_CASE for global constants; camelCase for local constants.
-- **Files:** kebab-case (e.g., `user-profile.ts`, `auth-utils.ts`).
+- **Files:** PascalCase (e.g., `NoteCard.tsx`, `Modal.tsx`, `useContactForm.ts`).
 
 ## 5. React Specifics (If applicable)
 - **Functional Components:** Always use functional components.
