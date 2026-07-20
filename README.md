@@ -66,7 +66,7 @@ For the latest updates, please refer to the official repository: https://github.
 **Attribution Example**<br>
 If you reference this project or use the source code in your own documentation, you can use the following attribution format:
 
-> **Source:** "My Notes App Starter App" by Lala Hakobyan. Copyright © 2026. All rights reserved. Available at: https://github.com/lala-hakobyan/react-architecture
+> **Source:** "React Architecture Starter Projects" by Lala Hakobyan. Copyright © 2026. All rights reserved. Available at: https://github.com/lala-hakobyan/react-architecture
 
 
 ## Feedback and Issues
